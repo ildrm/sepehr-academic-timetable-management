@@ -1,0 +1,63 @@
+- id: EVT-001
+  type: EnrollmentChanged
+  source: Enrollment
+  version: 1
+  consumer_effect: refresh academic roster and balance seats
+  ordering: aggregateKey + sequence
+  payload_fields:
+  - resourceId
+  - revision
+- id: EVT-002
+  type: WaitlistChanged
+  source: Enrollment
+  version: 1
+  consumer_effect: dispatch offer or re-examine queue head
+  ordering: aggregateKey + sequence
+  payload_fields:
+  - resourceId
+  - revision
+- id: EVT-003
+  type: RecordCorrected
+  source: Records
+  version: 1
+  consumer_effect: open a dependent-eligibility review
+  ordering: aggregateKey + sequence
+  payload_fields:
+  - resourceId
+  - revision
+- id: EVT-004
+  type: TimetablePublished
+  source: Timetabling
+  version: 1
+  consumer_effect: notify affected students and instructors
+  ordering: aggregateKey + sequence
+  payload_fields:
+  - resourceId
+  - revision
+- id: EVT-005
+  type: ExceptionDecided
+  source: Approvals
+  version: 1
+  consumer_effect: notify requester and invalidate decision previews
+  ordering: aggregateKey + sequence
+  payload_fields:
+  - resourceId
+  - revision
+- id: EVT-006
+  type: CapacityChanged
+  source: Offerings
+  version: 1
+  consumer_effect: recompute claim availability and wake promotion
+  ordering: aggregateKey + sequence
+  payload_fields:
+  - resourceId
+  - revision
+- id: EVT-007
+  type: SolveRequested
+  source: Timetabling
+  version: 1
+  consumer_effect: lease a persisted job and run solver
+  ordering: aggregateKey + sequence
+  payload_fields:
+  - resourceId
+  - revision

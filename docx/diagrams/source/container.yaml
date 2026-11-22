@@ -1,0 +1,22 @@
+title: Runtime responsibilities
+kind: relationship
+lanes: []
+rows:
+- - Browser
+  - Next.js BFF
+  - Session and interaction
+- - Next.js BFF
+  - Nest.js API
+  - Authenticated commands
+- - API / worker
+  - PostgreSQL
+  - Academic transactions
+- - Worker
+  - BullMQ / Redis
+  - Dispatch and retry jobs
+- - Worker
+  - Python solver
+  - Immutable planning input
+- - Solver
+  - Worker
+  - Candidate and diagnostics

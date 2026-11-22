@@ -1,0 +1,72 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {mkdir} from 'node:fs/promises';
+import {chromium} from 'playwright';
+
+test('Persian student registration and staff CSV export through the built portal',{timeout:150000},async()=>{
+  const password=process.env.DEV_BOOTSTRAP_PASSWORD;
+  const url=process.env.TEST_WEB_URL??'http://localhost:3000';
+  if(!password)throw new Error('Set isolated fixture password');
+  const browser=await chromium.launch({channel:process.env.BROWSER_CHANNEL||undefined,headless:true});
+  const context=await browser.newContext({viewport:{width:1440,height:950}});
+  try{
+    const page=await context.newPage();
+    page.setDefaultTimeout(25000);
+    console.log('Opened headless browser for the synthetic portal.');
+    const errors:string[]=[];
+    page.on('pageerror',e=>errors.push(e.message));
+    await page.goto(url,{waitUntil:'domcontentloaded'});
+    assert.equal(await page.locator('html').getAttribute('dir'),'rtl');
+    assert.equal(await page.locator('html').getAttribute('lang'),'fa');
+    await page.getByLabel('نام کاربری').fill('student.demo');
+    await page.getByLabel('رمز عبور').fill(password);
+    await page.getByRole('button',{name:'ورود به سامانه'}).click();
+    await page.getByRole('heading',{name:'سلام، به سپهر خوش آمدید'}).waitFor();
+    await page.getByRole('heading',{name:'مبانی برنامه‌نویسی'}).waitFor();
+    console.log('Student signed in and the catalog loaded.');
+    if(process.env.E2E_SCREENSHOT_DIR){
+      await mkdir(process.env.E2E_SCREENSHOT_DIR,{recursive:true});
+      await page.screenshot({path:process.env.E2E_SCREENSHOT_DIR+'/student-desktop.png',fullPage:true});
+    }
+    await page.getByRole('button',{name:'تخصیص گروهی'}).click();
+    await page.getByRole('heading',{name:'تخصیص گروهی'}).waitFor();
+    await page.getByRole('button',{name:'پیشخوان'}).click();
+    await page.getByRole('button',{name:'مشاهده درس‌ها'}).click();
+    await page.getByRole('textbox',{name:'جست‌وجوی نام یا کد درس'}).fill('رياضيات');
+    const course=page.locator('article').filter({hasText:'ریاضیات گسسته'});
+    await course.getByRole('button',{name:'افزودن به سبد'}).first().click();
+    await page.getByRole('button',{name:'بررسی سبد'}).click();
+    await page.getByRole('status').filter({hasText:'سبد از بررسی اولیه عبور کرد.'}).waitFor();
+    await page.getByRole('button',{name:'ثبت درخواست'}).click();
+    await page.getByRole('status').filter({hasText:'تأیید شد'}).waitFor();
+    await page.getByRole('button',{name:'برنامه کلاسی',exact:true}).click();
+    await page.getByRole('table',{name:'برنامه کلاسی'}).getByText('ریاضیات گسسته').waitFor();
+    await page.setViewportSize({width:390,height:844});
+    await page.getByRole('button',{name:'باز کردن منو'}).focus();
+    await page.keyboard.press('Enter');
+    await page.getByRole('button',{name:'پیشخوان'}).waitFor();
+    await page.getByRole('button',{name:'پیشخوان'}).click();
+    await page.getByRole('heading',{name:'مبانی برنامه‌نویسی'}).waitFor();
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),true);
+    if(process.env.E2E_SCREENSHOT_DIR)await page.screenshot({path:process.env.E2E_SCREENSHOT_DIR+'/student-mobile.png',fullPage:true});
+    await page.getByRole('button',{name:'باز کردن منو'}).click();
+    await page.getByRole('button',{name:'خروج'}).click();
+    await page.getByRole('heading',{name:'ورود به سامانه'}).waitFor();
+    console.log('Student enrollment and mobile navigation completed.');
+    await page.getByLabel('نام کاربری').fill('office.demo');
+    await page.getByLabel('رمز عبور').fill(password);
+    await page.getByRole('button',{name:'ورود به سامانه'}).click();
+    await page.getByRole('button',{name:'باز کردن منو'}).click();
+    await page.getByRole('button',{name:'گزارش‌ها',exact:true}).click();
+    await page.getByRole('heading',{name:'گزارش‌ها'}).waitFor();
+    await page.getByLabel('شناسه واحد سازمانی').fill('2');
+    await page.getByRole('button',{name:'نمایش گزارش'}).click();
+    await page.getByRole('table',{name:'ظرفیت',exact:true}).waitFor();
+    const csvPath=await page.getByRole('link',{name:'دریافت CSV'}).getAttribute('href');
+    assert.ok(csvPath);
+    const csv=await page.request.get(new URL(csvPath,url).href);
+    assert.equal(csv.status(),200);
+    assert.match(await csv.text(),/suppressed.*REP-001-v1/);
+    assert.deepEqual(errors,[]);
+  }finally{await context.close();await browser.close();}
+});

@@ -1,0 +1,435 @@
+{
+  "reviewed_at": "2026-11-22T06:35:43.165622+00:00",
+  "method": "Rendered each Word file with headless LibreOffice, rasterized every final PDF page at 840 px width with Poppler, and visually inspected all 15 labeled image sheets. Checked typesetting, headings, captions, diagram legibility, page numbers, tables, and the Persian example.",
+  "revision_notes": "Rebuilt after tightening tables and preventing short references-only continuation pages. Re-rendered and re-inspected the two changed chapters on solver contracts and scoped read permissions.",
+  "documents": {
+    "word/00-overview-scope.docx": {
+      "word_sha256": "30b0c3a58144954e9af745b6cdd6c068ce7a23cac63dd4bab55fc0c7302e014d",
+      "pdf_sha256": "5bb0e9ee4712ecad6bc55c5c314be5efd27358a41682b3a5cd42e0324f39ee2b",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-01.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/01-product-requirements.docx": {
+      "word_sha256": "21673d3b22728a90a2d95c456411279332499711798714ac31cbc360075d895d",
+      "pdf_sha256": "fbe1df02900989869df9386a3d3b439bf4fbeb6533b1e214b4dbfc776f22a290",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-01.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/02-software-requirements-use-cases.docx": {
+      "word_sha256": "1bcb04a3c5c776cfb9bc7ed7c950c4f0e771ebdade7deac376d6e6d462f9532b",
+      "pdf_sha256": "523b2e8e6f6522c00b244e5b4e8848e5909fdd8ae7c2bf27ca8532c7649f7440",
+      "page_count": 2,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-01.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/03-team-roles-raci.docx": {
+      "word_sha256": "2615636c6c5c76d190fb17f5b973698bfd9a58fa27b5ebea572a711515e34150",
+      "pdf_sha256": "2c023ade3e47b3942d56eb22a55407fca3387ae336a6ee195102c0bf915de262",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-02.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/04-user-roles-permissions.docx": {
+      "word_sha256": "bfd5e79dff8af4cd794fd19e646957b47f97a9b41b044bb1f60adb2a25fdfde1",
+      "pdf_sha256": "32256f41e64f9eb809bfdf055453dd89743cc73e03e913e7a6394c0ebaf52078",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-02.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/05-academic-domain-curriculum.docx": {
+      "word_sha256": "ab9fea2d76a430348554df2450c26be4112f2229ec427ce31599473449fec163",
+      "pdf_sha256": "29fd55a91b9d225e611e78920bca6cd8bdf9b34c074c1fa8c7666d3ff45bf715",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-02.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/06-academic-rule-engine.docx": {
+      "word_sha256": "b6eeb3e517ec0515256323e2b861e0fa0223281955fd7c8d5066a1a9bc46cb6e",
+      "pdf_sha256": "ecb8696bf9780a5fd0cba7d2c8d60e183e0e18b999dc26b2b98612d879e76a41",
+      "page_count": 2,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-02.jpg",
+        "validation/evidence/word-pages/sheet-03.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/07-calendar-state-workflows.docx": {
+      "word_sha256": "3d8b742c3eae0bc548d6a8b4f753e49bee0ab0c2225eeea23368c00beacb6067",
+      "pdf_sha256": "8179857531cface1a6d59ab18b618e5c3ec3a223946c2aa9c30ed6189be88fd7",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-03.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/08-faculty-resources-offerings.docx": {
+      "word_sha256": "4b53bac1539c2db2b3e41f8bdc76c3ab1bfbfdcb7dd8a253544726e246c4704e",
+      "pdf_sha256": "07d890e8f2872939ca4405ff17821cdbb1ef7b8590555f20f8c518e455b5b6eb",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-03.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/09-enrollment-waitlist.docx": {
+      "word_sha256": "29da3c0667486be01c7917237a9deceb87c822ef8dd3884fffa95b989be99828",
+      "pdf_sha256": "f49fef97a6a44bab6d71a66f1c2d77c96cdffffc9f8fa14c8f546ad80ae9a0c7",
+      "page_count": 2,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-03.jpg",
+        "validation/evidence/word-pages/sheet-04.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/10-timetabling-optimization.docx": {
+      "word_sha256": "0c368d429cc1e6673fb0cda6929b7f4bc9f45b64f0b5fff4366fd7c5c1f2b4db",
+      "pdf_sha256": "cc24720448497fe5b85ed1da4acd8a43fff549c782525118a644e4f833132674",
+      "page_count": 2,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-04.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/11-student-scheduling-degree-audit.docx": {
+      "word_sha256": "5a2014348cd7f67d0f3a98dd624cebe34b1929d5baf05e0dc55730990af6feab",
+      "pdf_sha256": "d3771a70fa799362abd2fa4edcf026e35f5e79f17faed819ce9716ceee7f6e9e",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-04.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/12-system-architecture.docx": {
+      "word_sha256": "301df0735628773a08df477a4fef042155c4e1287e94aaf910ad2dad62700a4d",
+      "pdf_sha256": "df4089e6e9f82bebf96ae39d065bd218f6f7e7fa9435a4ba948fdf44ad9424ca",
+      "page_count": 2,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-05.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/13-nestjs-backend-design.docx": {
+      "word_sha256": "5aaea8b06428a82d3dfc57c1e278f46c8e5c0141be80a2d0c9dba031df94faca",
+      "pdf_sha256": "66f8bf7553ece44709e5790cba53b62b0c82e63bcd739361d79712564a63c4d1",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-05.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/14-nextjs-frontend-ux.docx": {
+      "word_sha256": "e8b6c2eb721433704dbff001c36e25341b895b93cc130527f61bf5b89f9e8f51",
+      "pdf_sha256": "6be8d28c7c4054438f0f7f608a1f2e48002795fe5ee98ba487fcb15d8149ca2e",
+      "page_count": 2,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-05.jpg",
+        "validation/evidence/word-pages/sheet-06.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/15-data-model-dictionary.docx": {
+      "word_sha256": "0f51008e445ffe9eba93372268bfea751d50d2a764d33b1acad1dd9553285de7",
+      "pdf_sha256": "83d3e26bab153c01c43cfba1d5f595cf7d276c27ee9b6f6fe26c2237ccf6e648",
+      "page_count": 2,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-06.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/16-api-contracts-errors.docx": {
+      "word_sha256": "3e26d2a520929b41a542f8e42ba9c535c4c196e7ddbf8c16859f2951d41a2bb9",
+      "pdf_sha256": "72ca8dd435195936c661ce561b7937f18b9a49e3187cf9dbc68201e762fd5a45",
+      "page_count": 2,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-06.jpg",
+        "validation/evidence/word-pages/sheet-07.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/17-transactions-consistency.docx": {
+      "word_sha256": "d66d91abe00f5f055f1752285a1593e15d0d4f4e2e55df1b69d1c0dd5b8980ab",
+      "pdf_sha256": "0ca245b12ced8a1ce95d74d97e5ddd77108f54a444aba45978cb78d91ea7bb9e",
+      "page_count": 2,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-07.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/18-events-jobs-integrations.docx": {
+      "word_sha256": "e0f0f8181d80857c964313201c09525d93cc41fd6b75405b5b31421c9488b486",
+      "pdf_sha256": "b52be27786148574ceb2c9b1d02acc1665d2e8d25f55b55d9d3739427d6d1dc7",
+      "page_count": 2,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-07.jpg",
+        "validation/evidence/word-pages/sheet-08.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/19-security-privacy-threat-model.docx": {
+      "word_sha256": "a43ed6dc7fc1099ea453c2050a8b8d50284f7f0bbb082585f4815d4efd7cc44b",
+      "pdf_sha256": "daedca5b7a09bb3ab4f0f3ace53fd9bfb634d9d438b166a53df77fb49e04cc45",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-08.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/20-nfr-performance-capacity.docx": {
+      "word_sha256": "900cfcc6f93b1709a72f2a6de9c87c5756811db477b0ce60f70c45317fa971d6",
+      "pdf_sha256": "8a8a2bcf6903f4150c693ae4bb2e9fcde7c52e79fd2849ca34f1d725fbd08ed8",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-08.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/21-test-verification-strategy.docx": {
+      "word_sha256": "acec26bcdb0ab440911984db5992468112e308455a7a30db3e44950fcecbf165",
+      "pdf_sha256": "2038b76f6f4027ade871fd97789300f4af67347ad6b3f03f89f33a1c68e106fd",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-08.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/22-devops-deployment.docx": {
+      "word_sha256": "567a0f7477b710ca48ea44b30194f7a982b2c2a91714f742272910db706f1621",
+      "pdf_sha256": "8cd7b7efd8a960bb30f9b2f81aa1013c64ee9f7380ab820a188ce7dda877e75d",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-09.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/23-observability-reporting.docx": {
+      "word_sha256": "56b6878f348eeb92209e94067cf46d16e8f973a44fa9861cb7e036d234493f55",
+      "pdf_sha256": "d01ef9e98320a7f12b43c59330458d04006d8db50ccf66468e1b1400683de629",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-09.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/24-backup-disaster-recovery-runbooks.docx": {
+      "word_sha256": "0cee2b1580f3c291a40c155e40728fba792419f08645b04fd26a3ac4adca763d",
+      "pdf_sha256": "a7d599b864a19127b2d63427586398e9fbf51cedfd55d70d0e4344c67f02e913",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-09.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/25-data-migration-quality.docx": {
+      "word_sha256": "d6fbcb0d5e508ae718b247a46e01b8694da21127e3b4cf8c6d30b3ed9c2ac75d",
+      "pdf_sha256": "37059b671cb9cbdb80133d4aada10ddf0dfcc568055fb9ffcdedd934f30ddef8",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-09.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/26-i18n-accessibility-time.docx": {
+      "word_sha256": "2c4404a24d1922a178bf57d3b0430de59a13d8058c3f54f154c0b1496366c04c",
+      "pdf_sha256": "7b1e24804937c61e952cb6e362ba3d826c7ce29e799833e1f333e7af3205c53e",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-10.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/27-student-user-guide.docx": {
+      "word_sha256": "4ef7da49e2d9f9eb78aa0946ba754b34cfa5a9c6fe970d103226587825d83faa",
+      "pdf_sha256": "dba793b71431dc7aa5dd5d5ef823472f971929a445eecd79c3b03c22fe5fb2c1",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-10.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/28-faculty-planner-user-guide.docx": {
+      "word_sha256": "a7b91f1e4bc402a382122d2e8063ca774ebd888bca07beefdd644a9afc6d6764",
+      "pdf_sha256": "ae188317fed2bb81acf410171a1b623e3c8dea1eaf683dc2087182abea55e5aa",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-10.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/29-education-admin-user-guide.docx": {
+      "word_sha256": "81423c86cd95a947c0768671f7771772857e2097c8813f6a98d49420ca5f3ca5",
+      "pdf_sha256": "92698706294dc427224e5fdcb115d9501b352c71982a82dcf0344dd4a5f99109",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-10.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/30-roadmap-backlog-delivery.docx": {
+      "word_sha256": "eadeed7058c7e16607f4cbdaaff300e4d08570cd7833b995150b41c6866b8ade",
+      "pdf_sha256": "d224cd42e958ec384e9e016ae403da8d5f5a0067cf818f7a1e349e38606cc2f3",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-11.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/31-extension-modules.docx": {
+      "word_sha256": "505fff228c73ec2b351f117c45c74dce335c586bd59649afe955740ff9e032fe",
+      "pdf_sha256": "48686553446a4d48739b3332b1e46db4237d9ce735ed064ea20f5aaf5ec4fcd2",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-11.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/32-risks-assumptions-open-decisions.docx": {
+      "word_sha256": "4814729d1498af5c535882ae5b41c8115f54a11e6b655aa983adf49ba2d116ab",
+      "pdf_sha256": "a78a69e02b97297ef9541a0abcfb8d91c382c00b698af8173d256e8f3ed0836e",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-11.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/33-quality-review-traceability.docx": {
+      "word_sha256": "47268089734a341b959e3f14020db315a82c3f5dbc8e4c405eabc69646f51e28",
+      "pdf_sha256": "db1d70858edbf5c6d2af7ea482ea0d6ed50db641f561b1ff7589911ea4cf346d",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-11.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/34-glossary-references-maintenance.docx": {
+      "word_sha256": "add559fea1dd26223726bd6374837d0a3c836112f3fa7911ddac7ffbf195d72b",
+      "pdf_sha256": "2eda55d3814a690eb7e261b431caeb26d37fb94e76911f78c007bbebba81221f",
+      "page_count": 2,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-12.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/adr/adr-001-modular-architecture.docx": {
+      "word_sha256": "933dc3d8780603301d9dc655cb851c8187198e165ef38d17c9981de6fe532903",
+      "pdf_sha256": "600a741adb704fefb36511aee70d9dc2db2ff465d636207871725fd137a514f0",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-12.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/adr/adr-002-bff-boundary.docx": {
+      "word_sha256": "0f9b59414e5786e120aa59b38bc9b312cef9197da9c14d7e71f4ed3bc1d1df63",
+      "pdf_sha256": "ac6980d47be68fdb10f2a85eb53ab6de753be1f0e5ae25f00780aa2bdacf86bd",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-12.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/adr/adr-003-data-ownership.docx": {
+      "word_sha256": "387871fdbaabbf0348d11fd573128d280f95823a050956bc544e595ff781ff86",
+      "pdf_sha256": "0ff1bc80af85079e09c000cc77a54fb5462f53f23f5642dde7f946a7a7cb1d71",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-13.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/adr/adr-004-orm-sql.docx": {
+      "word_sha256": "b07a8915b1916ba2a2e017916b010e6ed889365a23d0ab9773970d31a92aa9d9",
+      "pdf_sha256": "4bc56409fb46d8747db0a77480d89cf6d35fb649666b6edd3ff25a69ef00573c",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-13.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/adr/adr-005-isolation-locking.docx": {
+      "word_sha256": "f6f8ebf6d9334675c9dc068aae33d87dc560e94290214f9a3753996f35cdccd1",
+      "pdf_sha256": "eeade1542e1279059066349575886c2d1229487a93447f9dfb88ec4d75cdd4f1",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-13.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/adr/adr-006-idempotency.docx": {
+      "word_sha256": "e52ed328ddce098edc5937ff6659cb49df1e34270e9df8838d3bd893201fd6dc",
+      "pdf_sha256": "3b03a532a09a777bcd03fab1a815c2bb5bf06b678ddc0e4f082d087e106abe93",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-13.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/adr/adr-007-transactional-outbox.docx": {
+      "word_sha256": "939257655dcc19b2295aed20981d1484b22b2afabe4744a58c03497a47effe16",
+      "pdf_sha256": "d4256a31006695b5e2e58bb0a4b91ee7faa90dafd4135c12d0cbe50456ff6d57",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-14.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/adr/adr-008-cache-queue-separation.docx": {
+      "word_sha256": "5c9ab9e349dc37dec1e70efa6b4e06bc30bf40cba6afc56e0352cbacf3baa531",
+      "pdf_sha256": "75d7da56b5d365cdb8ec63d5e83d048d18a681cf8774af2b8cf9dd24dd33ff16",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-14.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/adr/adr-009-independent-solver.docx": {
+      "word_sha256": "7a495818dfc2d3b14d244b002fc3707da9912baf29a05eec1b360350d59b7473",
+      "pdf_sha256": "77e24a1f8a12912891d98ffa89934f5528262a5739319b56a2c16e798022fb20",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-14.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/adr/adr-010-versioning.docx": {
+      "word_sha256": "5b82347c6bd640dd15841d30f1fd62ff0e09623d562344670b23010f8e7d758c",
+      "pdf_sha256": "25d36b99f72a220c103a52d5092db2497c0bce427e269dce84b205467e9b5afb",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-14.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/adr/adr-011-authorization.docx": {
+      "word_sha256": "2d996ec6fbc8d3d0dba3c9b574d87c2641ae15ce14dea81ca5d325021ed69e18",
+      "pdf_sha256": "f5a18f2645442f3c4774aa931faa5810cb6100605710b712c11a894586dc8232",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-15.jpg"
+      ],
+      "review_status": "inspected"
+    },
+    "word/adr/adr-012-time-semantics.docx": {
+      "word_sha256": "99606764dd2eb302357de71174ea8545fee917f1d3c8a1a312088d273b2b0125",
+      "pdf_sha256": "0ff7c55a8360f3a2398cf7504e8bae7558e2c711d649676b7df25261ee4e4aba",
+      "page_count": 1,
+      "sheets": [
+        "validation/evidence/word-pages/sheet-15.jpg"
+      ],
+      "review_status": "inspected"
+    }
+  }
+}

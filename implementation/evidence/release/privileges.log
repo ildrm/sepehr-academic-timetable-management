@@ -1,0 +1,23 @@
+        set_config         
+---------------------------
+ academic_release_api_test
+(1 row)
+
+          set_config          
+------------------------------
+ academic_release_worker_test
+(1 row)
+
+ ?column? 
+----------
+(0 rows)
+
+ ?column? 
+----------
+(0 rows)
+
+                         result                         
+--------------------------------------------------------
+ Runtime grants verified in the isolated test database.
+(1 row)
+

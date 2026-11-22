@@ -1,0 +1,756 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["partialIndexes"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model academic_record {
+  id                    BigInt           @id @default(autoincrement())
+  student_id            BigInt
+  course_id             BigInt
+  attempt_key           String
+  revision              Int
+  outcome               String
+  grade                 Decimal?         @db.Decimal(7, 3)
+  earned_credits        Decimal          @db.Decimal(6, 2)
+  supersedes            BigInt?          @unique
+  course                course           @relation(fields: [course_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  identity_account      identity_account @relation(fields: [student_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  academic_record       academic_record? @relation("academic_recordToacademic_record", fields: [supersedes], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  other_academic_record academic_record? @relation("academic_recordToacademic_record")
+
+  @@unique([student_id, attempt_key, revision])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model academic_rule {
+  id               BigInt         @id @default(autoincrement())
+  policy_id        BigInt
+  rule_code        String
+  stage            String
+  expression       Json
+  target_course_id BigInt?
+  waivable         Boolean        @default(false)
+  policy_version   policy_version @relation(fields: [policy_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  course           course?        @relation(fields: [target_course_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([policy_id, rule_code])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model appointment {
+  id           BigInt       @id @default(autoincrement())
+  student_id   BigInt
+  term_id      BigInt
+  opens_at     DateTime     @db.Timestamptz(6)
+  closes_at    DateTime     @db.Timestamptz(6)
+  student_term student_term @relation(fields: [student_id, term_id], references: [student_id, term_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model audit_entry {
+  id                                                        BigInt            @id @default(autoincrement())
+  actor_id                                                  BigInt
+  subject_id                                                BigInt?
+  term_id                                                   BigInt?
+  action                                                    String
+  decision_ref                                              String
+  request_id                                                String
+  occurred_at                                               DateTime          @db.Timestamptz(6)
+  identity_account_audit_entry_actor_idToidentity_account   identity_account  @relation("audit_entry_actor_idToidentity_account", fields: [actor_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  identity_account_audit_entry_subject_idToidentity_account identity_account? @relation("audit_entry_subject_idToidentity_account", fields: [subject_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  term                                                      term?             @relation(fields: [term_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model availability {
+  id            BigInt     @id @default(autoincrement())
+  instructor_id BigInt
+  term_id       BigInt
+  starts_at     DateTime   @db.Timestamptz(6)
+  ends_at       DateTime   @db.Timestamptz(6)
+  instructor    instructor @relation(fields: [instructor_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  term          term       @relation(fields: [term_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model capacity_pool {
+  id          BigInt        @id @default(autoincrement())
+  term_id     BigInt
+  capacity    Int
+  term        term          @relation(fields: [term_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  component   component[]
+  reservation reservation[]
+  seat_claim  seat_claim[]
+  section     section[]
+  waitlist    waitlist[]
+}
+
+model case_delegation {
+  case_ref                                                      String           @id
+  actor_id                                                      BigInt
+  student_id                                                    BigInt
+  term_id                                                       BigInt
+  valid_until                                                   DateTime         @db.Timestamptz(6)
+  identity_account_case_delegation_actor_idToidentity_account   identity_account @relation("case_delegation_actor_idToidentity_account", fields: [actor_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  identity_account_case_delegation_student_idToidentity_account identity_account @relation("case_delegation_student_idToidentity_account", fields: [student_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  term                                                          term             @relation(fields: [term_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model component {
+  id                         BigInt                       @id @default(autoincrement())
+  section_id                 BigInt
+  kind                       String
+  pool_id                    BigInt
+  required_pattern           String
+  contact_minutes            Int
+  capacity_pool              capacity_pool                @relation(fields: [pool_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  section                    section                      @relation(fields: [section_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  component_room_requirement component_room_requirement[]
+  enrollment_component       enrollment_component[]
+  meeting                    meeting[]
+}
+
+model consumer_receipt {
+  consumer     String
+  event_id     String   @db.Uuid
+  processed_at DateTime @db.Timestamptz(6)
+
+  @@id([consumer, event_id])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model course {
+  id                                            BigInt              @id @default(autoincrement())
+  code                                          String              @unique
+  title                                         String
+  credits                                       Decimal             @db.Decimal(6, 2)
+  canonical_course_id                           BigInt?
+  academic_record                               academic_record[]
+  academic_rule                                 academic_rule[]
+  course                                        course?             @relation("courseTocourse", fields: [canonical_course_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  other_course                                  course[]            @relation("courseTocourse")
+  curriculum_course                             curriculum_course[]
+  enrollment                                    enrollment[]
+  equivalency_equivalency_source_courseTocourse equivalency[]       @relation("equivalency_source_courseTocourse")
+  equivalency_equivalency_target_courseTocourse equivalency[]       @relation("equivalency_target_courseTocourse")
+  offering                                      offering[]
+  qualification                                 qualification[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model curriculum_course {
+  curriculum_id      BigInt
+  course_id          BigInt
+  classification     String
+  requirement_group  String
+  course             course             @relation(fields: [course_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  curriculum_version curriculum_version @relation(fields: [curriculum_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([curriculum_id, course_id, requirement_group])
+}
+
+model curriculum_version {
+  id                BigInt              @id @default(autoincrement())
+  program_id        BigInt
+  edition           String
+  effective_from    DateTime            @db.Date
+  requirements      Json
+  curriculum_course curriculum_course[]
+  curriculum_review curriculum_review?
+  program           program             @relation(fields: [program_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  equivalency       equivalency[]
+  student_program   student_program[]
+
+  @@unique([id, program_id])
+  @@unique([program_id, edition])
+}
+
+model development_credential {
+  actor_id         BigInt           @id
+  login            String           @unique
+  password_hash    String
+  identity_account identity_account @relation(fields: [actor_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model enrollment {
+  id                   BigInt                 @id @default(autoincrement())
+  student_id           BigInt
+  term_id              BigInt
+  offering_id          BigInt
+  section_id           BigInt
+  course_id            BigInt
+  credit_value         Decimal                @db.Decimal(6, 2)
+  state                String
+  revision             Int                    @default(1)
+  course               course                 @relation(fields: [course_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  offering             offering               @relation(fields: [offering_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  section              section                @relation(fields: [section_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  student_term         student_term           @relation(fields: [student_id, term_id], references: [student_id, term_id], onDelete: NoAction, onUpdate: NoAction)
+  enrollment_component enrollment_component[]
+  seat_claim           seat_claim[]
+
+  @@unique([student_id, term_id, course_id], map: "one_active_course", where: raw("(state = 'active'::text)"))
+  @@index([term_id, student_id], map: "enrollment_term_scope", where: raw("(state = 'active'::text)"))
+}
+
+model enrollment_component {
+  enrollment_id BigInt
+  component_id  BigInt
+  component     component  @relation(fields: [component_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  enrollment    enrollment @relation(fields: [enrollment_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([enrollment_id, component_id])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model equivalency {
+  id                                       BigInt             @id @default(autoincrement())
+  source_course                            BigInt
+  target_course                            BigInt
+  curriculum_id                            BigInt
+  valid_from                               DateTime           @db.Date
+  valid_until                              DateTime?          @db.Date
+  approval_ref                             String
+  curriculum_version                       curriculum_version @relation(fields: [curriculum_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  course_equivalency_source_courseTocourse course             @relation("equivalency_source_courseTocourse", fields: [source_course], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  course_equivalency_target_courseTocourse course             @relation("equivalency_target_courseTocourse", fields: [target_course], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model exception_grant {
+  id                                                           BigInt            @id @default(autoincrement())
+  student_id                                                   BigInt
+  term_id                                                      BigInt
+  rule_code                                                    String
+  policy_id                                                    BigInt
+  requestor                                                    BigInt
+  approver                                                     BigInt?
+  reason_ref                                                   String
+  valid_until                                                  DateTime          @db.Timestamptz(6)
+  state                                                        String
+  identity_account_exception_grant_approverToidentity_account  identity_account? @relation("exception_grant_approverToidentity_account", fields: [approver], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  policy_version                                               policy_version    @relation(fields: [policy_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  identity_account_exception_grant_requestorToidentity_account identity_account  @relation("exception_grant_requestorToidentity_account", fields: [requestor], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  student_term                                                 student_term      @relation(fields: [student_id, term_id], references: [student_id, term_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model idempotency_record {
+  actor_id                                                         BigInt
+  operation                                                        String
+  request_key                                                      String
+  subject_id                                                       BigInt
+  term_id                                                          BigInt
+  payload_hash                                                     String
+  state                                                            String
+  http_status                                                      Int?
+  outcome                                                          Json?
+  expires_at                                                       DateTime         @db.Timestamptz(6)
+  case_ref                                                         String?
+  identity_account_idempotency_record_actor_idToidentity_account   identity_account @relation("idempotency_record_actor_idToidentity_account", fields: [actor_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  identity_account_idempotency_record_subject_idToidentity_account identity_account @relation("idempotency_record_subject_idToidentity_account", fields: [subject_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  term                                                             term             @relation(fields: [term_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([actor_id, operation, request_key])
+  @@index([expires_at], map: "idempotency_expiry")
+}
+
+model identity_account {
+  id                                                                 BigInt                  @id @default(autoincrement())
+  issuer                                                             String
+  subject                                                            String
+  academic_record                                                    academic_record[]
+  audit_entry_audit_entry_actor_idToidentity_account                 audit_entry[]           @relation("audit_entry_actor_idToidentity_account")
+  audit_entry_audit_entry_subject_idToidentity_account               audit_entry[]           @relation("audit_entry_subject_idToidentity_account")
+  case_delegation_case_delegation_actor_idToidentity_account         case_delegation[]       @relation("case_delegation_actor_idToidentity_account")
+  case_delegation_case_delegation_student_idToidentity_account       case_delegation[]       @relation("case_delegation_student_idToidentity_account")
+  curriculum_review_curriculum_review_approved_byToidentity_account  curriculum_review[]     @relation("curriculum_review_approved_byToidentity_account")
+  curriculum_review_curriculum_review_author_idToidentity_account    curriculum_review[]     @relation("curriculum_review_author_idToidentity_account")
+  development_credential                                             development_credential?
+  exception_grant_exception_grant_approverToidentity_account         exception_grant[]       @relation("exception_grant_approverToidentity_account")
+  exception_grant_exception_grant_requestorToidentity_account        exception_grant[]       @relation("exception_grant_requestorToidentity_account")
+  idempotency_record_idempotency_record_actor_idToidentity_account   idempotency_record[]    @relation("idempotency_record_actor_idToidentity_account")
+  idempotency_record_idempotency_record_subject_idToidentity_account idempotency_record[]    @relation("idempotency_record_subject_idToidentity_account")
+  import_batch                                                       import_batch[]
+  instructor                                                         instructor?
+  policy_author                                                      policy_author[]
+  role_assignment                                                    role_assignment[]
+  solve_job                                                          solve_job[]
+  solve_snapshot                                                     solve_snapshot[]
+  student_program                                                    student_program[]
+  student_term                                                       student_term[]
+  timetable_version                                                  timetable_version[]
+  web_session                                                        web_session[]
+
+  @@unique([issuer, subject])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model instructor {
+  id               BigInt           @id
+  unit_id          BigInt
+  workload_limit   Decimal          @db.Decimal(8, 2)
+  availability     availability[]
+  identity_account identity_account @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  org_unit         org_unit         @relation(fields: [unit_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  meeting          meeting[]
+  qualification    qualification[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model meeting {
+  id                BigInt            @id @default(autoincrement())
+  version_id        BigInt
+  component_id      BigInt
+  instructor_id     BigInt
+  room_id           BigInt
+  local_day         Int               @db.SmallInt
+  local_start       DateTime          @db.Time(6)
+  duration_minutes  Int
+  week_dates        DateTime[]        @db.Date
+  zone              String
+  exception_dates   Json
+  component         component         @relation(fields: [component_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  instructor        instructor        @relation(fields: [instructor_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  room              room              @relation(fields: [room_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  timetable_version timetable_version @relation(fields: [version_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model notification_intent {
+  event_id     String       @id @db.Uuid
+  state        String
+  created_at   DateTime     @default(dbgenerated("clock_timestamp()")) @db.Timestamptz(6)
+  outbox_event outbox_event @relation(fields: [event_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model offering {
+  id           BigInt       @id @default(autoincrement())
+  course_id    BigInt
+  term_id      BigInt
+  unit_id      BigInt
+  credit_value Decimal      @db.Decimal(6, 2)
+  search_title String?
+  enrollment   enrollment[]
+  course       course       @relation(fields: [course_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  term         term         @relation(fields: [term_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  org_unit     org_unit     @relation(fields: [unit_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  section      section[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model operation_window {
+  term_id   BigInt
+  operation String
+  opens_at  DateTime @db.Timestamptz(6)
+  closes_at DateTime @db.Timestamptz(6)
+  term      term     @relation(fields: [term_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([term_id, operation])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model org_unit {
+  id              BigInt            @id @default(autoincrement())
+  code            String            @unique
+  kind            String
+  parent_id       BigInt?
+  instructor      instructor[]
+  offering        offering[]
+  org_unit        org_unit?         @relation("org_unitToorg_unit", fields: [parent_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  other_org_unit  org_unit[]        @relation("org_unitToorg_unit")
+  policy_version  policy_version[]
+  program         program[]
+  role_assignment role_assignment[]
+  term_scope      term_scope[]
+}
+
+model outbox_event {
+  id                  String               @id @db.Uuid
+  aggregate_key       String
+  sequence            BigInt
+  event_type          String
+  envelope            Json
+  occurred_at         DateTime             @db.Timestamptz(6)
+  published_at        DateTime?            @db.Timestamptz(6)
+  notification_intent notification_intent?
+  quarantine_event    quarantine_event?
+
+  @@unique([aggregate_key, sequence])
+  @@index([occurred_at, id], map: "outbox_pending", where: raw("(published_at IS NULL)"))
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model policy_version {
+  id              BigInt            @id @default(autoincrement())
+  unit_id         BigInt
+  edition         String
+  state           String
+  parameters      Json
+  academic_rule   academic_rule[]
+  exception_grant exception_grant[]
+  policy_author   policy_author?
+  org_unit        org_unit          @relation(fields: [unit_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  student_term    student_term[]
+
+  @@unique([unit_id, edition])
+}
+
+model program {
+  id                 BigInt               @id @default(autoincrement())
+  unit_id            BigInt
+  code               String               @unique
+  degree_level       String
+  curriculum_version curriculum_version[]
+  org_unit           org_unit             @relation(fields: [unit_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  student_program    student_program[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model qualification {
+  instructor_id BigInt
+  course_id     BigInt
+  valid_from    DateTime   @db.Date
+  valid_until   DateTime?  @db.Date
+  course        course     @relation(fields: [course_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  instructor    instructor @relation(fields: [instructor_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([instructor_id, course_id, valid_from])
+}
+
+model quarantine_event {
+  event_id     String       @id @db.Uuid
+  reason       String
+  recorded_at  DateTime     @default(dbgenerated("clock_timestamp()")) @db.Timestamptz(6)
+  outbox_event outbox_event @relation(fields: [event_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model queue_guard {
+  term_id BigInt @id
+  term    term   @relation(fields: [term_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model reservation {
+  id                BigInt        @id @default(autoincrement())
+  pool_id           BigInt
+  eligibility_group String
+  seats             Int
+  release_at        DateTime      @db.Timestamptz(6)
+  capacity_pool     capacity_pool @relation(fields: [pool_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  seat_claim        seat_claim[]
+
+  @@unique([pool_id, eligibility_group])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model review_case {
+  id             BigInt       @id @default(autoincrement())
+  student_id     BigInt
+  term_id        BigInt
+  trigger_event  String       @db.Uuid
+  reason         String
+  state          String
+  resolution_ref String?
+  student_term   student_term @relation(fields: [student_id, term_id], references: [student_id, term_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([student_id, term_id, trigger_event])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model role_assignment {
+  id               BigInt           @id @default(autoincrement())
+  actor_id         BigInt
+  role_code        String
+  unit_id          BigInt
+  term_id          BigInt?
+  valid_from       DateTime         @db.Timestamptz(6)
+  valid_until      DateTime         @db.Timestamptz(6)
+  identity_account identity_account @relation(fields: [actor_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  term             term?            @relation(fields: [term_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  org_unit         org_unit         @relation(fields: [unit_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([actor_id, unit_id, role_code], map: "role_scope")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model room {
+  id           BigInt         @id @default(autoincrement())
+  code         String         @unique
+  campus       String
+  capacity     Int
+  meeting      meeting[]
+  room_feature room_feature[]
+}
+
+model room_feature {
+  room_id BigInt
+  feature String
+  room    room   @relation(fields: [room_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([room_id, feature])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model seat_claim {
+  id             BigInt        @id @default(autoincrement())
+  pool_id        BigInt
+  reservation_id BigInt?
+  enrollment_id  BigInt?
+  waitlist_id    BigInt?
+  enrollment     enrollment?   @relation(fields: [enrollment_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  capacity_pool  capacity_pool @relation(fields: [pool_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  reservation    reservation?  @relation(fields: [reservation_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  waitlist       waitlist?     @relation(fields: [waitlist_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([pool_id, enrollment_id])
+  @@unique([pool_id, waitlist_id])
+  @@index([pool_id, reservation_id], map: "pool_claims")
+}
+
+model section {
+  id             BigInt           @id @default(autoincrement())
+  offering_id    BigInt
+  code           String
+  pool_id        BigInt
+  component      component[]
+  enrollment     enrollment[]
+  offering       offering         @relation(fields: [offering_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  capacity_pool  capacity_pool    @relation(fields: [pool_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  section_bundle section_bundle[] @ignore
+
+  @@unique([offering_id, code])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model section_bundle {
+  section_id    BigInt
+  component_ids BigInt[]
+  section       section  @relation(fields: [section_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([section_id, component_ids])
+  @@ignore
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model solve_job {
+  id               BigInt            @id @default(autoincrement())
+  term_id          BigInt
+  snapshot_hash    String
+  input_uri        String
+  solver_version   String
+  config           Json
+  state            String
+  result_uri       String?
+  lease_until      DateTime?         @db.Timestamptz(6)
+  generation       BigInt            @default(0)
+  result           Json?
+  error_code       String?
+  created_by       BigInt?
+  identity_account identity_account? @relation(fields: [created_by], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  term             term              @relation(fields: [term_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model solve_snapshot {
+  id                String              @id
+  term_id           BigInt
+  epoch             BigInt
+  input             Json
+  created_by        BigInt
+  identity_account  identity_account    @relation(fields: [created_by], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  term              term                @relation(fields: [term_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  timetable_version timetable_version[]
+}
+
+model student_program {
+  id                 BigInt             @id @default(autoincrement())
+  student_id         BigInt
+  program_id         BigInt
+  curriculum_id      BigInt
+  specialization     String?
+  admitted_on        DateTime           @db.Date
+  curriculum_version curriculum_version @relation(fields: [curriculum_id, program_id], references: [id, program_id], onDelete: NoAction, onUpdate: NoAction)
+  program            program            @relation(fields: [program_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  identity_account   identity_account   @relation(fields: [student_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  student_term       student_term[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model student_term {
+  student_id         BigInt
+  term_id            BigInt
+  student_program_id BigInt
+  policy_id          BigInt
+  epoch              BigInt            @default(0)
+  registration_stage String            @default("draft")
+  finalization_ref   String?
+  revision           Int               @default(0)
+  standing           String?
+  gpa                Decimal?          @db.Decimal(7, 3)
+  appointment        appointment[]
+  enrollment         enrollment[]
+  exception_grant    exception_grant[]
+  review_case        review_case[]
+  policy_version     policy_version    @relation(fields: [policy_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  identity_account   identity_account  @relation(fields: [student_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  student_program    student_program   @relation(fields: [student_program_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  term               term              @relation(fields: [term_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  waitlist           waitlist[]
+
+  @@id([student_id, term_id])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model term {
+  id                 BigInt               @id @default(autoincrement())
+  code               String               @unique
+  zone               String
+  opens_at           DateTime             @db.Timestamptz(6)
+  closes_at          DateTime             @db.Timestamptz(6)
+  epoch              BigInt               @default(0)
+  audit_entry        audit_entry[]
+  availability       availability[]
+  capacity_pool      capacity_pool[]
+  case_delegation    case_delegation[]
+  idempotency_record idempotency_record[]
+  import_batch       import_batch[]
+  offering           offering[]
+  operation_window   operation_window[]
+  queue_guard        queue_guard?
+  role_assignment    role_assignment[]
+  solve_job          solve_job[]
+  solve_snapshot     solve_snapshot[]
+  student_term       student_term[]
+  term_scope         term_scope?
+  timetable_version  timetable_version?
+}
+
+model term_scope {
+  term_id  BigInt   @id
+  unit_id  BigInt
+  term     term     @relation(fields: [term_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  org_unit org_unit @relation(fields: [unit_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model timetable_version {
+  id                      BigInt              @id @default(autoincrement())
+  term_id                 BigInt              @unique(map: "one_published", where: raw("(state = 'published'::text)"))
+  based_on                BigInt?
+  state                   String
+  input_epoch             BigInt
+  content_hash            String
+  validator_ref           String?
+  proposer_id             BigInt
+  snapshot_id             String?
+  assignments             Json?
+  meeting                 meeting[]
+  timetable_version       timetable_version?  @relation("timetable_versionTotimetable_version", fields: [based_on], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  other_timetable_version timetable_version[] @relation("timetable_versionTotimetable_version")
+  identity_account        identity_account    @relation(fields: [proposer_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  solve_snapshot          solve_snapshot?     @relation(fields: [snapshot_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  term                    term                @relation(fields: [term_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  validation_record       validation_record[]
+}
+
+model validation_record {
+  id                BigInt            @id @default(autoincrement())
+  version_id        BigInt
+  content_hash      String
+  checked_epoch     BigInt
+  validator_build   String
+  passed            Boolean
+  conflict_report   Json
+  checked_at        DateTime          @db.Timestamptz(6)
+  timetable_version timetable_version @relation(fields: [version_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model waitlist {
+  id            BigInt        @id @default(autoincrement())
+  student_id    BigInt
+  term_id       BigInt
+  pool_id       BigInt
+  bundle        Json
+  tier          Int
+  joined_at     DateTime      @db.Timestamptz(6)
+  expires_at    DateTime?     @db.Timestamptz(6)
+  state         String
+  reason_code   String?
+  pool_ids      BigInt[]      @default([])
+  seat_claim    seat_claim[]
+  capacity_pool capacity_pool @relation(fields: [pool_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  student_term  student_term  @relation(fields: [student_id, term_id], references: [student_id, term_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([student_id, pool_id], map: "one_live_entry", where: raw("(state = ANY (ARRAY['queued'::text, 'offered'::text]))"))
+  @@index([pool_ids], map: "overlapping_waitlist", type: Gin)
+  @@index([pool_id, tier, joined_at, id], map: "queue_order", where: raw("(state = 'queued'::text)"))
+}
+
+model web_session {
+  token_hash       String           @id
+  csrf_hash        String
+  actor_id         BigInt
+  expires_at       DateTime         @db.Timestamptz(6)
+  revoked_at       DateTime?        @db.Timestamptz(6)
+  identity_account identity_account @relation(fields: [actor_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model component_room_requirement {
+  component_id BigInt
+  feature      String
+  component    component @relation(fields: [component_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([component_id, feature])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model curriculum_review {
+  curriculum_id                                                    BigInt             @id
+  author_id                                                        BigInt
+  approved_by                                                      BigInt?
+  state                                                            String
+  identity_account_curriculum_review_approved_byToidentity_account identity_account?  @relation("curriculum_review_approved_byToidentity_account", fields: [approved_by], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  identity_account_curriculum_review_author_idToidentity_account   identity_account   @relation("curriculum_review_author_idToidentity_account", fields: [author_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  curriculum_version                                               curriculum_version @relation(fields: [curriculum_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model import_batch {
+  id               BigInt           @id @default(autoincrement())
+  actor_id         BigInt
+  term_id          BigInt
+  source_ref       String
+  payload_hash     String
+  inserted         Int
+  imported_at      DateTime         @default(dbgenerated("clock_timestamp()")) @db.Timestamptz(6)
+  identity_account identity_account @relation(fields: [actor_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  term             term             @relation(fields: [term_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([actor_id, term_id, source_ref])
+}
+
+model oidc_attempt {
+  state_hash   String   @id
+  browser_hash String
+  nonce        String
+  verifier     String
+  expires_at   DateTime @db.Timestamptz(6)
+
+  @@index([expires_at], map: "oidc_attempt_expiry")
+}
+
+model policy_author {
+  policy_id        BigInt           @id
+  actor_id         BigInt
+  identity_account identity_account @relation(fields: [actor_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  policy_version   policy_version   @relation(fields: [policy_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}

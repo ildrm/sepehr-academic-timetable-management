@@ -1,0 +1,17 @@
+Restored into a fresh isolated database. Selected counts and invariants matched.
+0
+0
+0
+allocation_application|2
+allocation_campaign|1
+allocation_run|2
+consumer_receipt|13
+enrollment|9
+notification_intent|6
+outbox_event|14
+seat_claim|9
+term|2
+timetable_change_notice|1
+timetable_impact_review|1
+timetable_version|3
+Archive and comparison files are in /var/folders/4l/x8t1_s4x13l2ptc2j0rnr8900000gn/T/tmp.TdQFfnYjuJ.

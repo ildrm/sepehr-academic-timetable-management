@@ -1,0 +1,19 @@
+# Additive development endpoints
+
+The checked-in OpenAPI specification governs the 14 documented operations. The application adds the following scoped endpoints for the portal and staff workflows. These are implementation contracts pending formal specification adoption. Input DTOs live in the linked modules.
+
+| Prefix | Operations | Input and scope |
+|---|---|---|
+| `/session` | Development login, OIDC start and callback, logout | Development login requires explicit flags. OIDC uses authorization code, PKCE, state, nonce, and preprovisioned issuer/subject. [Identity implementation](../packages/backend-core/oidc.ts) |
+| `/me` | Portal, catalog details, overview, suggestions, degree audit | Student identity comes from the session. Suggestions accept `q` and up to five ordered, comma-separated `preferred` course codes. Degree audits include record revision and allocated credits by record. [Portal queries](../packages/backend-core/portal.ts) |
+| `/me/exceptions/:termId`, `/terms/:termId/exceptions` | Request, review, approve, reject or revoke a named exception | Requests carry ruleCode, reasonRef and validUntil. Review and decisions require scoped academic authority. [Exception service](../packages/backend-core/academic-office.ts) |
+| `/me/instructor/:termId` | Current workload limit, availability and teaching assignments | Availability creation requires offset-bearing `start` and `end`. [Instructor service](../packages/backend-core/academic-office.ts) |
+| `/terms/:termId/snapshots` and `/terms/:termId/timetables` | Store normalized planning input, read versions and submit manual assignments | Snapshot uses the existing solver input schema. Proposal uses snapshotId and classId/placementId pairs. [Timetabling implementation](../packages/backend-core/timetable.ts) |
+| `/terms/:termId/timetables/:versionId/impact` | Inspect impact and record a staff decision | Approval accepts `impactHash` and `approvalRef`. Publication checks the current impact again. [Review calculation](../packages/backend-core/timetable-impact.ts) |
+| `/terms/:termId/allocations`, `/me/allocations/:termId` | Create or approve campaigns, submit preferences, request solver runs and publish outcomes | Staff decisions require matching term scope and independent authority. Students see their own result. [Allocation service](../packages/backend-core/allocation.ts) |
+| `/academic` | Create courses, rooms, terms, offerings and staged policies or curricula | Explicit DTOs reject unexpected fields. Role assignments and version guards are checked in the same transaction. [Inventory service](../packages/backend-core/inventory.ts) · [Academic setup service](../packages/backend-core/academic-setup.ts) |
+| `/academic/imports` | Dry-run and apply normalized academic history batches | Requires an existing student, mapped course and attempt key. Conflicts withhold the batch. Replay verifies request hash and current scope. [Import service](../packages/backend-core/import-records.ts) |
+| `/terms/:termId/reports`, `/terms/:termId/audit` | Seat use, unmet demand, disruption and audit reads | Export routes append `/export` to the corresponding report path and require positive `REPORT_MIN_CELL`. Disruption takes `before` and `after` version IDs. [Reporting service](../packages/backend-core/reports.ts) |
+| `/internal/metrics`, `/health/live`, `/health/ready` | Runtime monitoring and readiness | The deployment network exposes these endpoints to trusted monitoring. [Runbook](../infra/deployment/README.md) |
+
+The administration screen accepts the same JSON DTOs as the API to preserve explicit inputs and reject unknown fields. Term and capacity writes use an expected epoch, so a concurrent administrative update yields a stale-version error. The API accepts numeric database references as opaque strings. The documentary illustrative IDs are examples.

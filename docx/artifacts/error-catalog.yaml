@@ -1,0 +1,52 @@
+- id: ERR-001
+  http: 400
+  messageKey: invalid_input
+  recovery: Correct invalid fields and submit a fresh request.
+- id: ERR-002
+  http: 401
+  messageKey: session_expired
+  recovery: Sign in again before checking the original request.
+- id: ERR-003
+  http: 403
+  messageKey: scope_denied
+  recovery: Request access from the responsible office.
+- id: ERR-004
+  http: 422
+  messageKey: rule_rejected
+  recovery: Review rule explanations or request an allowed exception.
+- id: ERR-005
+  http: 409
+  messageKey: capacity_conflict
+  recovery: Refresh available bundles or join the waitlist.
+- id: ERR-006
+  http: 409
+  messageKey: key_reused
+  recovery: Use the original payload or a new key for a different intent.
+- id: ERR-007
+  http: 409
+  messageKey: window_closed
+  recovery: Check the assigned appointment and term timezone.
+- id: ERR-008
+  http: 409
+  messageKey: stale_version
+  recovery: Refresh inputs and validate a new version.
+- id: ERR-009
+  http: 409
+  messageKey: queue_priority
+  recovery: Join the academic queue or respond to an existing offer.
+- id: ERR-010
+  http: 503
+  messageKey: retry_exhausted
+  recovery: Check request status before retrying the same key.
+- id: ERR-011
+  http: 404
+  messageKey: not_found
+  recovery: Verify the resource reference in your authorized scope.
+- id: ERR-012
+  http: 429
+  messageKey: rate_limited
+  recovery: Retry after the indicated delay.
+- id: ERR-013
+  http: 409
+  messageKey: invalid_state
+  recovery: Refresh the resource and review its current state.

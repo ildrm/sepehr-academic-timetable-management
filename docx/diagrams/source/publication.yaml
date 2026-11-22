@@ -1,0 +1,25 @@
+title: Approve current validated content
+kind: sequence
+lanes:
+- Approver
+- API
+- Database
+rows:
+- - 0
+  - 1
+  - Submit version and evidence
+- - 1
+  - 2
+  - Lock term and version
+- - 2
+  - 1
+  - Compare current epoch + hash
+- - 1
+  - 2
+  - Supersede and publish atomically
+- - 2
+  - 1
+  - Commit audit and notification
+- - 1
+  - 0
+  - Return publication receipt

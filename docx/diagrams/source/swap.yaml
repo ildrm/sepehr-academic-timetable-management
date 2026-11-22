@@ -1,0 +1,25 @@
+title: Atomic replacement
+kind: sequence
+lanes:
+- Student
+- Service
+- Database
+rows:
+- - 0
+  - 1
+  - Select original + replacement
+- - 1
+  - 2
+  - Lock union of all pools
+- - 2
+  - 1
+  - Read final-set facts
+- - 1
+  - 2
+  - Check all replacement claims
+- - 2
+  - 1
+  - Failure preserves originals
+- - 1
+  - 0
+  - Receipt or reason

@@ -1,0 +1,11 @@
+services:
+  worker:
+    environment:
+      NOTIFICATION_GATEWAY_URL: ${NOTIFICATION_GATEWAY_URL:?Set the approved notification gateway URL}
+      NOTIFICATION_IDEMPOTENCY_CONTRACT: event-id-v1
+      NOTIFICATION_SIGNING_KEY_FILE: /run/secrets/notification_signing_key
+    secrets:
+      - notification_signing_key
+secrets:
+  notification_signing_key:
+    file: ${NOTIFICATION_SIGNING_KEY_FILE:?Set the notification signing key file path}

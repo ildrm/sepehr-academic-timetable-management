@@ -1,0 +1,12 @@
+**/node_modules
+**/.next
+dist
+.git
+.env
+.env.*
+.venv
+implementation
+docx/*
+!docx/artifacts/
+!docx/artifacts/**
+**/__pycache__

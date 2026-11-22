@@ -1,0 +1,10 @@
+
+> teaching-system@0.1.0 typecheck
+> tsc --noEmit && npm run typecheck -w @teaching/web
+
+
+> typecheck
+> next typegen && tsc --noEmit
+
+Generating route types...
+✓ Types generated successfully

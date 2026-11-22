@@ -1,0 +1,16 @@
+{
+  "purpose": "Hypothetical, unapproved values for hand checks only.",
+  "student": "S",
+  "currentCredits": "3.00",
+  "ceiling": "6.00",
+  "offeringCredits": "3.00",
+  "lecturePool": {
+    "capacity": 2,
+    "claimed": 1
+  },
+  "labPool": {
+    "capacity": 1,
+    "claimed": 1
+  },
+  "expected": "ERR-005; active credits remain 3.00; lecture claims remain 1."
+}

@@ -1,0 +1,20 @@
+
+> teaching-system@0.1.0 test
+> node --import tsx --test tests/unit/*.test.ts
+
+(node:93702) [DEP0205] DeprecationWarning: `module.register()` is deprecated. Use `module.registerHooks()` instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+✔ prerequisite alternatives, grades, current study and concurrent course retain distinct semantics (27.901416ms)
+✔ rule compiler rejects unknown operators, excess depth and unbound course IDs (0.324209ms)
+✔ degree allocation consumes an exclusive completed course once (1.188292ms)
+✔ requests conform to OpenAPI and reject duplicate and invented inputs (1.950917ms)
+✔ Persian search normalization and half-open occurrence exceptions (1.499416ms)
+✔ local times reject daylight-saving gaps and repeats without ratified disambiguation (50.997834ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 582.036

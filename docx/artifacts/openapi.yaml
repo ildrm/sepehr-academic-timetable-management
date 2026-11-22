@@ -1,0 +1,2132 @@
+openapi: 3.1.1
+info:
+  title: Academic operations
+  version: 0.1.0
+  description: Proposed same-origin BFF contract. Mutating cookie paths require session-bound CSRF proof and Origin
+    validation. Identifiers are opaque strings.
+paths:
+  /me/enrollment-previews:
+    post:
+      operationId: previewEnrollment
+      summary: Evaluate the proposed final enrollment set
+      description: PERM-022; enforce current assignment, relationship, time and resource scope in Nest.js.
+      security:
+      - session: []
+      parameters:
+      - name: X-CSRF-Token
+        in: header
+        required: true
+        schema: &id001
+          type: string
+          minLength: 1
+      responses:
+        '200':
+          description: Advisory result; no claim is created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Decision'
+              example:
+                decision: accepted
+                policyVersion: POL-A
+                evaluatedRules:
+                - BR-001
+                reasons: []
+                explanationKey: preview.eligible
+        '400':
+          description: Correct invalid fields and submit a fresh request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-001
+                messageKey: invalid_input
+                requestId: SYN-REQ
+                details: []
+        '401':
+          description: Sign in again before checking the original request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-002
+                messageKey: session_expired
+                requestId: SYN-REQ
+                details: []
+        '403':
+          description: Request access from the responsible office.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-003
+                messageKey: scope_denied
+                requestId: SYN-REQ
+                details: []
+        '404':
+          description: Verify the resource reference in your authorized scope.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-011
+                messageKey: not_found
+                requestId: SYN-REQ
+                details: []
+        '409':
+          description: Refresh available bundles or join the waitlist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-005
+                messageKey: capacity_conflict
+                requestId: SYN-REQ
+                details: []
+        '422':
+          description: Review rule explanations or request an allowed exception.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-004
+                messageKey: rule_rejected
+                requestId: SYN-REQ
+                details: []
+        '429':
+          description: Retry after the indicated delay.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-012
+                messageKey: rate_limited
+                requestId: SYN-REQ
+                details: []
+        '503':
+          description: Check request status before retrying the same key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-010
+                messageKey: retry_exhausted
+                requestId: SYN-REQ
+                details: []
+      x-id: API-001
+      x-permission: PERM-022
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/previewEnrollmentInput'
+            example:
+              termId: T
+              add: &id004
+              - &id002
+                sectionId: SEC-A
+                componentIds:
+                - LEC-A
+                - LAB-A
+              dropEnrollmentIds: &id005 []
+  /me/enrollments:
+    post:
+      operationId: enroll
+      summary: Enroll in all supplied bundles atomically
+      description: PERM-001; enforce current assignment, relationship, time and resource scope in Nest.js.
+      security:
+      - session: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: true
+        schema:
+          type: string
+          minLength: 8
+          maxLength: 128
+        description: Opaque key scoped to session actor and operation. Mismatched body or subject returns ERR-006.
+      - name: X-CSRF-Token
+        in: header
+        required: true
+        schema: *id001
+      responses:
+        '200':
+          description: Authoritative response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Receipt'
+              example: &id003
+                requestId: SYN-REQ
+                outcome: committed
+                resourceId: SYN-R1
+                revision: 1
+        '400':
+          description: Correct invalid fields and submit a fresh request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-001
+                messageKey: invalid_input
+                requestId: SYN-REQ
+                details: []
+        '401':
+          description: Sign in again before checking the original request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-002
+                messageKey: session_expired
+                requestId: SYN-REQ
+                details: []
+        '403':
+          description: Request access from the responsible office.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-003
+                messageKey: scope_denied
+                requestId: SYN-REQ
+                details: []
+        '404':
+          description: Verify the resource reference in your authorized scope.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-011
+                messageKey: not_found
+                requestId: SYN-REQ
+                details: []
+        '409':
+          description: Refresh available bundles or join the waitlist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-005
+                messageKey: capacity_conflict
+                requestId: SYN-REQ
+                details: []
+        '422':
+          description: Review rule explanations or request an allowed exception.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-004
+                messageKey: rule_rejected
+                requestId: SYN-REQ
+                details: []
+        '429':
+          description: Retry after the indicated delay.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-012
+                messageKey: rate_limited
+                requestId: SYN-REQ
+                details: []
+        '503':
+          description: Check request status before retrying the same key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-010
+                messageKey: retry_exhausted
+                requestId: SYN-REQ
+                details: []
+      x-id: API-002
+      x-permission: PERM-001
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/enrollInput'
+            example:
+              termId: T
+              bundles:
+              - *id002
+  /me/drops:
+    post:
+      operationId: drop
+      summary: Drop the set atomically
+      description: PERM-001; enforce current assignment, relationship, time and resource scope in Nest.js.
+      security:
+      - session: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: true
+        schema:
+          type: string
+          minLength: 8
+          maxLength: 128
+        description: Opaque key scoped to session actor and operation. Mismatched body or subject returns ERR-006.
+      - name: X-CSRF-Token
+        in: header
+        required: true
+        schema: *id001
+      responses:
+        '200':
+          description: Authoritative response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Receipt'
+              example: *id003
+        '400':
+          description: Correct invalid fields and submit a fresh request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-001
+                messageKey: invalid_input
+                requestId: SYN-REQ
+                details: []
+        '401':
+          description: Sign in again before checking the original request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-002
+                messageKey: session_expired
+                requestId: SYN-REQ
+                details: []
+        '403':
+          description: Request access from the responsible office.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-003
+                messageKey: scope_denied
+                requestId: SYN-REQ
+                details: []
+        '404':
+          description: Verify the resource reference in your authorized scope.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-011
+                messageKey: not_found
+                requestId: SYN-REQ
+                details: []
+        '409':
+          description: Refresh available bundles or join the waitlist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-005
+                messageKey: capacity_conflict
+                requestId: SYN-REQ
+                details: []
+        '422':
+          description: Review rule explanations or request an allowed exception.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-004
+                messageKey: rule_rejected
+                requestId: SYN-REQ
+                details: []
+        '429':
+          description: Retry after the indicated delay.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-012
+                messageKey: rate_limited
+                requestId: SYN-REQ
+                details: []
+        '503':
+          description: Check request status before retrying the same key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-010
+                messageKey: retry_exhausted
+                requestId: SYN-REQ
+                details: []
+      x-id: API-003
+      x-permission: PERM-001
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dropInput'
+            example:
+              termId: T
+              enrollmentIds:
+              - E1
+  /me/swaps:
+    post:
+      operationId: swap
+      summary: Release originals only if all replacements fit
+      description: PERM-001; enforce current assignment, relationship, time and resource scope in Nest.js.
+      security:
+      - session: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: true
+        schema:
+          type: string
+          minLength: 8
+          maxLength: 128
+        description: Opaque key scoped to session actor and operation. Mismatched body or subject returns ERR-006.
+      - name: X-CSRF-Token
+        in: header
+        required: true
+        schema: *id001
+      responses:
+        '200':
+          description: Authoritative response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Receipt'
+              example: *id003
+        '400':
+          description: Correct invalid fields and submit a fresh request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-001
+                messageKey: invalid_input
+                requestId: SYN-REQ
+                details: []
+        '401':
+          description: Sign in again before checking the original request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-002
+                messageKey: session_expired
+                requestId: SYN-REQ
+                details: []
+        '403':
+          description: Request access from the responsible office.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-003
+                messageKey: scope_denied
+                requestId: SYN-REQ
+                details: []
+        '404':
+          description: Verify the resource reference in your authorized scope.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-011
+                messageKey: not_found
+                requestId: SYN-REQ
+                details: []
+        '409':
+          description: Refresh available bundles or join the waitlist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-005
+                messageKey: capacity_conflict
+                requestId: SYN-REQ
+                details: []
+        '422':
+          description: Review rule explanations or request an allowed exception.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-004
+                messageKey: rule_rejected
+                requestId: SYN-REQ
+                details: []
+        '429':
+          description: Retry after the indicated delay.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-012
+                messageKey: rate_limited
+                requestId: SYN-REQ
+                details: []
+        '503':
+          description: Check request status before retrying the same key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-010
+                messageKey: retry_exhausted
+                requestId: SYN-REQ
+                details: []
+      x-id: API-004
+      x-permission: PERM-001
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/swapInput'
+            example:
+              termId: T
+              add:
+              - *id002
+              dropEnrollmentIds:
+              - E1
+  /me/waitlist-entries:
+    post:
+      operationId: joinWaitlist
+      summary: Queue one complete bundle
+      description: PERM-017; enforce current assignment, relationship, time and resource scope in Nest.js.
+      security:
+      - session: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: true
+        schema:
+          type: string
+          minLength: 8
+          maxLength: 128
+        description: Opaque key scoped to session actor and operation. Mismatched body or subject returns ERR-006.
+      - name: X-CSRF-Token
+        in: header
+        required: true
+        schema: *id001
+      responses:
+        '200':
+          description: Authoritative response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Receipt'
+              example: *id003
+        '400':
+          description: Correct invalid fields and submit a fresh request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-001
+                messageKey: invalid_input
+                requestId: SYN-REQ
+                details: []
+        '401':
+          description: Sign in again before checking the original request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-002
+                messageKey: session_expired
+                requestId: SYN-REQ
+                details: []
+        '403':
+          description: Request access from the responsible office.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-003
+                messageKey: scope_denied
+                requestId: SYN-REQ
+                details: []
+        '404':
+          description: Verify the resource reference in your authorized scope.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-011
+                messageKey: not_found
+                requestId: SYN-REQ
+                details: []
+        '409':
+          description: Refresh available bundles or join the waitlist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-005
+                messageKey: capacity_conflict
+                requestId: SYN-REQ
+                details: []
+        '422':
+          description: Review rule explanations or request an allowed exception.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-004
+                messageKey: rule_rejected
+                requestId: SYN-REQ
+                details: []
+        '429':
+          description: Retry after the indicated delay.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-012
+                messageKey: rate_limited
+                requestId: SYN-REQ
+                details: []
+        '503':
+          description: Check request status before retrying the same key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-010
+                messageKey: retry_exhausted
+                requestId: SYN-REQ
+                details: []
+      x-id: API-005
+      x-permission: PERM-017
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/joinWaitlistInput'
+            example:
+              termId: T
+              bundle: *id002
+  /me/waitlist-entries/{entryId}/responses:
+    post:
+      operationId: respondToOffer
+      summary: Accept or decline an owned offer
+      description: PERM-017; enforce current assignment, relationship, time and resource scope in Nest.js.
+      security:
+      - session: []
+      parameters:
+      - name: entryId
+        in: path
+        required: true
+        schema: *id001
+      - name: Idempotency-Key
+        in: header
+        required: true
+        schema:
+          type: string
+          minLength: 8
+          maxLength: 128
+        description: Opaque key scoped to session actor and operation. Mismatched body or subject returns ERR-006.
+      - name: X-CSRF-Token
+        in: header
+        required: true
+        schema: *id001
+      responses:
+        '200':
+          description: Authoritative response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Receipt'
+              example: *id003
+        '400':
+          description: Correct invalid fields and submit a fresh request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-001
+                messageKey: invalid_input
+                requestId: SYN-REQ
+                details: []
+        '401':
+          description: Sign in again before checking the original request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-002
+                messageKey: session_expired
+                requestId: SYN-REQ
+                details: []
+        '403':
+          description: Request access from the responsible office.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-003
+                messageKey: scope_denied
+                requestId: SYN-REQ
+                details: []
+        '404':
+          description: Verify the resource reference in your authorized scope.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-011
+                messageKey: not_found
+                requestId: SYN-REQ
+                details: []
+        '409':
+          description: Refresh available bundles or join the waitlist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-005
+                messageKey: capacity_conflict
+                requestId: SYN-REQ
+                details: []
+        '422':
+          description: Review rule explanations or request an allowed exception.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-004
+                messageKey: rule_rejected
+                requestId: SYN-REQ
+                details: []
+        '429':
+          description: Retry after the indicated delay.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-012
+                messageKey: rate_limited
+                requestId: SYN-REQ
+                details: []
+        '503':
+          description: Check request status before retrying the same key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-010
+                messageKey: retry_exhausted
+                requestId: SYN-REQ
+                details: []
+      x-id: API-006
+      x-permission: PERM-017
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/respondToOfferInput'
+            example:
+              termId: T
+              response: accept
+  /me/requests/{operation}/{requestKey}:
+    get:
+      operationId: getRequestStatus
+      summary: Retrieve own stored outcome
+      description: Own actor-key namespace. Self-service uses PERM-023. For a staff or publication receipt, recheck
+        the original delegated grant and current resource scope before revealing any stored data.
+      security:
+      - session: []
+      parameters:
+      - name: operation
+        in: path
+        required: true
+        schema: *id001
+      - name: requestKey
+        in: path
+        required: true
+        schema: *id001
+      responses:
+        '200':
+          description: Authoritative response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestStatus'
+              example:
+                state: finished
+                originalHttpStatus: 200
+                outcome: *id003
+        '400':
+          description: Correct invalid fields and submit a fresh request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-001
+                messageKey: invalid_input
+                requestId: SYN-REQ
+                details: []
+        '401':
+          description: Sign in again before checking the original request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-002
+                messageKey: session_expired
+                requestId: SYN-REQ
+                details: []
+        '403':
+          description: Request access from the responsible office.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-003
+                messageKey: scope_denied
+                requestId: SYN-REQ
+                details: []
+        '404':
+          description: Verify the resource reference in your authorized scope.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-011
+                messageKey: not_found
+                requestId: SYN-REQ
+                details: []
+        '409':
+          description: Refresh available bundles or join the waitlist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-005
+                messageKey: capacity_conflict
+                requestId: SYN-REQ
+                details: []
+        '422':
+          description: Review rule explanations or request an allowed exception.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-004
+                messageKey: rule_rejected
+                requestId: SYN-REQ
+                details: []
+        '429':
+          description: Retry after the indicated delay.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-012
+                messageKey: rate_limited
+                requestId: SYN-REQ
+                details: []
+        '503':
+          description: Check request status before retrying the same key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-010
+                messageKey: retry_exhausted
+                requestId: SYN-REQ
+                details: []
+      x-id: API-007
+      x-permission: PERM-023
+  /staff/students/{studentId}/enrollment-changes:
+    post:
+      operationId: changeForStudent
+      summary: Apply a justified delegated change
+      description: PERM-007; enforce current assignment, relationship, time and resource scope in Nest.js.
+      security:
+      - session: []
+      parameters:
+      - name: studentId
+        in: path
+        required: true
+        schema: *id001
+      - name: Idempotency-Key
+        in: header
+        required: true
+        schema:
+          type: string
+          minLength: 8
+          maxLength: 128
+        description: Opaque key scoped to session actor and operation. Mismatched body or subject returns ERR-006.
+      - name: X-CSRF-Token
+        in: header
+        required: true
+        schema: *id001
+      responses:
+        '200':
+          description: Authoritative response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Receipt'
+              example: *id003
+        '400':
+          description: Correct invalid fields and submit a fresh request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-001
+                messageKey: invalid_input
+                requestId: SYN-REQ
+                details: []
+        '401':
+          description: Sign in again before checking the original request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-002
+                messageKey: session_expired
+                requestId: SYN-REQ
+                details: []
+        '403':
+          description: Request access from the responsible office.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-003
+                messageKey: scope_denied
+                requestId: SYN-REQ
+                details: []
+        '404':
+          description: Verify the resource reference in your authorized scope.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-011
+                messageKey: not_found
+                requestId: SYN-REQ
+                details: []
+        '409':
+          description: Refresh available bundles or join the waitlist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-005
+                messageKey: capacity_conflict
+                requestId: SYN-REQ
+                details: []
+        '422':
+          description: Review rule explanations or request an allowed exception.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-004
+                messageKey: rule_rejected
+                requestId: SYN-REQ
+                details: []
+        '429':
+          description: Retry after the indicated delay.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-012
+                messageKey: rate_limited
+                requestId: SYN-REQ
+                details: []
+        '503':
+          description: Check request status before retrying the same key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-010
+                messageKey: retry_exhausted
+                requestId: SYN-REQ
+                details: []
+      x-id: API-008
+      x-permission: PERM-007
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/changeForStudentInput'
+            example:
+              termId: T
+              add: *id004
+              dropEnrollmentIds: *id005
+              caseRef: CASE-SYN
+  /terms/{termId}/solve-runs:
+    post:
+      operationId: startSolve
+      summary: Persist a solve job and enqueue via outbox
+      description: PERM-021; enforce current assignment, relationship, time and resource scope in Nest.js.
+      security:
+      - session: []
+      parameters:
+      - name: termId
+        in: path
+        required: true
+        schema: *id001
+      - name: X-CSRF-Token
+        in: header
+        required: true
+        schema: *id001
+      responses:
+        '202':
+          description: Authoritative response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Run'
+              example: &id006
+                runId: J1
+                state: queued
+                snapshotId: SYN-SNAP
+                resultRef: null
+                solverStatus: null
+                unassignedCount: null
+        '400':
+          description: Correct invalid fields and submit a fresh request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-001
+                messageKey: invalid_input
+                requestId: SYN-REQ
+                details: []
+        '401':
+          description: Sign in again before checking the original request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-002
+                messageKey: session_expired
+                requestId: SYN-REQ
+                details: []
+        '403':
+          description: Request access from the responsible office.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-003
+                messageKey: scope_denied
+                requestId: SYN-REQ
+                details: []
+        '404':
+          description: Verify the resource reference in your authorized scope.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-011
+                messageKey: not_found
+                requestId: SYN-REQ
+                details: []
+        '409':
+          description: Refresh available bundles or join the waitlist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-005
+                messageKey: capacity_conflict
+                requestId: SYN-REQ
+                details: []
+        '422':
+          description: Review rule explanations or request an allowed exception.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-004
+                messageKey: rule_rejected
+                requestId: SYN-REQ
+                details: []
+        '429':
+          description: Retry after the indicated delay.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-012
+                messageKey: rate_limited
+                requestId: SYN-REQ
+                details: []
+        '503':
+          description: Check request status before retrying the same key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-010
+                messageKey: retry_exhausted
+                requestId: SYN-REQ
+                details: []
+      x-id: API-009
+      x-permission: PERM-021
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/startSolveInput'
+            example:
+              snapshotId: SYN-SNAP
+              configurationId: CFG-A
+  /terms/{termId}/solve-runs/{runId}:
+    get:
+      operationId: getSolve
+      summary: Read a scoped run and snapshot reference
+      description: PERM-021; enforce current assignment, relationship, time and resource scope in Nest.js.
+      security:
+      - session: []
+      parameters:
+      - name: termId
+        in: path
+        required: true
+        schema: *id001
+      - name: runId
+        in: path
+        required: true
+        schema: *id001
+      responses:
+        '200':
+          description: Authoritative response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Run'
+              example: *id006
+        '400':
+          description: Correct invalid fields and submit a fresh request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-001
+                messageKey: invalid_input
+                requestId: SYN-REQ
+                details: []
+        '401':
+          description: Sign in again before checking the original request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-002
+                messageKey: session_expired
+                requestId: SYN-REQ
+                details: []
+        '403':
+          description: Request access from the responsible office.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-003
+                messageKey: scope_denied
+                requestId: SYN-REQ
+                details: []
+        '404':
+          description: Verify the resource reference in your authorized scope.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-011
+                messageKey: not_found
+                requestId: SYN-REQ
+                details: []
+        '409':
+          description: Refresh available bundles or join the waitlist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-005
+                messageKey: capacity_conflict
+                requestId: SYN-REQ
+                details: []
+        '422':
+          description: Review rule explanations or request an allowed exception.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-004
+                messageKey: rule_rejected
+                requestId: SYN-REQ
+                details: []
+        '429':
+          description: Retry after the indicated delay.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-012
+                messageKey: rate_limited
+                requestId: SYN-REQ
+                details: []
+        '503':
+          description: Check request status before retrying the same key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-010
+                messageKey: retry_exhausted
+                requestId: SYN-REQ
+                details: []
+      x-id: API-010
+      x-permission: PERM-021
+  /terms/{termId}/timetables/{versionId}/validations:
+    post:
+      operationId: validateTimetable
+      summary: Independently validate the immutable candidate
+      description: PERM-009; enforce current assignment, relationship, time and resource scope in Nest.js.
+      security:
+      - session: []
+      parameters:
+      - name: termId
+        in: path
+        required: true
+        schema: *id001
+      - name: versionId
+        in: path
+        required: true
+        schema: *id001
+      - name: X-CSRF-Token
+        in: header
+        required: true
+        schema: *id001
+      responses:
+        '200':
+          description: Authoritative response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Validation'
+              example:
+                versionId: V1
+                valid: true
+                contentHash: SYN-HASH
+                conflicts: []
+        '400':
+          description: Correct invalid fields and submit a fresh request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-001
+                messageKey: invalid_input
+                requestId: SYN-REQ
+                details: []
+        '401':
+          description: Sign in again before checking the original request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-002
+                messageKey: session_expired
+                requestId: SYN-REQ
+                details: []
+        '403':
+          description: Request access from the responsible office.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-003
+                messageKey: scope_denied
+                requestId: SYN-REQ
+                details: []
+        '404':
+          description: Verify the resource reference in your authorized scope.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-011
+                messageKey: not_found
+                requestId: SYN-REQ
+                details: []
+        '409':
+          description: Refresh available bundles or join the waitlist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-005
+                messageKey: capacity_conflict
+                requestId: SYN-REQ
+                details: []
+        '422':
+          description: Review rule explanations or request an allowed exception.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-004
+                messageKey: rule_rejected
+                requestId: SYN-REQ
+                details: []
+        '429':
+          description: Retry after the indicated delay.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-012
+                messageKey: rate_limited
+                requestId: SYN-REQ
+                details: []
+        '503':
+          description: Check request status before retrying the same key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-010
+                messageKey: retry_exhausted
+                requestId: SYN-REQ
+                details: []
+      x-id: API-011
+      x-permission: PERM-009
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/validateTimetableInput'
+            example:
+              contentHash: SYN-HASH
+  /terms/{termId}/timetables/{versionId}/publications:
+    post:
+      operationId: publishTimetable
+      summary: Approve a fresh validated timetable
+      description: PERM-011; enforce current assignment, relationship, time and resource scope in Nest.js.
+      security:
+      - session: []
+      parameters:
+      - name: termId
+        in: path
+        required: true
+        schema: *id001
+      - name: versionId
+        in: path
+        required: true
+        schema: *id001
+      - name: Idempotency-Key
+        in: header
+        required: true
+        schema:
+          type: string
+          minLength: 8
+          maxLength: 128
+        description: Opaque key scoped to session actor and operation. Mismatched body or subject returns ERR-006.
+      - name: X-CSRF-Token
+        in: header
+        required: true
+        schema: *id001
+      responses:
+        '200':
+          description: Authoritative response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Receipt'
+              example: *id003
+        '400':
+          description: Correct invalid fields and submit a fresh request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-001
+                messageKey: invalid_input
+                requestId: SYN-REQ
+                details: []
+        '401':
+          description: Sign in again before checking the original request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-002
+                messageKey: session_expired
+                requestId: SYN-REQ
+                details: []
+        '403':
+          description: Request access from the responsible office.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-003
+                messageKey: scope_denied
+                requestId: SYN-REQ
+                details: []
+        '404':
+          description: Verify the resource reference in your authorized scope.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-011
+                messageKey: not_found
+                requestId: SYN-REQ
+                details: []
+        '409':
+          description: Refresh available bundles or join the waitlist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-005
+                messageKey: capacity_conflict
+                requestId: SYN-REQ
+                details: []
+        '422':
+          description: Review rule explanations or request an allowed exception.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-004
+                messageKey: rule_rejected
+                requestId: SYN-REQ
+                details: []
+        '429':
+          description: Retry after the indicated delay.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-012
+                messageKey: rate_limited
+                requestId: SYN-REQ
+                details: []
+        '503':
+          description: Check request status before retrying the same key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-010
+                messageKey: retry_exhausted
+                requestId: SYN-REQ
+                details: []
+      x-id: API-012
+      x-permission: PERM-011
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/publishTimetableInput'
+            example:
+              contentHash: SYN-HASH
+              validationRef: VAL-1
+  /me/offerings:
+    get:
+      operationId: listOfferings
+      summary: Browse permitted offerings using a stable id cursor
+      description: PERM-022; enforce current assignment, relationship, time and resource scope in Nest.js.
+      security:
+      - session: []
+      parameters:
+      - name: termId
+        in: query
+        required: true
+        schema: *id001
+      - name: department
+        in: query
+        required: false
+        schema: *id001
+      - name: cursor
+        in: query
+        required: false
+        schema: *id001
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+      responses:
+        '200':
+          description: Authoritative response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page'
+              example:
+                items:
+                - id: SEC-A
+                  label: Synthetic lecture and lab
+                nextCursor: null
+                asOf: '2030-02-04T08:00:00Z'
+        '400':
+          description: Correct invalid fields and submit a fresh request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-001
+                messageKey: invalid_input
+                requestId: SYN-REQ
+                details: []
+        '401':
+          description: Sign in again before checking the original request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-002
+                messageKey: session_expired
+                requestId: SYN-REQ
+                details: []
+        '403':
+          description: Request access from the responsible office.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-003
+                messageKey: scope_denied
+                requestId: SYN-REQ
+                details: []
+        '404':
+          description: Verify the resource reference in your authorized scope.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-011
+                messageKey: not_found
+                requestId: SYN-REQ
+                details: []
+        '409':
+          description: Refresh available bundles or join the waitlist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-005
+                messageKey: capacity_conflict
+                requestId: SYN-REQ
+                details: []
+        '422':
+          description: Review rule explanations or request an allowed exception.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-004
+                messageKey: rule_rejected
+                requestId: SYN-REQ
+                details: []
+        '429':
+          description: Retry after the indicated delay.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-012
+                messageKey: rate_limited
+                requestId: SYN-REQ
+                details: []
+        '503':
+          description: Check request status before retrying the same key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-010
+                messageKey: retry_exhausted
+                requestId: SYN-REQ
+                details: []
+      x-id: API-013
+      x-permission: PERM-022
+  /me/registration-finalizations:
+    post:
+      operationId: finalizeRegistration
+      summary: Validate the complete registration including its minimum credits
+      description: PERM-001; enforce current assignment, relationship, time and resource scope in Nest.js.
+      security:
+      - session: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: true
+        schema:
+          type: string
+          minLength: 8
+          maxLength: 128
+        description: Opaque key scoped to session actor and operation. Mismatched body or subject returns ERR-006.
+      - name: X-CSRF-Token
+        in: header
+        required: true
+        schema: *id001
+      responses:
+        '200':
+          description: Authoritative response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Receipt'
+              example: *id003
+        '400':
+          description: Correct invalid fields and submit a fresh request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-001
+                messageKey: invalid_input
+                requestId: SYN-REQ
+                details: []
+        '401':
+          description: Sign in again before checking the original request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-002
+                messageKey: session_expired
+                requestId: SYN-REQ
+                details: []
+        '403':
+          description: Request access from the responsible office.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-003
+                messageKey: scope_denied
+                requestId: SYN-REQ
+                details: []
+        '404':
+          description: Verify the resource reference in your authorized scope.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-011
+                messageKey: not_found
+                requestId: SYN-REQ
+                details: []
+        '409':
+          description: Refresh available bundles or join the waitlist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-005
+                messageKey: capacity_conflict
+                requestId: SYN-REQ
+                details: []
+        '422':
+          description: Review rule explanations or request an allowed exception.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-004
+                messageKey: rule_rejected
+                requestId: SYN-REQ
+                details: []
+        '429':
+          description: Retry after the indicated delay.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-012
+                messageKey: rate_limited
+                requestId: SYN-REQ
+                details: []
+        '503':
+          description: Check request status before retrying the same key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: ERR-010
+                messageKey: retry_exhausted
+                requestId: SYN-REQ
+                details: []
+      x-id: API-014
+      x-permission: PERM-001
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/finalizeRegistrationInput'
+            example:
+              termId: T
+components:
+  securitySchemes:
+    session:
+      type: apiKey
+      in: cookie
+      name: academic_session
+  schemas:
+    Bundle: &id008
+      type: object
+      additionalProperties: false
+      properties:
+        sectionId: *id001
+        componentIds:
+          type: array
+          items: *id001
+          uniqueItems: true
+          minItems: 1
+      required:
+      - sectionId
+      - componentIds
+    Decision:
+      type: object
+      additionalProperties: false
+      properties:
+        decision:
+          type: string
+          enum:
+          - accepted
+          - rejected
+          - exception
+          - review
+        policyVersion: *id001
+        evaluatedRules:
+          type: array
+          items: *id001
+        reasons:
+          type: array
+          items: &id007
+            type: object
+            additionalProperties: false
+            properties:
+              ruleId: *id001
+              reasonCode: *id001
+              messageKey: *id001
+            required:
+            - ruleId
+            - reasonCode
+            - messageKey
+        explanationKey: *id001
+      required:
+      - decision
+      - policyVersion
+      - evaluatedRules
+      - reasons
+      - explanationKey
+    Receipt:
+      type: object
+      additionalProperties: false
+      properties:
+        requestId: *id001
+        outcome:
+          type: string
+          enum:
+          - committed
+        resourceId: *id001
+        revision:
+          type: integer
+          minimum: 1
+      required:
+      - requestId
+      - outcome
+      - resourceId
+      - revision
+    Error:
+      type: object
+      additionalProperties: false
+      properties:
+        code:
+          type: string
+          enum:
+          - ERR-001
+          - ERR-002
+          - ERR-003
+          - ERR-004
+          - ERR-005
+          - ERR-006
+          - ERR-007
+          - ERR-008
+          - ERR-009
+          - ERR-010
+          - ERR-011
+          - ERR-012
+          - ERR-013
+        messageKey: *id001
+        requestId: *id001
+        details:
+          type: array
+          items: *id007
+      required:
+      - code
+      - messageKey
+      - requestId
+      - details
+    Run:
+      type: object
+      additionalProperties: false
+      properties:
+        runId: *id001
+        state:
+          type: string
+          enum:
+          - queued
+          - running
+          - finished
+          - failed
+        snapshotId: *id001
+        resultRef:
+          type:
+          - string
+          - 'null'
+        solverStatus:
+          type:
+          - string
+          - 'null'
+          enum:
+          - FEASIBLE
+          - OPTIMAL
+          - INFEASIBLE
+          - UNKNOWN
+          - MODEL_INVALID
+          - null
+        unassignedCount:
+          type:
+          - integer
+          - 'null'
+          minimum: 0
+      required:
+      - runId
+      - state
+      - snapshotId
+      - resultRef
+      - solverStatus
+      - unassignedCount
+    Validation:
+      type: object
+      additionalProperties: false
+      properties:
+        versionId: *id001
+        valid:
+          type: boolean
+        contentHash: *id001
+        conflicts:
+          type: array
+          items: *id001
+      required:
+      - versionId
+      - valid
+      - contentHash
+      - conflicts
+    Page:
+      type: object
+      additionalProperties: false
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              id: *id001
+              label: *id001
+            required:
+            - id
+            - label
+        nextCursor:
+          type:
+          - string
+          - 'null'
+        asOf: *id001
+      required:
+      - items
+      - nextCursor
+      - asOf
+    RequestStatus:
+      type: object
+      additionalProperties: false
+      properties:
+        state:
+          type: string
+          enum:
+          - processing
+          - finished
+        originalHttpStatus:
+          type:
+          - integer
+          - 'null'
+        outcome:
+          oneOf:
+          - $ref: '#/components/schemas/Receipt'
+          - $ref: '#/components/schemas/Error'
+          - type: 'null'
+      required:
+      - state
+      - originalHttpStatus
+      - outcome
+    previewEnrollmentInput:
+      type: object
+      additionalProperties: false
+      properties:
+        termId: *id001
+        add: &id010
+          type: array
+          items: *id008
+        dropEnrollmentIds: &id011
+          type: array
+          items: *id001
+          uniqueItems: true
+      required:
+      - termId
+      - add
+      - dropEnrollmentIds
+    enrollInput:
+      type: object
+      additionalProperties: false
+      properties:
+        termId: *id001
+        bundles: &id009
+          type: array
+          items: *id008
+          minItems: 1
+          uniqueItems: true
+      required:
+      - termId
+      - bundles
+    dropInput:
+      type: object
+      additionalProperties: false
+      properties:
+        termId: *id001
+        enrollmentIds:
+          type: array
+          items: *id001
+          minItems: 1
+          uniqueItems: true
+      required:
+      - termId
+      - enrollmentIds
+    swapInput:
+      type: object
+      additionalProperties: false
+      properties:
+        termId: *id001
+        add: *id009
+        dropEnrollmentIds:
+          type: array
+          items: *id001
+          minItems: 1
+          uniqueItems: true
+      required:
+      - termId
+      - add
+      - dropEnrollmentIds
+    joinWaitlistInput:
+      type: object
+      additionalProperties: false
+      properties:
+        termId: *id001
+        bundle: *id008
+      required:
+      - termId
+      - bundle
+    respondToOfferInput:
+      type: object
+      additionalProperties: false
+      properties:
+        termId: *id001
+        response:
+          type: string
+          enum:
+          - accept
+          - decline
+      required:
+      - termId
+      - response
+    changeForStudentInput:
+      type: object
+      additionalProperties: false
+      properties:
+        termId: *id001
+        add: *id010
+        dropEnrollmentIds: *id011
+        caseRef: *id001
+      required:
+      - termId
+      - add
+      - dropEnrollmentIds
+      - caseRef
+    startSolveInput:
+      type: object
+      additionalProperties: false
+      properties:
+        snapshotId: *id001
+        configurationId: *id001
+      required:
+      - snapshotId
+      - configurationId
+    validateTimetableInput:
+      type: object
+      additionalProperties: false
+      properties:
+        contentHash: *id001
+      required:
+      - contentHash
+    publishTimetableInput:
+      type: object
+      additionalProperties: false
+      properties:
+        contentHash: *id001
+        validationRef: *id001
+      required:
+      - contentHash
+      - validationRef
+    finalizeRegistrationInput:
+      type: object
+      additionalProperties: false
+      properties:
+        termId: *id001
+      required:
+      - termId

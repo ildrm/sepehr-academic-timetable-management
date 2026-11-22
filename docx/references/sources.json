@@ -1,0 +1,92 @@
+[
+  {
+    "id": "SRC-01",
+    "title": "Explicit Locking",
+    "publisher": "PostgreSQL Global Development Group",
+    "url": "https://www.postgresql.org/docs/17/explicit-locking.html",
+    "access_date": "2026-11-22",
+    "relevant_version": "17",
+    "claim": "Row locks coordinate conflicting writers; consistent acquisition order reduces deadlocks."
+  },
+  {
+    "id": "SRC-02",
+    "title": "CP-SAT Solver",
+    "publisher": "Google OR-Tools",
+    "url": "https://developers.google.com/optimization/cp/cp_solver",
+    "access_date": "2026-11-22",
+    "relevant_version": "online guide, package unpinned",
+    "claim": "Integer formulation and distinct feasible, optimal, infeasible, invalid and unknown outcomes."
+  },
+  {
+    "id": "SRC-03",
+    "title": "Server and Client Components",
+    "publisher": "Vercel",
+    "url": "https://nextjs.org/docs/app/getting-started/server-and-client-components",
+    "access_date": "2026-11-22",
+    "relevant_version": "App Router, rolling documentation",
+    "claim": "Server and client boundaries partition rendering and interactive code."
+  },
+  {
+    "id": "SRC-04",
+    "title": "Modules",
+    "publisher": "NestJS",
+    "url": "https://docs.nestjs.com/modules",
+    "access_date": "2026-11-22",
+    "relevant_version": "online guide, package unpinned",
+    "claim": "Providers and exports delimit module interfaces."
+  },
+  {
+    "id": "SRC-05",
+    "title": "Transactions",
+    "publisher": "Prisma",
+    "url": "https://www.prisma.io/docs/orm/fundamentals/transactions",
+    "access_date": "2026-11-22",
+    "relevant_version": "online guide, client unpinned",
+    "claim": "A transaction groups operations with one commit or rollback."
+  },
+  {
+    "id": "SRC-06",
+    "title": "Going to production",
+    "publisher": "BullMQ",
+    "url": "https://docs.bullmq.io/guide/going-to-production",
+    "access_date": "2026-11-22",
+    "relevant_version": "online guide",
+    "claim": "Redis persistence and noeviction settings matter for queue deployments."
+  },
+  {
+    "id": "SRC-07",
+    "title": "OpenAPI Specification",
+    "publisher": "OpenAPI Initiative",
+    "url": "https://spec.openapis.org/oas/v3.1.1.html",
+    "access_date": "2026-11-22",
+    "relevant_version": "3.1.1",
+    "claim": "Contract format, schema objects and security requirements."
+  },
+  {
+    "id": "SRC-08",
+    "title": "Authorization Cheat Sheet",
+    "publisher": "OWASP Foundation",
+    "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html",
+    "access_date": "2026-11-22",
+    "relevant_version": "living guidance",
+    "claim": "Deny by default and check permissions on each request."
+  },
+  {
+    "id": "SRC-09",
+    "title": "Web Content Accessibility Guidelines",
+    "publisher": "W3C",
+    "url": "https://www.w3.org/TR/WCAG22/",
+    "access_date": "2026-11-22",
+    "relevant_version": "2.2",
+    "claim": "Keyboard access, contrast, labeling and status messages inform acceptance."
+  },
+  {
+    "id": "SRC-10",
+    "title": "JSON Schema",
+    "publisher": "JSON Schema project",
+    "url": "https://json-schema.org/draft/2020-12",
+    "access_date": "2026-11-22",
+    "relevant_version": "2020-12",
+    "claim": "Dialect for restricted recursive rule and integration contracts."
+  }
+]

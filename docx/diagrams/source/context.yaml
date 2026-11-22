@@ -1,0 +1,16 @@
+title: Trust across the institution
+kind: relationship
+lanes: []
+rows:
+- - Students and staff
+  - Academic system
+  - Scoped requests and receipts
+- - Identity provider
+  - Academic system
+  - Verified identity claims
+- - Academic system
+  - Messaging service
+  - Minimal authorized notices
+- - Academic system
+  - External platforms
+  - Versioned roster changes

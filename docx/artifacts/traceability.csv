@@ -1,0 +1,27 @@
+requirement,rule_or_constraint,module,interface,entity,design,tests
+FR-001,N/A: technical or reporting requirement,Institution,Academic structure editor,org_unit,source/05-academic-domain-curriculum.md,TEST-032
+FR-002,BR-008,Curricula,Curriculum editor,curriculum_version,source/05-academic-domain-curriculum.md,TEST-018
+FR-003,BR-001,Policies,API-001,academic_rule,source/06-academic-rule-engine.md,TEST-019 TEST-037
+FR-004,BR-004,Calendar,API-002,appointment,source/07-calendar-state-workflows.md,TEST-011 TEST-036 TEST-040
+FR-005,BR-006,Offerings,Offering editor,component,source/08-faculty-resources-offerings.md,TEST-021 TEST-030
+FR-006,BR-002,Enrollment,API-002,enrollment_component,source/09-enrollment-waitlist.md,TEST-001 TEST-002 TEST-003
+FR-007,BR-002,Enrollment,API-003 API-004,enrollment,source/17-transactions-consistency.md,TEST-006 TEST-007
+FR-008,BR-005,Enrollment,API-005 API-006,waitlist,source/09-enrollment-waitlist.md,TEST-009 TEST-010
+FR-009,BR-003,Approvals,Exception editor,exception_grant,source/06-academic-rule-engine.md,TEST-008 TEST-031
+FR-010,CON-001,Timetabling,API-009 API-010,solve_job,source/10-timetabling-optimization.md,TEST-013 TEST-034
+FR-011,CON-004,Timetabling,API-011 API-012,timetable_version,source/10-timetabling-optimization.md,TEST-012 TEST-021
+FR-012,BR-008,Curricula,Student planner,academic_record,source/11-student-scheduling-degree-audit.md,TEST-003 TEST-022 TEST-037
+FR-013,BR-005,Enrollment,Batch allocation review,student_term,source/11-student-scheduling-degree-audit.md,TEST-026
+FR-014,N/A: technical or reporting requirement,Reporting,Report center,enrollment,source/23-observability-reporting.md,TEST-024 TEST-038
+FR-015,N/A: technical or reporting requirement,Enrollment,API-007,idempotency_record,source/16-api-contracts-errors.md,TEST-004 TEST-005
+FR-016,N/A: technical or reporting requirement,Events,Outbox relay,outbox_event,source/18-events-jobs-integrations.md,TEST-014 TEST-015 TEST-035
+FR-017,BR-008,Records,Migration console,academic_record,source/25-data-migration-quality.md,TEST-025
+FR-018,BR-003,Identity,API-008,role_assignment,source/04-user-roles-permissions.md,TEST-017 TEST-031 TEST-038 TEST-041
+FR-019,BR-007,Enrollment,API-014,student_term,source/07-calendar-state-workflows.md,TEST-002 TEST-007 TEST-036 TEST-039
+FR-020,CON-002,Timetabling,Planner calendar,meeting,source/26-i18n-accessibility-time.md,TEST-033
+NFR-001,N/A: technical or reporting requirement,Identity,Student and staff screens,role_assignment,source/26-i18n-accessibility-time.md,TEST-020 TEST-028
+NFR-002,N/A: technical or reporting requirement,Enrollment,API-002 API-013,capacity_pool,source/20-nfr-performance-capacity.md,TEST-027
+NFR-003,N/A: technical or reporting requirement,Events,Recovery runbook,outbox_event,source/24-backup-disaster-recovery-runbooks.md,TEST-023
+NFR-004,N/A: technical or reporting requirement,Identity,API-007,role_assignment,source/19-security-privacy-threat-model.md,TEST-017 TEST-028
+NFR-005,N/A: technical or reporting requirement,Reporting,Release review,audit_entry,source/33-quality-review-traceability.md,TEST-029 TEST-038
+NFR-006,BR-003,Approvals,Finance adapter gate,exception_grant,source/18-events-jobs-integrations.md,TEST-016

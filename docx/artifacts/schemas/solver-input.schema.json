@@ -1,0 +1,269 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "solver-input",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "snapshotId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "zone": {
+      "type": "string",
+      "minLength": 1
+    },
+    "configuration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "seed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "objective": {
+          "type": "string",
+          "minLength": 1
+        },
+        "limitParameter": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "seed",
+        "objective",
+        "limitParameter"
+      ]
+    },
+    "classes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "pinned": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "placements": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "room": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "instructor": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "campus": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "intervals": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "weekDate": {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      "startMinute": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "endMinute": {
+                        "type": "integer",
+                        "minimum": 1
+                      }
+                    },
+                    "required": [
+                      "weekDate",
+                      "startMinute",
+                      "endMinute"
+                    ]
+                  },
+                  "minItems": 1
+                },
+                "penalty": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "loadUnits": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "preferenceCosts": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                }
+              },
+              "required": [
+                "id",
+                "room",
+                "instructor",
+                "campus",
+                "intervals",
+                "penalty",
+                "loadUnits",
+                "preferenceCosts"
+              ]
+            }
+          }
+        },
+        "required": [
+          "id",
+          "pinned",
+          "placements"
+        ]
+      },
+      "minItems": 1
+    },
+    "sourceFactsRef": {
+      "type": "string",
+      "minLength": 1
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "forbiddenPairs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "a": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "classId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "placementId": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "classId",
+                  "placementId"
+                ]
+              },
+              "b": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "classId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "placementId": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "classId",
+                  "placementId"
+                ]
+              },
+              "constraintId": {
+                "enum": [
+                  "CON-001",
+                  "CON-002",
+                  "CON-003",
+                  "CON-004"
+                ]
+              }
+            },
+            "required": [
+              "a",
+              "b",
+              "constraintId"
+            ]
+          }
+        },
+        "workloadCaps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "instructor": {
+                "type": "string",
+                "minLength": 1
+              },
+              "maxUnits": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "instructor",
+              "maxUnits"
+            ]
+          }
+        },
+        "objectiveTiers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "weight": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": [
+              "name",
+              "weight"
+            ]
+          }
+        }
+      },
+      "required": [
+        "forbiddenPairs",
+        "workloadCaps",
+        "objectiveTiers"
+      ]
+    }
+  },
+  "required": [
+    "snapshotId",
+    "epoch",
+    "zone",
+    "configuration",
+    "classes",
+    "sourceFactsRef",
+    "constraints"
+  ]
+}

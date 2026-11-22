@@ -1,0 +1,41 @@
+- id: REP-001
+  name: Seat utilization
+  audience: Registrar
+  formula: live enrollment claims / physical pool capacity; zero denominator is undefined; display open
+    offers separately
+  sources: seat_claim, capacity_pool, reservation
+  dimensions: term, pool, unit
+  freshness: post-commit projection watermark
+  authorization: academic office within faculty
+  export: scoped aggregate CSV; suppress small cells per approved parameter
+  limitations: cross-listed pools counted once
+- id: REP-002
+  name: Unmet demand
+  audience: Planner
+  formula: count distinct queued students per bundle at watermark; show incompatible bundles separately
+  sources: waitlist, component, offering
+  dimensions: term, bundle, cohort
+  freshness: queue snapshot timestamp
+  authorization: delegated planner; aggregates only
+  export: release limited CSV after disclosure check
+  limitations: one student can request alternatives; bundle counts are nonadditive
+- id: REP-003
+  name: Degree progress
+  audience: Advisor
+  formula: sum uniquely allocated recognized credits / credits required by pinned group
+  sources: academic_record, curriculum_version, equivalency
+  dimensions: student, curriculum, requirement group
+  freshness: record revision + curriculum edition
+  authorization: student self or assigned advisor
+  export: individual export via scoped grant
+  limitations: provisional work shown separately
+- id: REP-004
+  name: Schedule disruption
+  audience: Department head
+  formula: count distinct enrolled students whose time, campus or section changes between versions
+  sources: meeting, timetable_version, enrollment
+  dimensions: term, campus, department
+  freshness: pair of publication hashes
+  authorization: head within affected department
+  export: masked aggregate CSV
+  limitations: students can occur in multiple department totals

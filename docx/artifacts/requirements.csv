@@ -1,0 +1,27 @@
+id,requirement,status,scope,acceptance,owner
+FR-001,Track the institutional hierarchy and student program,proposed,core,"Program, unit and pinned curriculum resolve unambiguously.",Registrar
+FR-002,Pin curriculum and classification to a student program,proposed,core,A remains selected unless an authorized migration occurs.,Registrar
+FR-003,Evaluate restricted policy expressions with reasons,proposed,core,Return unmet or review according to explicit provisional rule. Count one recognized completion under the pinned policy.,Academic policy owner
+FR-004,Apply term and appointment boundaries,proposed,core,Only the first decision may commit. Return window error with no enrolled rows.,Registrar
+FR-005,"Check instructor, room and bundle compatibility",proposed,core,"Reject candidate with component, constraint and conflict evidence. Both consume the same physical budget.",Planning lead
+FR-006,Enroll a complete multi-component bundle,proposed,core,One active enrollment and one capacity conflict. At most one commits and the other sees the new total. No enrollment or seat claim survives.,Registrar
+FR-007,Drop and swap using the final course set,proposed,core,Old enrollment and claims remain active. Reject final set and preserve both.,Database reviewer
+FR-008,Order waitlist offers and protect reserved capacity,proposed,core,General access begins at release and total never increases. Eligible head has first opportunity and no duplicate hold.,Registrar
+FR-009,Approve scoped exceptions and handle grade correction,proposed,core,One review case; student stays enrolled pending decision. Reject self-approval by actor identity.,Academic policy owner
+FR-010,Persist a solver run and its inputs,proposed,core,No publishable placement; a time limit alone yields no proof. Only current lease generation can complete the run.,Planning lead
+FR-011,Validate and approve timetable versions,proposed,core,"Current version stays published and stale error returned. Reject candidate with component, constraint and conflict evidence.",Planning lead
+FR-012,Suggest compatible student schedules and audit progress,proposed,core,No enrollment or seat claim survives. Consume the completion once and explain outstanding group. Count one recognized completion under the pinned policy.,Academic policy owner
+FR-013,Allocate by approved priorities and tie breaks,proposed,core,Same tie outcome and published cohort metrics.,Academic policy owner
+FR-014,Expose scoped reports at a consistent watermark,proposed,core,Totals and details share one watermark and permitted scope. Deny the file and audit the attempt.,Reporting lead
+FR-015,Recover registration intent after disconnect,proposed,core,Both resolve to one stored outcome and one mutation. Return the stored outcome with no second write.,Backend lead
+FR-016,Route events and downstream effects durably,proposed,core,Consumer deduplicates; ambiguous delivery enters reconciliation. Database fact and outbox survive; catch-up preserves per-key order. One downstream effect per consumer and event ID.,Integration lead
+FR-017,Import and reconcile prior academic history,proposed,core,Quarantine collision and withhold cutover.,Registrar
+FR-018,Separate staff access and technical authority,proposed,core,No record data returned and access denial recorded. Reject self-approval by actor identity. Deny the file and audit the attempt.,Security lead
+FR-019,Require explicit term registration finalization,proposed,core,A valid first bundle can be committed below the minimum in draft. Finalization below the floor returns an explained rejection without changing the draft state. A subsequent drop from a finalized plan must maintain the floor or have a valid grant.,Registrar
+FR-020,Expand local-time recurrence and exceptions,proposed,core,Only approved local occurrences exist with explicit offsets.,UX lead
+NFR-001,Support keyboard and Persian mixed-direction access,proposed,core,"Every meeting, status and action is announced in logical order. No personal cache leak or premature success.",UX lead
+NFR-002,Meet ratified peak workload budgets,proposed,core,"Record percentiles, errors and saturation against ratified budgets.",Operations lead
+NFR-003,Recover authority from isolated restoration,proposed,core,Rebuild projections and quarantine ambiguous sends.,Operations lead
+NFR-004,Maintain scoped access after session changes,proposed,core,No record data returned and access denial recorded. No personal cache leak or premature success.,Security lead
+NFR-005,Qualify release evidence and privacy boundaries,proposed,core,No authorization to release until affected acceptance cases have passed. Deny the file and audit the attempt.,Quality lead
+NFR-006,Reconcile stale external financial holds,proposed,extension gate,Show pending verification when policy requires a fresh hold; no implicit adverse decision.,Integration lead

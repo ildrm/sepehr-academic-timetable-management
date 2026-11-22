@@ -1,0 +1,1173 @@
+{
+  "documents": [
+    {
+      "identifier": "DOC-00",
+      "title": "Academic management system",
+      "source_path": "source/00-overview-scope.md",
+      "word_path": "word/00-overview-scope.docx",
+      "scope_summary": "Set the boundaries of the institutional service and its release gates.",
+      "status": "proposed",
+      "approval_owner_role": "Product owner",
+      "dependencies": [
+        "source/01-product-requirements.md",
+        "source/32-risks-assumptions-open-decisions.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "212e12d1e045a9aa91ec7f3a4d5dbf3ab7083f9487a1f040abeded8103b06322",
+      "word_sha256": "30b0c3a58144954e9af745b6cdd6c068ce7a23cac63dd4bab55fc0c7302e014d",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-01",
+      "title": "Product requirements",
+      "source_path": "source/01-product-requirements.md",
+      "word_path": "word/01-product-requirements.docx",
+      "scope_summary": "Decide which academic outcomes belong in the first release.",
+      "status": "proposed",
+      "approval_owner_role": "Product owner",
+      "dependencies": [
+        "source/05-academic-domain-curriculum.md",
+        "source/09-enrollment-waitlist.md",
+        "source/11-student-scheduling-degree-audit.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "da6faa5bf1440e96771f49c2d43b52b734d6fd39f76c446f3e786a1a2b15e634",
+      "word_sha256": "21673d3b22728a90a2d95c456411279332499711798714ac31cbc360075d895d",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-02",
+      "title": "Requirements and use cases",
+      "source_path": "source/02-software-requirements-use-cases.md",
+      "word_path": "word/02-software-requirements-use-cases.docx",
+      "scope_summary": "Translate student and staff intentions into observable outcomes.",
+      "status": "proposed",
+      "approval_owner_role": "Business analyst",
+      "dependencies": [
+        "source/04-user-roles-permissions.md",
+        "source/06-academic-rule-engine.md",
+        "source/16-api-contracts-errors.md",
+        "source/17-transactions-consistency.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "91b5714294f2f715db135dde67361ecb62931a1b9d76ee64751c47b3e03048d8",
+      "word_sha256": "1bcb04a3c5c776cfb9bc7ed7c950c4f0e771ebdade7deac376d6e6d462f9532b",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-03",
+      "title": "Delivery responsibilities",
+      "source_path": "source/03-team-roles-raci.md",
+      "word_path": "word/03-team-roles-raci.docx",
+      "scope_summary": "Assign accountable decision owners and review evidence.",
+      "status": "proposed",
+      "approval_owner_role": "Delivery lead",
+      "dependencies": [
+        "source/30-roadmap-backlog-delivery.md",
+        "source/33-quality-review-traceability.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "8fd6fe94e6ead5662a432ffe25f4d218506d9be3c046ee8906a053e57e7fdbad",
+      "word_sha256": "2615636c6c5c76d190fb17f5b973698bfd9a58fa27b5ebea572a711515e34150",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-04",
+      "title": "Product roles and permissions",
+      "source_path": "source/04-user-roles-permissions.md",
+      "word_path": "word/04-user-roles-permissions.docx",
+      "scope_summary": "Evaluate access in the context of actor, resource, assignment and time.",
+      "status": "proposed",
+      "approval_owner_role": "Security lead",
+      "dependencies": [
+        "source/19-security-privacy-threat-model.md",
+        "source/29-education-admin-user-guide.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "01d375e0f81712d68798bb7ab6239c22f670fd7a71cd16cd7420c52549400ba1",
+      "word_sha256": "bfd5e79dff8af4cd794fd19e646957b47f97a9b41b044bb1f60adb2a25fdfde1",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-05",
+      "title": "Academic domain and curriculum",
+      "source_path": "source/05-academic-domain-curriculum.md",
+      "word_path": "word/05-academic-domain-curriculum.docx",
+      "scope_summary": "Distinguish earned credit from teaching resources and preserve the student’s curriculum.",
+      "status": "proposed",
+      "approval_owner_role": "Registrar",
+      "dependencies": [
+        "source/15-data-model-dictionary.md",
+        "source/25-data-migration-quality.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "8c75b3d251f7597c0c5a53dfd88513682e25827610a6c9871a5977b644e172bd",
+      "word_sha256": "ab9fea2d76a430348554df2450c26be4112f2229ec427ce31599473449fec163",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-06",
+      "title": "Academic rule evaluation",
+      "source_path": "source/06-academic-rule-engine.md",
+      "word_path": "word/06-academic-rule-engine.docx",
+      "scope_summary": "Evaluate a versioned eligibility expression against a proposed final state.",
+      "status": "proposed",
+      "approval_owner_role": "Academic policy owner",
+      "dependencies": [
+        "source/05-academic-domain-curriculum.md",
+        "source/07-calendar-state-workflows.md",
+        "source/17-transactions-consistency.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "94b54833af3bd676cc24b0f3baefc1573595878d350a1323ed85088be4653565",
+      "word_sha256": "b6eeb3e517ec0515256323e2b861e0fa0223281955fd7c8d5066a1a9bc46cb6e",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-07",
+      "title": "Calendar and academic workflows",
+      "source_path": "source/07-calendar-state-workflows.md",
+      "word_path": "word/07-calendar-state-workflows.docx",
+      "scope_summary": "Control deadlines, registration stages and authorized state transitions.",
+      "status": "proposed",
+      "approval_owner_role": "Registrar",
+      "dependencies": [
+        "source/06-academic-rule-engine.md",
+        "source/26-i18n-accessibility-time.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "eadf56db6eb3bcf56ca5dc3933c03830ffe0e777f0d761550424dbf1a314875a",
+      "word_sha256": "3d8b742c3eae0bc548d6a8b4f753e49bee0ab0c2225eeea23368c00beacb6067",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-08",
+      "title": "Instructors, resources and offerings",
+      "source_path": "source/08-faculty-resources-offerings.md",
+      "word_path": "word/08-faculty-resources-offerings.docx",
+      "scope_summary": "Convert teaching demand into valid sections, bundles and resource claims.",
+      "status": "proposed",
+      "approval_owner_role": "Planning lead",
+      "dependencies": [
+        "source/05-academic-domain-curriculum.md",
+        "source/10-timetabling-optimization.md",
+        "source/15-data-model-dictionary.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "982a73398096f1b6528deecebe70fd9b31c50edfdfcc78d2d2b6680dc92f9d27",
+      "word_sha256": "4b53bac1539c2db2b3e41f8bdc76c3ab1bfbfdcb7dd8a253544726e246c4704e",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-09",
+      "title": "Enrollment and waitlists",
+      "source_path": "source/09-enrollment-waitlist.md",
+      "word_path": "word/09-enrollment-waitlist.docx",
+      "scope_summary": "Coordinate additions, drops, swaps, offers and exceptions across shared pools.",
+      "status": "proposed",
+      "approval_owner_role": "Registrar",
+      "dependencies": [
+        "source/06-academic-rule-engine.md",
+        "source/16-api-contracts-errors.md",
+        "source/17-transactions-consistency.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "15bb2bea18ea38b98b8dc56e2d7b4e9ceaacb3e18e0305f4490b3421eb9c77f6",
+      "word_sha256": "29da3c0667486be01c7917237a9deceb87c822ef8dd3884fffa95b989be99828",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-10",
+      "title": "Timetabling optimization",
+      "source_path": "source/10-timetabling-optimization.md",
+      "word_path": "word/10-timetabling-optimization.docx",
+      "scope_summary": "Choose feasible placements and validate a timetable before publication.",
+      "status": "proposed",
+      "approval_owner_role": "Planning lead",
+      "dependencies": [
+        "source/08-faculty-resources-offerings.md",
+        "source/18-events-jobs-integrations.md",
+        "source/28-faculty-planner-user-guide.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "afb0123bfa6d563eab6e6091bfb95df13631bd0115f43d946b6b89e96c47f05e",
+      "word_sha256": "0c368d429cc1e6673fb0cda6929b7f4bc9f45b64f0b5fff4366fd7c5c1f2b4db",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-11",
+      "title": "Student planning and degree audit",
+      "source_path": "source/11-student-scheduling-degree-audit.md",
+      "word_path": "word/11-student-scheduling-degree-audit.docx",
+      "scope_summary": "Build individual alternatives, allocate scarce bundles and explain degree progress.",
+      "status": "proposed",
+      "approval_owner_role": "Academic policy owner",
+      "dependencies": [
+        "source/05-academic-domain-curriculum.md",
+        "source/06-academic-rule-engine.md",
+        "source/09-enrollment-waitlist.md",
+        "source/10-timetabling-optimization.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "67d89d7646cd4d84ff07d49ad0338d79bb8494caac797308bd619f69ca7f8a3a",
+      "word_sha256": "5a2014348cd7f67d0f3a98dd624cebe34b1929d5baf05e0dc55730990af6feab",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-12",
+      "title": "System architecture",
+      "source_path": "source/12-system-architecture.md",
+      "word_path": "word/12-system-architecture.docx",
+      "scope_summary": "Set trust boundaries, write ownership and deployment responsibilities.",
+      "status": "proposed",
+      "approval_owner_role": "Architecture lead",
+      "dependencies": [
+        "source/13-nestjs-backend-design.md",
+        "source/14-nextjs-frontend-ux.md",
+        "source/17-transactions-consistency.md",
+        "source/18-events-jobs-integrations.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "6253b8af240e9a64922bb61c07753e3059da91ee0ae544264bbf962b31000657",
+      "word_sha256": "301df0735628773a08df477a4fef042155c4e1287e94aaf910ad2dad62700a4d",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-13",
+      "title": "Nest.js application design",
+      "source_path": "source/13-nestjs-backend-design.md",
+      "word_path": "word/13-nestjs-backend-design.docx",
+      "scope_summary": "Structure synchronous commands and module dependencies inside one academic core.",
+      "status": "proposed",
+      "approval_owner_role": "Backend lead",
+      "dependencies": [
+        "source/12-system-architecture.md",
+        "source/16-api-contracts-errors.md",
+        "source/17-transactions-consistency.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "0cae73bad850bf7b6a9d6190f24126dfd57fe42b16d09be39878e4f84d5f9b64",
+      "word_sha256": "5aaea8b06428a82d3dfc57c1e278f46c8e5c0141be80a2d0c9dba031df94faca",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-14",
+      "title": "Next.js frontend and user experience",
+      "source_path": "source/14-nextjs-frontend-ux.md",
+      "word_path": "word/14-nextjs-frontend-ux.docx",
+      "scope_summary": "Guide each role through authoritative, recoverable interactions.",
+      "status": "proposed",
+      "approval_owner_role": "Frontend lead",
+      "dependencies": [
+        "source/04-user-roles-permissions.md",
+        "source/16-api-contracts-errors.md",
+        "source/26-i18n-accessibility-time.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "f2ffdb0b82ae98f14df8d132a2553f2f961ce95878eb97743ff13d49b551bd8c",
+      "word_sha256": "e8b6c2eb721433704dbff001c36e25341b895b93cc130527f61bf5b89f9e8f51",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-15",
+      "title": "Academic data dictionary",
+      "source_path": "source/15-data-model-dictionary.md",
+      "word_path": "word/15-data-model-dictionary.docx",
+      "scope_summary": "Interpret the SQL schema, cardinalities, ownership and historical records.",
+      "status": "proposed",
+      "approval_owner_role": "Database reviewer",
+      "dependencies": [
+        "source/05-academic-domain-curriculum.md",
+        "source/17-transactions-consistency.md",
+        "source/25-data-migration-quality.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "ee08774aaca4572fddc46e7d0224e0aa29f5cc4a7d38df81400ca05c325886dc",
+      "word_sha256": "0f51008e445ffe9eba93372268bfea751d50d2a764d33b1acad1dd9553285de7",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-16",
+      "title": "API contracts and errors",
+      "source_path": "source/16-api-contracts-errors.md",
+      "word_path": "word/16-api-contracts-errors.docx",
+      "scope_summary": "Use the REST contracts and resolve failures without duplicate writes.",
+      "status": "proposed",
+      "approval_owner_role": "Backend lead",
+      "dependencies": [
+        "source/04-user-roles-permissions.md",
+        "source/09-enrollment-waitlist.md",
+        "source/17-transactions-consistency.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "f796d19efcdfff966cf6fa6e7d62b23524efb87679bb35515c8b01580082cc22",
+      "word_sha256": "3e26d2a520929b41a542f8e42ba9c535c4c196e7ddbf8c16859f2951d41a2bb9",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-17",
+      "title": "Registration transactions",
+      "source_path": "source/17-transactions-consistency.md",
+      "word_path": "word/17-transactions-consistency.docx",
+      "scope_summary": "Make final-set and capacity decisions under concurrent writes.",
+      "status": "proposed",
+      "approval_owner_role": "Database reviewer",
+      "dependencies": [
+        "source/06-academic-rule-engine.md",
+        "source/09-enrollment-waitlist.md",
+        "source/15-data-model-dictionary.md",
+        "source/16-api-contracts-errors.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "981b48f1f9d819dc4c6be8eb46f5146d9fdcf672b09909f95025918e2201c162",
+      "word_sha256": "d66d91abe00f5f055f1752285a1593e15d0d4f4e2e55df1b69d1c0dd5b8980ab",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-18",
+      "title": "Events, jobs and integrations",
+      "source_path": "source/18-events-jobs-integrations.md",
+      "word_path": "word/18-events-jobs-integrations.docx",
+      "scope_summary": "Recover asynchronous effects using authoritative database facts.",
+      "status": "proposed",
+      "approval_owner_role": "Integration lead",
+      "dependencies": [
+        "source/13-nestjs-backend-design.md",
+        "source/17-transactions-consistency.md",
+        "source/24-backup-disaster-recovery-runbooks.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "39be665390457ae020d549bc3467b37863c9fc5820160c61104f6f1eafff4639",
+      "word_sha256": "e0f0f8181d80857c964313201c09525d93cc41fd6b75405b5b31421c9488b486",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-19",
+      "title": "Security and privacy",
+      "source_path": "source/19-security-privacy-threat-model.md",
+      "word_path": "word/19-security-privacy-threat-model.docx",
+      "scope_summary": "Protect records and decision authority across trust boundaries.",
+      "status": "proposed",
+      "approval_owner_role": "Security lead",
+      "dependencies": [
+        "source/04-user-roles-permissions.md",
+        "source/12-system-architecture.md",
+        "source/23-observability-reporting.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "a587de4a7128cd35d5ee0a1af4c65058e8522f854151d0b179a6101765b235f6",
+      "word_sha256": "a43ed6dc7fc1099ea453c2050a8b8d50284f7f0bbb082585f4815d4efd7cc44b",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-20",
+      "title": "Performance and capacity",
+      "source_path": "source/20-nfr-performance-capacity.md",
+      "word_path": "word/20-nfr-performance-capacity.docx",
+      "scope_summary": "Set measurable budgets and build a representative registration workload.",
+      "status": "proposed",
+      "approval_owner_role": "Operations lead",
+      "dependencies": [
+        "source/17-transactions-consistency.md",
+        "source/21-test-verification-strategy.md",
+        "source/23-observability-reporting.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "86922036400b635a55602e7f798da4d8552c3f60f90ec679901810340b71f679",
+      "word_sha256": "900cfcc6f93b1709a72f2a6de9c87c5756811db477b0ce60f70c45317fa971d6",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-21",
+      "title": "Test and verification strategy",
+      "source_path": "source/21-test-verification-strategy.md",
+      "word_path": "word/21-test-verification-strategy.docx",
+      "scope_summary": "Design reproducible tests for academic and operational invariants.",
+      "status": "proposed",
+      "approval_owner_role": "Quality lead",
+      "dependencies": [
+        "source/09-enrollment-waitlist.md",
+        "source/10-timetabling-optimization.md",
+        "source/17-transactions-consistency.md",
+        "source/20-nfr-performance-capacity.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "4ebaaf302b677c45a8edb005310abf8b0e70c46f98da7c0c0fc65d9b9aad57ce",
+      "word_sha256": "acec26bcdb0ab440911984db5992468112e308455a7a30db3e44950fcecbf165",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-22",
+      "title": "Deployment and change control",
+      "source_path": "source/22-devops-deployment.md",
+      "word_path": "word/22-devops-deployment.docx",
+      "scope_summary": "Promote compatible releases and recover safely from partial rollout.",
+      "status": "proposed",
+      "approval_owner_role": "Operations lead",
+      "dependencies": [
+        "source/12-system-architecture.md",
+        "source/18-events-jobs-integrations.md",
+        "source/24-backup-disaster-recovery-runbooks.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "c0500b3a7b69359c3e621598e1691c5ce32cd4a88da7f41eeea21adf3b5d21fb",
+      "word_sha256": "567a0f7477b710ca48ea44b30194f7a982b2c2a91714f742272910db706f1621",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-23",
+      "title": "Observability and academic reports",
+      "source_path": "source/23-observability-reporting.md",
+      "word_path": "word/23-observability-reporting.docx",
+      "scope_summary": "Measure service health and deliver scoped, reproducible academic totals.",
+      "status": "proposed",
+      "approval_owner_role": "Reporting lead",
+      "dependencies": [
+        "source/15-data-model-dictionary.md",
+        "source/18-events-jobs-integrations.md",
+        "source/19-security-privacy-threat-model.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "c500030cff5e52a2e1c1a18d6cd104283ed6f71861ba91df72ee95f8ca29f752",
+      "word_sha256": "56b6878f348eeb92209e94067cf46d16e8f973a44fa9861cb7e036d234493f55",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-24",
+      "title": "Recovery and incident runbooks",
+      "source_path": "source/24-backup-disaster-recovery-runbooks.md",
+      "word_path": "word/24-backup-disaster-recovery-runbooks.docx",
+      "scope_summary": "Restore academic authority and reconcile effects after disruption.",
+      "status": "proposed",
+      "approval_owner_role": "Operations lead",
+      "dependencies": [
+        "source/17-transactions-consistency.md",
+        "source/18-events-jobs-integrations.md",
+        "source/23-observability-reporting.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "bb77431bd0bf4d40c90112bc1f44b7e5ac4ce102154835a8d6c22e5a070049ae",
+      "word_sha256": "0cee2b1580f3c291a40c155e40728fba792419f08645b04fd26a3ac4adca763d",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-25",
+      "title": "Data migration and reconciliation",
+      "source_path": "source/25-data-migration-quality.md",
+      "word_path": "word/25-data-migration-quality.docx",
+      "scope_summary": "Move academic history with traceable mappings and a reversible cutover.",
+      "status": "proposed",
+      "approval_owner_role": "Registrar",
+      "dependencies": [
+        "source/05-academic-domain-curriculum.md",
+        "source/06-academic-rule-engine.md",
+        "source/15-data-model-dictionary.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "bb4dd0a0ab24ca966dc26d2b628ffd30ef9232c0a131ef0715c88bcaea2a1ef2",
+      "word_sha256": "d6fbcb0d5e508ae718b247a46e01b8694da21127e3b4cf8c6d30b3ed9c2ac75d",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-26",
+      "title": "Persian interface, accessibility and time",
+      "source_path": "source/26-i18n-accessibility-time.md",
+      "word_path": "word/26-i18n-accessibility-time.docx",
+      "scope_summary": "Define mixed-direction text, equivalent access and authoritative time handling.",
+      "status": "proposed",
+      "approval_owner_role": "UX lead",
+      "dependencies": [
+        "source/07-calendar-state-workflows.md",
+        "source/14-nextjs-frontend-ux.md",
+        "source/28-faculty-planner-user-guide.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "b1cecd21f4863c666d0efe5529cf769e27a3abf3ea249f154126aecf9854a33c",
+      "word_sha256": "2c4404a24d1922a178bf57d3b0430de59a13d8058c3f54f154c0b1496366c04c",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-27",
+      "title": "Student guide",
+      "source_path": "source/27-student-user-guide.md",
+      "word_path": "word/27-student-user-guide.docx",
+      "scope_summary": "Plan a valid bundle, register, recover an uncertain result and respond to offers.",
+      "status": "proposed",
+      "approval_owner_role": "Student services lead",
+      "dependencies": [
+        "source/06-academic-rule-engine.md",
+        "source/09-enrollment-waitlist.md",
+        "source/14-nextjs-frontend-ux.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "602d8f285081da148f7186f9f2d8dd5b27fd49d70974264c5041b04e9cb6c324",
+      "word_sha256": "4ef7da49e2d9f9eb78aa0946ba754b34cfa5a9c6fe970d103226587825d83faa",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-28",
+      "title": "Instructor and timetable planner guide",
+      "source_path": "source/28-faculty-planner-user-guide.md",
+      "word_path": "word/28-faculty-planner-user-guide.docx",
+      "scope_summary": "Submit availability, investigate conflicts and route changes for approval.",
+      "status": "proposed",
+      "approval_owner_role": "Planning lead",
+      "dependencies": [
+        "source/08-faculty-resources-offerings.md",
+        "source/10-timetabling-optimization.md",
+        "source/14-nextjs-frontend-ux.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "dc9c3419e03f89c6180d50cfd99898960ffd90ddfa89f97bacc535b90fe0358b",
+      "word_sha256": "a7b91f1e4bc402a382122d2e8063ca774ebd888bca07beefdd644a9afc6d6764",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-29",
+      "title": "Academic office guide",
+      "source_path": "source/29-education-admin-user-guide.md",
+      "word_path": "word/29-education-admin-user-guide.docx",
+      "scope_summary": "Publish curricula and policy editions and administer scoped exceptions and quotas.",
+      "status": "proposed",
+      "approval_owner_role": "Registrar",
+      "dependencies": [
+        "source/04-user-roles-permissions.md",
+        "source/05-academic-domain-curriculum.md",
+        "source/06-academic-rule-engine.md",
+        "source/09-enrollment-waitlist.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "9a2448485cf0ad259c38769d88651422e95534e38693ec2c7003724cf60248bd",
+      "word_sha256": "81423c86cd95a947c0768671f7771772857e2097c8813f6a98d49420ca5f3ca5",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-30",
+      "title": "Delivery roadmap and backlog",
+      "source_path": "source/30-roadmap-backlog-delivery.md",
+      "word_path": "word/30-roadmap-backlog-delivery.docx",
+      "scope_summary": "Sequence implementation around design dependencies and acceptance evidence.",
+      "status": "proposed",
+      "approval_owner_role": "Delivery lead",
+      "dependencies": [
+        "source/01-product-requirements.md",
+        "source/21-test-verification-strategy.md",
+        "source/32-risks-assumptions-open-decisions.md",
+        "source/33-quality-review-traceability.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "c5a4c3369784de4af2bd70e389b0b1ae5f98fc723ed26c6d09af7d02da701af0",
+      "word_sha256": "eadeed7058c7e16607f4cbdaaff300e4d08570cd7833b995150b41c6866b8ade",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-31",
+      "title": "Extension modules",
+      "source_path": "source/31-extension-modules.md",
+      "word_path": "word/31-extension-modules.docx",
+      "scope_summary": "Define entry conditions and data contracts for deferred academic services.",
+      "status": "proposed",
+      "approval_owner_role": "Product owner",
+      "dependencies": [
+        "source/05-academic-domain-curriculum.md",
+        "source/18-events-jobs-integrations.md",
+        "source/19-security-privacy-threat-model.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "b124afdbba52dc500ebbfeb444f672e02aca24fe2107a892d1f33858b01139e9",
+      "word_sha256": "505fff228c73ec2b351f117c45c74dce335c586bd59649afe955740ff9e032fe",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-32",
+      "title": "Risks and open decisions",
+      "source_path": "source/32-risks-assumptions-open-decisions.md",
+      "word_path": "word/32-risks-assumptions-open-decisions.docx",
+      "scope_summary": "Resolve uncertainties that could change eligibility, fairness or operations.",
+      "status": "proposed",
+      "approval_owner_role": "Product owner",
+      "dependencies": [
+        "source/03-team-roles-raci.md",
+        "source/30-roadmap-backlog-delivery.md",
+        "source/33-quality-review-traceability.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "45f432f76c3dd938f2798898b73b74442f1a8bd3223068832698e6bfba6e264e",
+      "word_sha256": "4814729d1498af5c535882ae5b41c8115f54a11e6b655aa983adf49ba2d116ab",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-33",
+      "title": "Traceability and delivery gates",
+      "source_path": "source/33-quality-review-traceability.md",
+      "word_path": "word/33-quality-review-traceability.docx",
+      "scope_summary": "Inspect the evidence supporting each technical and academic acceptance gate.",
+      "status": "proposed",
+      "approval_owner_role": "Quality lead",
+      "dependencies": [
+        "source/02-software-requirements-use-cases.md",
+        "source/21-test-verification-strategy.md",
+        "source/32-risks-assumptions-open-decisions.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "009514e4d6c4e9eee084ea86a89d1a6eb71189ee84dcd1f3a8e396e9a07602c0",
+      "word_sha256": "47268089734a341b959e3f14020db315a82c3f5dbc8e4c405eabc69646f51e28",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "DOC-34",
+      "title": "Glossary and maintenance",
+      "source_path": "source/34-glossary-references-maintenance.md",
+      "word_path": "word/34-glossary-references-maintenance.docx",
+      "scope_summary": "Maintain stable meanings, source provenance and controlled revisions.",
+      "status": "proposed",
+      "approval_owner_role": "Documentation lead",
+      "dependencies": [
+        "source/00-overview-scope.md",
+        "source/32-risks-assumptions-open-decisions.md",
+        "source/33-quality-review-traceability.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "81b5ed4e98df9ce3931097ae752158ee4d6414ec55b39a75dbc8febcf6bfccd7",
+      "word_sha256": "add559fea1dd26223726bd6374837d0a3c836112f3fa7911ddac7ffbf195d72b",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "ADR-001",
+      "title": "One modular academic core",
+      "source_path": "source/adr/adr-001-modular-architecture.md",
+      "word_path": "word/adr/adr-001-modular-architecture.docx",
+      "scope_summary": "Decide how to address the following design pressure. Enrollment, records and policy need a consistent commit boundary.",
+      "status": "proposed",
+      "approval_owner_role": "Architecture lead",
+      "dependencies": [
+        "source/12-system-architecture.md",
+        "source/13-nestjs-backend-design.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "167aef687e6f18aec0731f12d1c8516fa6cc90610fb6f12da39e60ea29f53356",
+      "word_sha256": "933dc3d8780603301d9dc655cb851c8187198e165ef38d17c9981de6fe532903",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "ADR-002",
+      "title": "Thin browser-facing backend",
+      "source_path": "source/adr/adr-002-bff-boundary.md",
+      "word_path": "word/adr/adr-002-bff-boundary.docx",
+      "scope_summary": "Decide how to address the following design pressure. Session handling and Persian UI orchestration belong near the web layer.",
+      "status": "proposed",
+      "approval_owner_role": "Frontend lead",
+      "dependencies": [
+        "source/12-system-architecture.md",
+        "source/14-nextjs-frontend-ux.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "a90c0b15e2f336633321eaecee869870ca43df85a47e958a449c348cee760e6c",
+      "word_sha256": "0f9b59414e5786e120aa59b38bc9b312cef9197da9c14d7e71f4ed3bc1d1df63",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "ADR-003",
+      "title": "PostgreSQL owns academic facts",
+      "source_path": "source/adr/adr-003-data-ownership.md",
+      "word_path": "word/adr/adr-003-data-ownership.docx",
+      "scope_summary": "Decide how to address the following design pressure. Cross-listed seats, active records and queue rank must survive outages and races.",
+      "status": "proposed",
+      "approval_owner_role": "Database reviewer",
+      "dependencies": [
+        "source/15-data-model-dictionary.md",
+        "source/17-transactions-consistency.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "f4f3754b546df09e8355588aa01d850fb7d2123d195cb5dab96a9ea534d5634c",
+      "word_sha256": "387871fdbaabbf0348d11fd573128d280f95823a050956bc544e595ff781ff86",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "ADR-004",
+      "title": "Prisma with reviewed SQL paths",
+      "source_path": "source/adr/adr-004-orm-sql.md",
+      "word_path": "word/adr/adr-004-orm-sql.docx",
+      "scope_summary": "Decide how to address the following design pressure. Most reads and domain writes map naturally to a typed data-access API. Guard locking and partial indexes need explicit SQL semantics.",
+      "status": "proposed",
+      "approval_owner_role": "Backend lead",
+      "dependencies": [
+        "source/13-nestjs-backend-design.md",
+        "source/15-data-model-dictionary.md",
+        "source/17-transactions-consistency.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "5c787ea53738d18c11960ae42d7595ada5c14144241b707d99e68893393bf4f3",
+      "word_sha256": "b07a8915b1916ba2a2e017916b010e6ed889365a23d0ab9773970d31a92aa9d9",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "ADR-005",
+      "title": "Ordered database guards",
+      "source_path": "source/adr/adr-005-isolation-locking.md",
+      "word_path": "word/adr/adr-005-isolation-locking.docx",
+      "scope_summary": "Decide how to address the following design pressure. Two requests can each satisfy a credit ceiling or a last seat when evaluated separately.",
+      "status": "proposed",
+      "approval_owner_role": "Database reviewer",
+      "dependencies": [
+        "source/09-enrollment-waitlist.md",
+        "source/17-transactions-consistency.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "7827ba920ff29ee1ed05205a9a7083b58d1ab483ac3780f33cc3201da42da335",
+      "word_sha256": "f6f8ebf6d9334675c9dc068aae33d87dc560e94290214f9a3753996f35cdccd1",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "ADR-006",
+      "title": "Durable command outcomes",
+      "source_path": "source/adr/adr-006-idempotency.md",
+      "word_path": "word/adr/adr-006-idempotency.docx",
+      "scope_summary": "Decide how to address the following design pressure. A commit can succeed while its response is lost.",
+      "status": "proposed",
+      "approval_owner_role": "Backend lead",
+      "dependencies": [
+        "source/16-api-contracts-errors.md",
+        "source/17-transactions-consistency.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "b6bd56d412392acf1a6daca66c76c72d4d2d2a0a19bb9a1721cefdd992e87c09",
+      "word_sha256": "e52ed328ddce098edc5937ff6659cb49df1e34270e9df8838d3bd893201fd6dc",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "ADR-007",
+      "title": "Recoverable event delivery",
+      "source_path": "source/adr/adr-007-transactional-outbox.md",
+      "word_path": "word/adr/adr-007-transactional-outbox.docx",
+      "scope_summary": "Decide how to address the following design pressure. Academic commit and external delivery have different failure modes.",
+      "status": "proposed",
+      "approval_owner_role": "Integration lead",
+      "dependencies": [
+        "source/18-events-jobs-integrations.md",
+        "source/24-backup-disaster-recovery-runbooks.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "1647a44bbfbfd05c2acc96e1dbf92659621e33a9f94acbf98c275f49b4d1ed37",
+      "word_sha256": "939257655dcc19b2295aed20981d1484b22b2afabe4744a58c03497a47effe16",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "ADR-008",
+      "title": "Separate cache and job storage",
+      "source_path": "source/adr/adr-008-cache-queue-separation.md",
+      "word_path": "word/adr/adr-008-cache-queue-separation.docx",
+      "scope_summary": "Decide how to address the following design pressure. Cached views are disposable. Evicting a queued job can delay an offer or publication notice.",
+      "status": "proposed",
+      "approval_owner_role": "Operations lead",
+      "dependencies": [
+        "source/18-events-jobs-integrations.md",
+        "source/22-devops-deployment.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "9975b795a1c779aa66fa9419434566ae4dee4cc31f5d8d22568a91217dad2909",
+      "word_sha256": "5c9ab9e349dc37dec1e70efa6b4e06bc30bf40cba6afc56e0352cbacf3baa531",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "ADR-009",
+      "title": "Solver as a proposal producer",
+      "source_path": "source/adr/adr-009-independent-solver.md",
+      "word_path": "word/adr/adr-009-independent-solver.docx",
+      "scope_summary": "Decide how to address the following design pressure. Timetabling is computationally distinct and can consume stale inputs.",
+      "status": "proposed",
+      "approval_owner_role": "Planning lead",
+      "dependencies": [
+        "source/10-timetabling-optimization.md",
+        "source/12-system-architecture.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "e5dcc81c3bbe5638337cba9b1de4d0a805569ab51242a29f88a101caacbdfd9c",
+      "word_sha256": "7a495818dfc2d3b14d244b002fc3707da9912baf29a05eec1b360350d59b7473",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "ADR-010",
+      "title": "Pin academic decisions to versions",
+      "source_path": "source/adr/adr-010-versioning.md",
+      "word_path": "word/adr/adr-010-versioning.docx",
+      "scope_summary": "Decide how to address the following design pressure. A changed policy or room assignment can invalidate historic explanations.",
+      "status": "proposed",
+      "approval_owner_role": "Registrar",
+      "dependencies": [
+        "source/05-academic-domain-curriculum.md",
+        "source/06-academic-rule-engine.md",
+        "source/07-calendar-state-workflows.md",
+        "source/10-timetabling-optimization.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "94159d99de73fce7dba6104c19f15c7d24cca85395727706aaa0e28dfa22df3c",
+      "word_sha256": "5b82347c6bd640dd15841d30f1fd62ff0e09623d562344670b23010f8e7d758c",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "ADR-011",
+      "title": "Scoped, time-bounded assignments",
+      "source_path": "source/adr/adr-011-authorization.md",
+      "word_path": "word/adr/adr-011-authorization.docx",
+      "scope_summary": "Decide how to address the following design pressure. People can hold several academic or technical roles across units and terms.",
+      "status": "proposed",
+      "approval_owner_role": "Security lead",
+      "dependencies": [
+        "source/04-user-roles-permissions.md",
+        "source/19-security-privacy-threat-model.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "607375ad5b2198547871188ebc5ff3ba2fb1be9c46961359c4961b3682e3d4ae",
+      "word_sha256": "2d996ec6fbc8d3d0dba3c9b574d87c2641ae15ce14dea81ca5d325021ed69e18",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    },
+    {
+      "identifier": "ADR-012",
+      "title": "Decision instants and local recurrence",
+      "source_path": "source/adr/adr-012-time-semantics.md",
+      "word_path": "word/adr/adr-012-time-semantics.docx",
+      "scope_summary": "Decide how to address the following design pressure. Registration has a dispute-sensitive cutoff. Weekly teaching follows local civil dates.",
+      "status": "proposed",
+      "approval_owner_role": "Registrar",
+      "dependencies": [
+        "source/07-calendar-state-workflows.md",
+        "source/17-transactions-consistency.md",
+        "source/26-i18n-accessibility-time.md"
+      ],
+      "version": "0.1",
+      "source_sha256": "ed96583a196c526321dc55bfb3e8fdb77365cd5e81fc1498070fb1d019d04b11",
+      "word_sha256": "99606764dd2eb302357de71174ea8545fee917f1d3c8a1a312088d273b2b0125",
+      "generation_status": "generated",
+      "content_approval_status": "needs_approval",
+      "visual_review_status": "visually_inspected",
+      "validation_results": {
+        "source_and_hash": "passed",
+        "word_package": "passed",
+        "visual_review": "passed"
+      }
+    }
+  ]
+}

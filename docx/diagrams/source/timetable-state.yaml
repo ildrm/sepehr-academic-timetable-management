@@ -1,0 +1,16 @@
+title: Timetable transitions
+kind: relationship
+lanes: []
+rows:
+- - Draft
+  - Proposed
+  - Submit immutable version
+- - Proposed
+  - Validated
+  - Independent validation passes
+- - Validated
+  - Published
+  - Authorized, current hash
+- - Published
+  - Superseded
+  - Replacement is published

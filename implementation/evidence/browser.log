@@ -1,0 +1,58 @@
+
+> teaching-system@0.1.0 db:migrate
+> prisma migrate deploy
+
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from prisma/schema.prisma.
+Datasource "db": PostgreSQL database "academic_test_5a38a40e", schema "public" at "127.0.0.1:55432"
+
+6 migrations found in prisma/migrations
+
+Applying migration `202611220001_core`
+Applying migration `202611220002_scope`
+Applying migration `202611220003_oidc`
+Applying migration `202611220004_resources`
+Applying migration `202611220005_approval`
+Applying migration `202611220006_imports`
+
+The following migration(s) have been applied:
+
+migrations/
+  └─ 202611220001_core/
+    └─ migration.sql
+  └─ 202611220002_scope/
+    └─ migration.sql
+  └─ 202611220003_oidc/
+    └─ migration.sql
+  └─ 202611220004_resources/
+    └─ migration.sql
+  └─ 202611220005_approval/
+    └─ migration.sql
+  └─ 202611220006_imports/
+    └─ migration.sql
+
+All migrations have been successfully applied.
+
+> teaching-system@0.1.0 db:seed
+> node --import tsx infra/local/seed.ts
+
+(node:97062) [DEP0205] DeprecationWarning: `module.register()` is deprecated. Use `module.registerHooks()` instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Synthetic academic fixture is ready.
+{"developmentLogin":true,"institutionalLogin":false}
+> teaching-system@0.1.0 test:e2e
+> node --import tsx --test tests/e2e/*.test.ts
+
+(node:97170) [DEP0205] DeprecationWarning: `module.register()` is deprecated. Use `module.registerHooks()` instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+✔ Persian student can preview and enroll in a real course through Next and Nest (19333.373792ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 21021.374125
+Browser test logs: /var/folders/4l/x8t1_s4x13l2ptc2j0rnr8900000gn/T/tmp.l8py1YJvXE

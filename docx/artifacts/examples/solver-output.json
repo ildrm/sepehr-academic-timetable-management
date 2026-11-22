@@ -1,0 +1,23 @@
+{
+  "snapshotId": "SYN-SNAP",
+  "inputSha256": "8dd63db9f3311a00cdff3ef4c7f2d72301cc5c1d21f598efc1895b5a4d444563",
+  "solverVersion": "manual-fixture",
+  "status": "FEASIBLE",
+  "assignments": [
+    {
+      "classId": "A",
+      "placementId": "A2"
+    },
+    {
+      "classId": "B",
+      "placementId": "B1"
+    }
+  ],
+  "objectiveScore": 3,
+  "unassigned": [],
+  "objectiveVector": [
+    3
+  ],
+  "boundVector": null,
+  "configurationId": "CFG-A"
+}

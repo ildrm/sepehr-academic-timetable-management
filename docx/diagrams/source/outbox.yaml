@@ -1,0 +1,22 @@
+title: Recoverable event delivery
+kind: sequence
+lanes:
+- Database
+- Relay
+- Consumer
+rows:
+- - 0
+  - 1
+  - Read next committed sequence
+- - 1
+  - 2
+  - Publish stable event ID
+- - 2
+  - 0
+  - Record effect and receipt
+- - 2
+  - 1
+  - Acknowledge delivery
+- - 1
+  - 0
+  - Mark published; replay safe

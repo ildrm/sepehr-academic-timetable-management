@@ -1,0 +1,109 @@
+{
+  "recorded_at": "2026-11-22T06:35:54.160318+00:00",
+  "checks": [
+    {
+      "check": "Document inventory",
+      "status": "passed",
+      "method": "inventory",
+      "executed_at": "2026-11-22T06:35:53.135817+00:00",
+      "duration_ms": 10.07,
+      "evidence": "35 exact chapter filenames and 12 ADRs paired by relative path; source/Word hashes and metadata match."
+    },
+    {
+      "check": "Local links",
+      "status": "passed",
+      "method": "links",
+      "executed_at": "2026-11-22T06:35:53.145961+00:00",
+      "duration_ms": 15.89,
+      "evidence": "370 source/README relative targets resolved."
+    },
+    {
+      "check": "Native formats",
+      "status": "passed",
+      "method": "native",
+      "executed_at": "2026-11-22T06:35:53.161860+00:00",
+      "duration_ms": 85.39,
+      "evidence": "Parsed 4 .csv, 10 .json, 20 .yaml files."
+    },
+    {
+      "check": "API and JSON Schemas",
+      "status": "passed",
+      "method": "contracts",
+      "executed_at": "2026-11-22T06:35:53.247259+00:00",
+      "duration_ms": 323.16,
+      "evidence": "OpenAPI 3.1.1 validated; 137 inline examples and four standalone schema/example pairs passed JSON Schema checks."
+    },
+    {
+      "check": "Requirements and modules",
+      "status": "passed",
+      "method": "tracing",
+      "executed_at": "2026-11-22T06:35:53.570427+00:00",
+      "duration_ms": 79.62,
+      "evidence": "26 requirement rows cover 41 defined scenarios; all trace links resolve and 40 tables have a single owner. Module imports are acyclic."
+    },
+    {
+      "check": "Contract reconciliation",
+      "status": "passed",
+      "method": "reconcile",
+      "executed_at": "2026-11-22T06:35:53.650065+00:00",
+      "duration_ms": 74.65,
+      "evidence": "Compared API permission/error IDs, event types, all six SQL/catalog state sets, module ownership and permission dimensions. Semantic review limits are recorded separately."
+    },
+    {
+      "check": "Fixture oracles",
+      "status": "passed",
+      "method": "fixtures",
+      "executed_at": "2026-11-22T06:35:53.724726+00:00",
+      "duration_ms": 0.26,
+      "evidence": "Enumerated tiny placement domain: [(['A2', 'B1'], 3)]. Verified the academic fixture has a free lecture seat and full required lab. No production solver or enrollment application executed."
+    },
+    {
+      "check": "Word structure",
+      "status": "passed",
+      "method": "word",
+      "executed_at": "2026-11-22T06:35:53.724991+00:00",
+      "duration_ms": 429.78,
+      "evidence": "47 readable OOXML packages; 13 embedded diagrams with alt text, repeated table headings and page fields."
+    },
+    {
+      "check": "SQL execution evidence",
+      "status": "passed",
+      "method": "sql",
+      "executed_at": "2026-11-22T06:35:54.154774+00:00",
+      "duration_ms": 0.11,
+      "evidence": "Recorded execution 2026-11-22T06:27:24.988342+00:00: 48 DDL statements created 40 public tables on isolated PostgreSQL 17.11."
+    },
+    {
+      "check": "Word visual review",
+      "status": "passed",
+      "method": "visual",
+      "executed_at": "2026-11-22T06:35:54.154896+00:00",
+      "duration_ms": 0.54,
+      "evidence": "58 pages across 47 Word files rendered and visually inspected; evidence matches Word SHA-256 values."
+    },
+    {
+      "check": "Sources and package hygiene",
+      "status": "passed",
+      "method": "hygiene",
+      "executed_at": "2026-11-22T06:35:54.155440+00:00",
+      "duration_ms": 4.07,
+      "evidence": "10 source records have provenance; checked expected text markers and sensitive-file types. Fixtures were authored as synthetic examples."
+    },
+    {
+      "check": "Application acceptance",
+      "status": "not_run",
+      "method": "Read-only scope and evidence review",
+      "executed_at": "2026-11-22T06:35:54.159513+00:00",
+      "duration_ms": 0,
+      "evidence": "No application exists in the inspected repository. The documented scenarios are implementation acceptance specifications."
+    },
+    {
+      "check": "Operational and institutional acceptance",
+      "status": "not_run",
+      "method": "Read-only scope and evidence review",
+      "executed_at": "2026-11-22T06:35:54.159517+00:00",
+      "duration_ms": 0,
+      "evidence": "Measured load, restore drill, policy ratification, fairness and privacy approvals await their accountable roles."
+    }
+  ]
+}

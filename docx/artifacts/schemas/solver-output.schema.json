@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "solver-output",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "snapshotId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "inputSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "solverVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "FEASIBLE",
+        "OPTIMAL",
+        "INFEASIBLE",
+        "UNKNOWN",
+        "MODEL_INVALID"
+      ]
+    },
+    "assignments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "classId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "placementId": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "classId",
+          "placementId"
+        ]
+      }
+    },
+    "objectiveScore": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "unassigned": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "objectiveVector": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "boundVector": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "configurationId": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "snapshotId",
+    "inputSha256",
+    "solverVersion",
+    "status",
+    "assignments",
+    "objectiveScore",
+    "unassigned",
+    "objectiveVector",
+    "boundVector",
+    "configurationId"
+  ]
+}

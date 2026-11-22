@@ -1,0 +1,31 @@
+services:
+  postgres:
+    image: postgres:17.11
+    environment:
+      POSTGRES_USER: academic
+      POSTGRES_PASSWORD: ${LOCAL_DB_PASSWORD:?Set LOCAL_DB_PASSWORD}
+      POSTGRES_DB: academic_local
+    ports: ["127.0.0.1:55432:5432"]
+    volumes: ["db:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U academic -d academic_local"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  queue:
+    image: redis:7.4.9-alpine
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory-policy", "noeviction"]
+    ports: ["127.0.0.1:56379:6379"]
+    volumes: ["queue:/data"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  cache:
+    image: redis:7.4.9-alpine
+    command: ["redis-server", "--save", "", "--maxmemory", "64mb", "--maxmemory-policy", "allkeys-lru"]
+    ports: ["127.0.0.1:56380:6379"]
+volumes:
+  db:
+  queue:

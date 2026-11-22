@@ -1,0 +1,22 @@
+title: Deployment and trust zones
+kind: relationship
+lanes: []
+rows:
+- - Public browser
+  - Ingress / web zone
+  - TLS; cookie session
+- - Web zone
+  - Private API zone
+  - Service identity and actor
+- - API / worker zone
+  - Protected data zone
+  - Role-limited SQL connection
+- - Worker zone
+  - Queue zone
+  - Separate queue credentials
+- - Solver zone
+  - Snapshot storage
+  - Scoped input and result
+- - Relay zone
+  - External provider
+  - Authenticated, bounded calls

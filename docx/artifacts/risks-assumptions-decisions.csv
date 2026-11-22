@@ -1,0 +1,14 @@
+id,status,statement,impact,accountable_role,resolution
+ASM-001,assumed,One institution with multiple faculties,Independent tenants would require identity and isolation redesign,Product owner,Confirm charter before tenancy design
+ASM-002,assumed,Legacy records can supply approved completions,Eligibility can be indeterminate at launch,Registrar,Sign reconciled import and evidence mapping
+RISK-001,needs_approval,"Thresholds, GPA scales, exception and sharing parameters",Students may gain or lose eligibility incorrectly,Academic senate delegate,"Approve policy editions, samples and applicability"
+RISK-002,needs_approval,"Waitlist tiers, reserve release and allocation tie-breaks",Unfair seat distribution or queue bypass,Registrar,"Approve priority, bundle contention and appeal process"
+RISK-003,needs_approval,"Jurisdiction, timezone, calendar and interval policy",Incorrect deadlines and legal obligations,Product owner,"Record institutional zone, conflict policy and counsel review"
+RISK-004,needs_approval,Retention and access delegation,Overexposure or premature loss of records,Privacy officer,Approve class-specific schedule and role review
+RISK-005,needs_approval,"Workload, recovery budgets and solver limits",Unmeasurable capacity or recovery promises,Operations lead,"Collect workload, restore drill and target sign-off"
+RISK-006,needs_approval,Solver weights and hard cohort commitments,Feasible schedules may displace priority groups,Planning lead,Approve constraints and representative benchmark corpus
+RISK-007,needs_approval,Final-set minimum-credit enforcement stage,Dropping can strand an invalid registration,Registrar,"Approve draft, finalization and late-change rules"
+RISK-008,proposed,Shared term guards and hot capacity pools,Lock convoys at registration opening,Database reviewer,Run real PostgreSQL contention tests and tune
+RISK-009,needs_approval,Third-party finance hold freshness and outages,Stale information could deny enrollment,Finance owner,Ratify outage posture before adapter activation
+RISK-010,needs_approval,Data stewardship and maker/checker delegations,Privilege leakage or unavailable signatories,Security lead,Test cross-scope grants and independent approval
+RISK-011,needs_approval,Component compatibility and workload units,Timetable may be feasible on an incorrect input set,Planning lead,"Review room, instructor and bundle inventory"

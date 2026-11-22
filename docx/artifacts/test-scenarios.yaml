@@ -1,0 +1,246 @@
+- id: TEST-001
+  name: Last shared seat
+  given: One pool has one free claim and two eligible students
+  when: Release two authenticated commits together
+  then: One active enrollment and one capacity conflict
+  execution: planned
+- id: TEST-002
+  name: One student, two writes
+  given: Either course alone fits the remaining credit ceiling
+  when: Race both valid requests for one student-term
+  then: At most one commits and the other sees the new total
+  execution: planned
+- id: TEST-003
+  name: Lecture and laboratory
+  given: Lecture has one seat and required lab has none
+  when: Commit a linked bundle
+  then: No enrollment or seat claim survives
+  execution: planned
+- id: TEST-004
+  name: Same key
+  given: Two equivalent payloads carry the same actor, operation and key
+  when: Send both before either response arrives
+  then: Both resolve to one stored outcome and one mutation
+  execution: planned
+- id: TEST-005
+  name: Lost response
+  given: Database commits before the connection drops
+  when: Retrieve status with the original operation and key
+  then: Return the stored outcome with no second write
+  execution: planned
+- id: TEST-006
+  name: Failed swap
+  given: Old section is active and replacement is full
+  when: Submit an atomic swap
+  then: Old enrollment and claims remain active
+  execution: planned
+- id: TEST-007
+  name: Remove corequisite
+  given: The surviving course requires concurrent lab credit
+  when: Drop only its partner
+  then: Reject final set and preserve both
+  execution: planned
+- id: TEST-008
+  name: Changed grade
+  given: A previous provisional outcome becomes failed
+  when: Append a corrected attempt and deliver event twice
+  then: One review case; student stays enrolled pending decision
+  execution: planned
+- id: TEST-009
+  name: Quota release
+  given: A pool is full for general applicants only because of a reserve
+  when: Evaluate immediately before and at release
+  then: General access begins at release and total never increases
+  execution: planned
+- id: TEST-010
+  name: Queue versus direct
+  given: A qualified head entry exists for the shared pool
+  when: Race direct commit and promotion
+  then: Eligible head has first opportunity and no duplicate hold
+  execution: planned
+- id: TEST-011
+  name: Closing instant
+  given: Open interval ends at T
+  when: Evaluate after locks at T minus one tick, at T and after T
+  then: Only the first decision may commit
+  execution: planned
+- id: TEST-012
+  name: Stale proposal
+  given: A validated candidate names an earlier term epoch
+  when: Attempt authorized publication
+  then: Current version stays published and stale error returned
+  execution: planned
+- id: TEST-013
+  name: Insufficient rooms
+  given: Two pinned classes require one room at the same time
+  when: Solve and independently check constraint set
+  then: No publishable placement; a time limit alone yields no proof
+  execution: planned
+- id: TEST-014
+  name: Worker termination
+  given: A provider delivery may succeed before local acknowledgement
+  when: Restart a worker after that boundary
+  then: Consumer deduplicates; ambiguous delivery enters reconciliation
+  execution: planned
+- id: TEST-015
+  name: Redis outage
+  given: Queue storage is unreachable
+  when: Commit an eligible change and later resume the relay
+  then: Database fact and outbox survive; catch-up preserves per-key order
+  execution: planned
+- id: TEST-016
+  name: Delayed financial response
+  given: Optional finance adapter has stale hold information
+  when: Apply the approved stale-data policy
+  then: Show pending verification when policy requires a fresh hold; no implicit adverse decision
+  execution: planned
+- id: TEST-017
+  name: Cross-scope access
+  given: An academic-office assignment ends at the faculty boundary
+  when: Request another faculty’s student or a different term
+  then: No record data returned and access denial recorded
+  execution: planned
+- id: TEST-018
+  name: Curriculum pin
+  given: An admitted student is bound to edition A
+  when: Approve B and re-run audit
+  then: A remains selected unless an authorized migration occurs
+  execution: planned
+- id: TEST-019
+  name: Rule semantics
+  given: A policy allows passed A or B with minimum grade
+  when: Supply only in-progress A and no B
+  then: Return unmet or review according to explicit provisional rule
+  execution: planned
+- id: TEST-020
+  name: Accessible schedule
+  given: Published weekly schedule includes mixed-direction identifiers
+  when: Navigate with keyboard and read the alternative table
+  then: Every meeting, status and action is announced in logical order
+  execution: planned
+- id: TEST-021
+  name: Resource eligibility
+  given: A pinned room lacks mandatory equipment
+  when: Validate a manual change
+  then: Reject candidate with component, constraint and conflict evidence
+  execution: planned
+- id: TEST-022
+  name: Audit allocation
+  given: One completion meets two exclusive groups
+  when: Recompute degree audit twice
+  then: Consume the completion once and explain outstanding group
+  execution: planned
+- id: TEST-023
+  name: Recovery
+  given: A restored snapshot precedes provider acknowledgements
+  when: Replay with provider reconciliation
+  then: Rebuild projections and quarantine ambiguous sends
+  execution: planned
+- id: TEST-024
+  name: Report boundary
+  given: A scoped export reads a reporting watermark
+  when: Change an enrollment during export
+  then: Totals and details share one watermark and permitted scope
+  execution: planned
+- id: TEST-025
+  name: Migration
+  given: Two legacy attempts map to one key with different grades
+  when: Dry-run import
+  then: Quarantine collision and withhold cutover
+  execution: planned
+- id: TEST-026
+  name: Fairness
+  given: Two equally ranked requests compete for a single bundle
+  when: Repeat allocation with fixed approved seed and input
+  then: Same tie outcome and published cohort metrics
+  execution: planned
+- id: TEST-027
+  name: Representative peak
+  given: Separate login, search, reads and write workloads have approved mixes
+  when: Run a repeatable load ramp
+  then: Record percentiles, errors and saturation against ratified budgets
+  execution: planned
+- id: TEST-028
+  name: Restore session
+  given: Session expires between preview and commit
+  when: Reauthenticate and inspect status
+  then: No personal cache leak or premature success
+  execution: planned
+- id: TEST-029
+  name: Backlog gate
+  given: A release includes a changed rule and contracts
+  when: Review its evidence links
+  then: No authorization to release until affected acceptance cases have passed
+  execution: planned
+- id: TEST-030
+  name: Offering identity
+  given: Two cross-listed sections use one physical pool
+  when: Plan enrollment through either listing
+  then: Both consume the same physical budget
+  execution: planned
+- id: TEST-031
+  name: Policy exception
+  given: Two assignments belong to the same person
+  when: Attempt approval of own request using second role
+  then: Reject self-approval by actor identity
+  execution: planned
+- id: TEST-032
+  name: Institution hierarchy
+  given: Faculty and department share a program code mapping
+  when: Resolve a new specialization with effective dates
+  then: Program, unit and pinned curriculum resolve unambiguously
+  execution: planned
+- id: TEST-033
+  name: Calendar recurrence
+  given: A holiday cancels an occurrence near a timezone transition
+  when: Expand week dates and insert a makeup meeting
+  then: Only approved local occurrences exist with explicit offsets
+  execution: planned
+- id: TEST-034
+  name: Solver lifecycle
+  given: Two workers see the same persisted job
+  when: Lease, retry and submit output
+  then: Only current lease generation can complete the run
+  execution: planned
+- id: TEST-035
+  name: Outbox duplicates
+  given: Broker acknowledges before publisher marks row sent
+  when: Replay same envelope twice
+  then: One downstream effect per consumer and event ID
+  execution: planned
+- id: TEST-036
+  name: Appointment
+  given: Student has no open appointment
+  when: Submit a valid-looking basket
+  then: Return window error with no enrolled rows
+  execution: planned
+- id: TEST-037
+  name: Repeat and transfer
+  given: A directed equivalent has one permitted use
+  when: Evaluate repeated attempts and apply approved grade threshold
+  then: Count one recognized completion under the pinned policy
+  execution: planned
+- id: TEST-038
+  name: Sensitive exports
+  given: Advisor has an advisee relationship but no export grant
+  when: Request a downloadable cohort report
+  then: Deny the file and audit the attempt
+  execution: planned
+- id: TEST-039
+  name: First draft and finalization
+  given: The approved floor exceeds the credits of a valid first bundle
+  when: Commit the first bundle in a draft and then finalize
+  then: Addition succeeds. Finalization refuses the shortfall without a grant and preserves draft status
+  execution: planned
+- id: TEST-040
+  name: Expired appointment on a read
+  given: A student can browse published offerings but has no current registration appointment
+  when: Preview the basket and then submit it
+  then: Preview may explain a closed window. Commit rejects at the authoritative decision time
+  execution: planned
+- id: TEST-041
+  name: Status after loss of staff delegation
+  given: An authorized staff change has a stored outcome
+  when: Revoke the case relationship and request the original receipt
+  then: No academic data is disclosed under the expired assignment
+  execution: planned

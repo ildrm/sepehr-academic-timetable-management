@@ -1,0 +1,396 @@
+{
+  "source": "docx/",
+  "institutionalApproval": "none recorded",
+  "scopeAuthority": "Implementation prompt authorizes implementation of documented core; unresolved institutional policies gate activation.",
+  "documentStatus": {
+    "source/00-overview-scope.md": "proposed",
+    "source/01-product-requirements.md": "proposed",
+    "source/02-software-requirements-use-cases.md": "proposed",
+    "source/03-team-roles-raci.md": "proposed",
+    "source/04-user-roles-permissions.md": "proposed",
+    "source/05-academic-domain-curriculum.md": "proposed",
+    "source/06-academic-rule-engine.md": "proposed",
+    "source/07-calendar-state-workflows.md": "proposed",
+    "source/08-faculty-resources-offerings.md": "proposed",
+    "source/09-enrollment-waitlist.md": "proposed",
+    "source/10-timetabling-optimization.md": "proposed",
+    "source/11-student-scheduling-degree-audit.md": "proposed",
+    "source/12-system-architecture.md": "proposed",
+    "source/13-nestjs-backend-design.md": "proposed",
+    "source/14-nextjs-frontend-ux.md": "proposed",
+    "source/15-data-model-dictionary.md": "proposed",
+    "source/16-api-contracts-errors.md": "proposed",
+    "source/17-transactions-consistency.md": "proposed",
+    "source/18-events-jobs-integrations.md": "proposed",
+    "source/19-security-privacy-threat-model.md": "proposed",
+    "source/20-nfr-performance-capacity.md": "proposed",
+    "source/21-test-verification-strategy.md": "proposed",
+    "source/22-devops-deployment.md": "proposed",
+    "source/23-observability-reporting.md": "proposed",
+    "source/24-backup-disaster-recovery-runbooks.md": "proposed",
+    "source/25-data-migration-quality.md": "proposed",
+    "source/26-i18n-accessibility-time.md": "proposed",
+    "source/27-student-user-guide.md": "proposed",
+    "source/28-faculty-planner-user-guide.md": "proposed",
+    "source/29-education-admin-user-guide.md": "proposed",
+    "source/30-roadmap-backlog-delivery.md": "proposed",
+    "source/31-extension-modules.md": "proposed",
+    "source/32-risks-assumptions-open-decisions.md": "proposed",
+    "source/33-quality-review-traceability.md": "proposed",
+    "source/34-glossary-references-maintenance.md": "proposed",
+    "source/adr/adr-001-modular-architecture.md": "proposed",
+    "source/adr/adr-002-bff-boundary.md": "proposed",
+    "source/adr/adr-003-data-ownership.md": "proposed",
+    "source/adr/adr-004-orm-sql.md": "proposed",
+    "source/adr/adr-005-isolation-locking.md": "proposed",
+    "source/adr/adr-006-idempotency.md": "proposed",
+    "source/adr/adr-007-transactional-outbox.md": "proposed",
+    "source/adr/adr-008-cache-queue-separation.md": "proposed",
+    "source/adr/adr-009-independent-solver.md": "proposed",
+    "source/adr/adr-010-versioning.md": "proposed",
+    "source/adr/adr-011-authorization.md": "proposed",
+    "source/adr/adr-012-time-semantics.md": "proposed"
+  },
+  "files": [
+    {
+      "path": "docx/MANIFEST.json",
+      "sha256": "99492798061e447b216b49fbafc97fd31d8ec9c3479e143e2fe7e460dd695893"
+    },
+    {
+      "path": "docx/README.md",
+      "sha256": "d32080b69fe2d8fbb454b8b7854bca2f7b0a622749bd9378d604910f006facd0"
+    },
+    {
+      "path": "docx/VALIDATION_REPORT.md",
+      "sha256": "61401928a255a060c1d0fff6883691b30bcf6ad39f1e88876c5196389389edcf"
+    },
+    {
+      "path": "docx/artifacts/core-schema.sql",
+      "sha256": "56615a8b86ea26051065b54e856838062c3b5b38a60d3b20581e6a5ce01c8a17"
+    },
+    {
+      "path": "docx/artifacts/error-catalog.yaml",
+      "sha256": "800467502737a3b4bc11e1a1c8dec4818339383ec442abc1146c0b61b7ee3204"
+    },
+    {
+      "path": "docx/artifacts/event-catalog.yaml",
+      "sha256": "9f1762983b7873b1594713408045ffa57ef06dfa014f3db4e96613c3183d47f7"
+    },
+    {
+      "path": "docx/artifacts/examples/academic-facts.json",
+      "sha256": "d862ae44c1db9673ef398c509817506887100ad394e4d58ca7d88c0de21724da"
+    },
+    {
+      "path": "docx/artifacts/examples/academic-rule.json",
+      "sha256": "62edc4f0685ebbc9edb51b47b435ef9843b4f5c483c50af0758e86de63e0df0f"
+    },
+    {
+      "path": "docx/artifacts/examples/event.json",
+      "sha256": "bf1f152f543e69b76a505b55c456a538f49cc7ea6f67daabd2c3c563fa79ba4d"
+    },
+    {
+      "path": "docx/artifacts/examples/solver-input.json",
+      "sha256": "8dd63db9f3311a00cdff3ef4c7f2d72301cc5c1d21f598efc1895b5a4d444563"
+    },
+    {
+      "path": "docx/artifacts/examples/solver-output.json",
+      "sha256": "ec23db4b7f08d274e6b8964f69047c1fa28265957df1935494ca1b9b48f81b23"
+    },
+    {
+      "path": "docx/artifacts/module-catalog.yaml",
+      "sha256": "400c6e922e936b04d0737064de955d16183e66892874c05c11203992c12853f1"
+    },
+    {
+      "path": "docx/artifacts/openapi.yaml",
+      "sha256": "d88f6977462078cdb40ed9ae4ed1254e5a0ac4102244f0326ff074917dae9147"
+    },
+    {
+      "path": "docx/artifacts/permission-matrix.csv",
+      "sha256": "4e1dbceea92c150d07ccc6a80e033bac3cd13d276169c6afc9f3d320d3bb8cca"
+    },
+    {
+      "path": "docx/artifacts/report-catalog.yaml",
+      "sha256": "fac80571227b22d7e3c66d10920e7e3f665384465d20faeaf372aca8da040ad7"
+    },
+    {
+      "path": "docx/artifacts/requirements.csv",
+      "sha256": "aa658e2923af077094aa100c24f5ebbf8ca7223256d348fa884ac732a886122c"
+    },
+    {
+      "path": "docx/artifacts/risks-assumptions-decisions.csv",
+      "sha256": "67ae1345645e1a182d6cd6671f68caf1d03286d91e6a0d27e90e306611fb64f8"
+    },
+    {
+      "path": "docx/artifacts/schemas/academic-rule.schema.json",
+      "sha256": "7398c43a4d47c4d8eaffaa4afa4aaa5b9d450d1840130435f36b9ba088cf76e9"
+    },
+    {
+      "path": "docx/artifacts/schemas/event.schema.json",
+      "sha256": "5b018eb274b911efed84c0400012c3dbcc0b2dce1c666968db91b3e851210026"
+    },
+    {
+      "path": "docx/artifacts/schemas/solver-input.schema.json",
+      "sha256": "5ffd897203476b4b39c4f8a1676670bd9659944b0a2ab640f47ccbaeed42cc43"
+    },
+    {
+      "path": "docx/artifacts/schemas/solver-output.schema.json",
+      "sha256": "34273f98be06630f708094bb76e67603fe06776ec7b8f01b57ff4ce103a2a3bc"
+    },
+    {
+      "path": "docx/artifacts/state-machines.yaml",
+      "sha256": "b0b717f4724d52162e0ba6bd887b13c51bd5eb0b969e385f17b2d9e8d5e962e0"
+    },
+    {
+      "path": "docx/artifacts/test-scenarios.yaml",
+      "sha256": "49e8a3bde1752cb167ffe18ee6bdf69525faf903f4a0a540cb385e1547804f1b"
+    },
+    {
+      "path": "docx/artifacts/traceability.csv",
+      "sha256": "53a3c0f1ec62f0563b590a08c37ecd9b1a52777170bc18a2f39a74a495edf822"
+    },
+    {
+      "path": "docx/diagrams/source/component.yaml",
+      "sha256": "2ded9a8f4558204ee6b65b7f9e29717dff5fae4af6761417f853200bf263732e"
+    },
+    {
+      "path": "docx/diagrams/source/container.yaml",
+      "sha256": "c413add1a04fcf59958e4e8ba0f3802506e2a0485ff84360864bc38bc7b11972"
+    },
+    {
+      "path": "docx/diagrams/source/context.yaml",
+      "sha256": "7305ace2491cc191ed035f370de25909d4e4b25171bb58ba5033aadaa9cd0175"
+    },
+    {
+      "path": "docx/diagrams/source/deployment.yaml",
+      "sha256": "68799873407b7127f63c808280f4200f35159a57e3654efa32e68260833ac931"
+    },
+    {
+      "path": "docx/diagrams/source/enrollment-state.yaml",
+      "sha256": "b725eb0ac28b8b84b421528e2d9006caa56c0fdf648fcbbda4313a96646194e6"
+    },
+    {
+      "path": "docx/diagrams/source/enrollment.yaml",
+      "sha256": "a945b13bc1e9c38dc08fbb7bd5d2df36182bdd9c91c72d0ef74a4c1140abfada"
+    },
+    {
+      "path": "docx/diagrams/source/erd.yaml",
+      "sha256": "b5f33168559d3063903ccf8b5735d22db2e225a1abfa882789f1da3cabe504af"
+    },
+    {
+      "path": "docx/diagrams/source/outbox.yaml",
+      "sha256": "709848182596520cb61f99c42813a2f96f7e55f371495d65b707357e3d1abd81"
+    },
+    {
+      "path": "docx/diagrams/source/publication.yaml",
+      "sha256": "baa79f69f6cc219e6b007598fea041b06e894d26ab1b88e577cdc162198ae70e"
+    },
+    {
+      "path": "docx/diagrams/source/solver.yaml",
+      "sha256": "85fa6455ed6d22e7673641a66ac9cdac916d1a09dcb007c2c4eea7d3da4cff40"
+    },
+    {
+      "path": "docx/diagrams/source/swap.yaml",
+      "sha256": "49c8d6ce24057b6d686e37511b1d8db2905f360f6640c32ece63ec57dfcb054a"
+    },
+    {
+      "path": "docx/diagrams/source/timetable-state.yaml",
+      "sha256": "a0e853a666b929bc3efc77e22a6a42829cbca155531371b1097c3a4aa1252645"
+    },
+    {
+      "path": "docx/diagrams/source/waitlist.yaml",
+      "sha256": "3fe2013b869d089a0a40e43c1ce7090ee41bc369e174c1022c08397362bed578"
+    },
+    {
+      "path": "docx/references/sources.json",
+      "sha256": "cc3b79085dce7b8f3e1bf0cddbdfffb3c34e6ec8fef01c42d66aecb7cb6d3abc"
+    },
+    {
+      "path": "docx/source/00-overview-scope.md",
+      "sha256": "212e12d1e045a9aa91ec7f3a4d5dbf3ab7083f9487a1f040abeded8103b06322"
+    },
+    {
+      "path": "docx/source/01-product-requirements.md",
+      "sha256": "da6faa5bf1440e96771f49c2d43b52b734d6fd39f76c446f3e786a1a2b15e634"
+    },
+    {
+      "path": "docx/source/02-software-requirements-use-cases.md",
+      "sha256": "91b5714294f2f715db135dde67361ecb62931a1b9d76ee64751c47b3e03048d8"
+    },
+    {
+      "path": "docx/source/03-team-roles-raci.md",
+      "sha256": "8fd6fe94e6ead5662a432ffe25f4d218506d9be3c046ee8906a053e57e7fdbad"
+    },
+    {
+      "path": "docx/source/04-user-roles-permissions.md",
+      "sha256": "01d375e0f81712d68798bb7ab6239c22f670fd7a71cd16cd7420c52549400ba1"
+    },
+    {
+      "path": "docx/source/05-academic-domain-curriculum.md",
+      "sha256": "8c75b3d251f7597c0c5a53dfd88513682e25827610a6c9871a5977b644e172bd"
+    },
+    {
+      "path": "docx/source/06-academic-rule-engine.md",
+      "sha256": "94b54833af3bd676cc24b0f3baefc1573595878d350a1323ed85088be4653565"
+    },
+    {
+      "path": "docx/source/07-calendar-state-workflows.md",
+      "sha256": "eadf56db6eb3bcf56ca5dc3933c03830ffe0e777f0d761550424dbf1a314875a"
+    },
+    {
+      "path": "docx/source/08-faculty-resources-offerings.md",
+      "sha256": "982a73398096f1b6528deecebe70fd9b31c50edfdfcc78d2d2b6680dc92f9d27"
+    },
+    {
+      "path": "docx/source/09-enrollment-waitlist.md",
+      "sha256": "15bb2bea18ea38b98b8dc56e2d7b4e9ceaacb3e18e0305f4490b3421eb9c77f6"
+    },
+    {
+      "path": "docx/source/10-timetabling-optimization.md",
+      "sha256": "afb0123bfa6d563eab6e6091bfb95df13631bd0115f43d946b6b89e96c47f05e"
+    },
+    {
+      "path": "docx/source/11-student-scheduling-degree-audit.md",
+      "sha256": "67d89d7646cd4d84ff07d49ad0338d79bb8494caac797308bd619f69ca7f8a3a"
+    },
+    {
+      "path": "docx/source/12-system-architecture.md",
+      "sha256": "6253b8af240e9a64922bb61c07753e3059da91ee0ae544264bbf962b31000657"
+    },
+    {
+      "path": "docx/source/13-nestjs-backend-design.md",
+      "sha256": "0cae73bad850bf7b6a9d6190f24126dfd57fe42b16d09be39878e4f84d5f9b64"
+    },
+    {
+      "path": "docx/source/14-nextjs-frontend-ux.md",
+      "sha256": "f2ffdb0b82ae98f14df8d132a2553f2f961ce95878eb97743ff13d49b551bd8c"
+    },
+    {
+      "path": "docx/source/15-data-model-dictionary.md",
+      "sha256": "ee08774aaca4572fddc46e7d0224e0aa29f5cc4a7d38df81400ca05c325886dc"
+    },
+    {
+      "path": "docx/source/16-api-contracts-errors.md",
+      "sha256": "f796d19efcdfff966cf6fa6e7d62b23524efb87679bb35515c8b01580082cc22"
+    },
+    {
+      "path": "docx/source/17-transactions-consistency.md",
+      "sha256": "981b48f1f9d819dc4c6be8eb46f5146d9fdcf672b09909f95025918e2201c162"
+    },
+    {
+      "path": "docx/source/18-events-jobs-integrations.md",
+      "sha256": "39be665390457ae020d549bc3467b37863c9fc5820160c61104f6f1eafff4639"
+    },
+    {
+      "path": "docx/source/19-security-privacy-threat-model.md",
+      "sha256": "a587de4a7128cd35d5ee0a1af4c65058e8522f854151d0b179a6101765b235f6"
+    },
+    {
+      "path": "docx/source/20-nfr-performance-capacity.md",
+      "sha256": "86922036400b635a55602e7f798da4d8552c3f60f90ec679901810340b71f679"
+    },
+    {
+      "path": "docx/source/21-test-verification-strategy.md",
+      "sha256": "4ebaaf302b677c45a8edb005310abf8b0e70c46f98da7c0c0fc65d9b9aad57ce"
+    },
+    {
+      "path": "docx/source/22-devops-deployment.md",
+      "sha256": "c0500b3a7b69359c3e621598e1691c5ce32cd4a88da7f41eeea21adf3b5d21fb"
+    },
+    {
+      "path": "docx/source/23-observability-reporting.md",
+      "sha256": "c500030cff5e52a2e1c1a18d6cd104283ed6f71861ba91df72ee95f8ca29f752"
+    },
+    {
+      "path": "docx/source/24-backup-disaster-recovery-runbooks.md",
+      "sha256": "bb77431bd0bf4d40c90112bc1f44b7e5ac4ce102154835a8d6c22e5a070049ae"
+    },
+    {
+      "path": "docx/source/25-data-migration-quality.md",
+      "sha256": "bb4dd0a0ab24ca966dc26d2b628ffd30ef9232c0a131ef0715c88bcaea2a1ef2"
+    },
+    {
+      "path": "docx/source/26-i18n-accessibility-time.md",
+      "sha256": "b1cecd21f4863c666d0efe5529cf769e27a3abf3ea249f154126aecf9854a33c"
+    },
+    {
+      "path": "docx/source/27-student-user-guide.md",
+      "sha256": "602d8f285081da148f7186f9f2d8dd5b27fd49d70974264c5041b04e9cb6c324"
+    },
+    {
+      "path": "docx/source/28-faculty-planner-user-guide.md",
+      "sha256": "dc9c3419e03f89c6180d50cfd99898960ffd90ddfa89f97bacc535b90fe0358b"
+    },
+    {
+      "path": "docx/source/29-education-admin-user-guide.md",
+      "sha256": "9a2448485cf0ad259c38769d88651422e95534e38693ec2c7003724cf60248bd"
+    },
+    {
+      "path": "docx/source/30-roadmap-backlog-delivery.md",
+      "sha256": "c5a4c3369784de4af2bd70e389b0b1ae5f98fc723ed26c6d09af7d02da701af0"
+    },
+    {
+      "path": "docx/source/31-extension-modules.md",
+      "sha256": "b124afdbba52dc500ebbfeb444f672e02aca24fe2107a892d1f33858b01139e9"
+    },
+    {
+      "path": "docx/source/32-risks-assumptions-open-decisions.md",
+      "sha256": "45f432f76c3dd938f2798898b73b74442f1a8bd3223068832698e6bfba6e264e"
+    },
+    {
+      "path": "docx/source/33-quality-review-traceability.md",
+      "sha256": "009514e4d6c4e9eee084ea86a89d1a6eb71189ee84dcd1f3a8e396e9a07602c0"
+    },
+    {
+      "path": "docx/source/34-glossary-references-maintenance.md",
+      "sha256": "81b5ed4e98df9ce3931097ae752158ee4d6414ec55b39a75dbc8febcf6bfccd7"
+    },
+    {
+      "path": "docx/source/adr/adr-001-modular-architecture.md",
+      "sha256": "167aef687e6f18aec0731f12d1c8516fa6cc90610fb6f12da39e60ea29f53356"
+    },
+    {
+      "path": "docx/source/adr/adr-002-bff-boundary.md",
+      "sha256": "a90c0b15e2f336633321eaecee869870ca43df85a47e958a449c348cee760e6c"
+    },
+    {
+      "path": "docx/source/adr/adr-003-data-ownership.md",
+      "sha256": "f4f3754b546df09e8355588aa01d850fb7d2123d195cb5dab96a9ea534d5634c"
+    },
+    {
+      "path": "docx/source/adr/adr-004-orm-sql.md",
+      "sha256": "5c787ea53738d18c11960ae42d7595ada5c14144241b707d99e68893393bf4f3"
+    },
+    {
+      "path": "docx/source/adr/adr-005-isolation-locking.md",
+      "sha256": "7827ba920ff29ee1ed05205a9a7083b58d1ab483ac3780f33cc3201da42da335"
+    },
+    {
+      "path": "docx/source/adr/adr-006-idempotency.md",
+      "sha256": "b6bd56d412392acf1a6daca66c76c72d4d2d2a0a19bb9a1721cefdd992e87c09"
+    },
+    {
+      "path": "docx/source/adr/adr-007-transactional-outbox.md",
+      "sha256": "1647a44bbfbfd05c2acc96e1dbf92659621e33a9f94acbf98c275f49b4d1ed37"
+    },
+    {
+      "path": "docx/source/adr/adr-008-cache-queue-separation.md",
+      "sha256": "9975b795a1c779aa66fa9419434566ae4dee4cc31f5d8d22568a91217dad2909"
+    },
+    {
+      "path": "docx/source/adr/adr-009-independent-solver.md",
+      "sha256": "e5dcc81c3bbe5638337cba9b1de4d0a805569ab51242a29f88a101caacbdfd9c"
+    },
+    {
+      "path": "docx/source/adr/adr-010-versioning.md",
+      "sha256": "94159d99de73fce7dba6104c19f15c7d24cca85395727706aaa0e28dfa22df3c"
+    },
+    {
+      "path": "docx/source/adr/adr-011-authorization.md",
+      "sha256": "607375ad5b2198547871188ebc5ff3ba2fb1be9c46961359c4961b3682e3d4ae"
+    },
+    {
+      "path": "docx/source/adr/adr-012-time-semantics.md",
+      "sha256": "ed96583a196c526321dc55bfb3e8fdb77365cd5e81fc1498070fb1d019d04b11"
+    }
+  ]
+}

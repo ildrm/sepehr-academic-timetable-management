@@ -1,0 +1,11 @@
+Restored into a fresh isolated database. Selected counts and invariants matched.
+0
+0
+0
+consumer_receipt|1
+enrollment|1
+outbox_event|1
+seat_claim|1
+term|2
+timetable_version|1
+Archive and comparison files are in /var/folders/4l/x8t1_s4x13l2ptc2j0rnr8900000gn/T/tmp.9BY6JOVXWG.

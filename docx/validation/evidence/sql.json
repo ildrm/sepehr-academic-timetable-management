@@ -1,0 +1,8 @@
+{
+  "checked_at": "2026-11-22T06:27:24.988342+00:00",
+  "method": "PostgreSQL 17.11 standalone backend, freshly initialized private temporary cluster with no network listener",
+  "sha256": "56615a8b86ea26051065b54e856838062c3b5b38a60d3b20581e6a5ce01c8a17",
+  "ddl_statements": 48,
+  "catalog_table_count": 40,
+  "result": "passed"
+}

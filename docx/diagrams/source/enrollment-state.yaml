@@ -1,0 +1,13 @@
+title: Enrollment transitions
+kind: relationship
+lanes: []
+rows:
+- - Absent
+  - Active
+  - Commit complete bundle
+- - Active
+  - Dropped
+  - Commit valid drop or swap
+- - Active
+  - Active
+  - Refused change leaves state intact

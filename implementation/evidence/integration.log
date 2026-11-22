@@ -1,0 +1,82 @@
+
+> teaching-system@0.1.0 db:migrate
+> prisma migrate deploy
+
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from prisma/schema.prisma.
+Datasource "db": PostgreSQL database "academic_test_411435b5", schema "public" at "127.0.0.1:55432"
+
+6 migrations found in prisma/migrations
+
+Applying migration `202611220001_core`
+Applying migration `202611220002_scope`
+Applying migration `202611220003_oidc`
+Applying migration `202611220004_resources`
+Applying migration `202611220005_approval`
+Applying migration `202611220006_imports`
+
+The following migration(s) have been applied:
+
+migrations/
+  └─ 202611220001_core/
+    └─ migration.sql
+  └─ 202611220002_scope/
+    └─ migration.sql
+  └─ 202611220003_oidc/
+    └─ migration.sql
+  └─ 202611220004_resources/
+    └─ migration.sql
+  └─ 202611220005_approval/
+    └─ migration.sql
+  └─ 202611220006_imports/
+    └─ migration.sql
+
+All migrations have been successfully applied.
+
+> teaching-system@0.1.0 db:generate
+> prisma generate
+
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from prisma/schema.prisma.
+
+✔ Generated Prisma Client (v7.10.1) to ./node_modules/@prisma/client in 734ms
+
+Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+
+
+
+> teaching-system@0.1.0 db:seed
+> node --import tsx infra/local/seed.ts
+
+(node:95019) [DEP0205] DeprecationWarning: `module.register()` is deprecated. Use `module.registerHooks()` instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Synthetic academic fixture is ready.
+{"status":"ready"}
+> teaching-system@0.1.0 test:integration
+> node --import tsx --test tests/integration/*.test.ts
+
+(node:95153) [DEP0205] DeprecationWarning: `module.register()` is deprecated. Use `module.registerHooks()` instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+▶ real API, PostgreSQL guard contention, durable recovery, waitlist and solver publication
+  ✔ scoped API, registration windows, self progress and CSRF (144.673042ms)
+  ✔ independent publication of a real CP-SAT result (2377.323375ms)
+  ✔ linked lab failure leaves lecture claims and enrollment untouched (70.455958ms)
+  ✔ last seat is decided under a real competing connection (142.815125ms)
+  ✔ atomic swap, complete laboratory bundle, corequisite removal and stable replay (115.651541ms)
+  ✔ one student, overlapping credit decisions (107.515417ms)
+  ✔ waitlist consumes a durable hold and outbox consumer deduplicates (1518.471083ms)
+  ✔ separate exception requester and approver, plus dry-run import and replay (134.242ms)
+  ✔ scoped academic setup and maker-checker metadata (190.665333ms)
+  ✔ expired role assignment and missing policy fail safely (29.011833ms)
+✔ real API, PostgreSQL guard contention, durable recovery, waitlist and solver publication (5264.321625ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5786.555625
+Integration logs: /var/folders/4l/x8t1_s4x13l2ptc2j0rnr8900000gn/T/tmp.lcmwWRuL79

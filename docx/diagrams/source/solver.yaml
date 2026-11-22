@@ -1,0 +1,22 @@
+title: Prepare a timetable candidate
+kind: sequence
+lanes:
+- Worker
+- Solver
+- Store
+rows:
+- - 0
+  - 2
+  - Lease job and pin input
+- - 2
+  - 0
+  - Read snapshot and hash
+- - 0
+  - 1
+  - Run with pinned configuration
+- - 1
+  - 0
+  - Return status and placements
+- - 0
+  - 2
+  - Fence generation; save result

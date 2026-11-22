@@ -1,0 +1,266 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "academic-rule",
+  "$ref": "#/$defs/node",
+  "$defs": {
+    "node": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "AND"
+            },
+            "children": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/node"
+              },
+              "minItems": 1,
+              "maxItems": 64
+            }
+          },
+          "required": [
+            "op",
+            "children"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "OR"
+            },
+            "children": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/node"
+              },
+              "minItems": 1,
+              "maxItems": 64
+            }
+          },
+          "required": [
+            "op",
+            "children"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "NOT"
+            },
+            "child": {
+              "$ref": "#/$defs/node"
+            }
+          },
+          "required": [
+            "op",
+            "child"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "completed"
+            },
+            "course": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "op",
+            "course"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "concurrent"
+            },
+            "course": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "op",
+            "course"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "inProgress"
+            },
+            "course": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "op",
+            "course"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "recognizedEquivalent"
+            },
+            "course": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "op",
+            "course"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "repeatAllowed"
+            },
+            "course": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "op",
+            "course"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "minimumGrade"
+            },
+            "course": {
+              "type": "string",
+              "minLength": 1
+            },
+            "thresholdParam": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "op",
+            "course",
+            "thresholdParam"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "creditRange"
+            },
+            "minParam": {
+              "type": "string",
+              "minLength": 1
+            },
+            "maxParam": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "op",
+            "minParam",
+            "maxParam"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "minimumGpa"
+            },
+            "thresholdParam": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "op",
+            "thresholdParam"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "standing"
+            },
+            "value": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "op",
+            "value"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "program"
+            },
+            "code": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "op",
+            "code"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "exception"
+            },
+            "ruleId": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "op",
+            "ruleId"
+          ]
+        }
+      ]
+    }
+  }
+}

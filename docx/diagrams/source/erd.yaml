@@ -1,0 +1,28 @@
+title: Core relationships
+kind: relationship
+lanes: []
+rows:
+- - Program
+  - Curriculum version
+  - 1 to many editions
+- - Curriculum version
+  - Student program
+  - 1 to many assignments
+- - Course
+  - Offering
+  - 1 to many term offerings
+- - Offering
+  - Section
+  - 1 to many alternatives
+- - Section
+  - Component
+  - 1 to many teaching parts
+- - Enrollment
+  - Component
+  - many to many via selection
+- - Capacity pool
+  - Seat claim
+  - 1 to many occupied seats
+- - Timetable version
+  - Meeting
+  - 1 to many occurrences/patterns

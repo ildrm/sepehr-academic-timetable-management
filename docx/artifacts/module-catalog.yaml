@@ -1,0 +1,131 @@
+- name: Identity
+  owned_tables:
+  - identity_account
+  - role_assignment
+  responsibility: Resolve subject and scoped assignments
+  imports:
+  - Institution
+- name: Institution
+  owned_tables:
+  - org_unit
+  - program
+  responsibility: Manage organizational boundaries
+  imports: []
+- name: Catalog
+  owned_tables:
+  - course
+  - equivalency
+  responsibility: Maintain canonical courses and substitutions
+  imports:
+  - Institution
+- name: Curricula
+  owned_tables:
+  - curriculum_version
+  - curriculum_course
+  responsibility: Own immutable student requirement sets
+  imports:
+  - Catalog
+- name: Records
+  owned_tables:
+  - student_program
+  - academic_record
+  responsibility: Post traceable attempts and corrections
+  imports:
+  - Curricula
+  - Identity
+- name: Instructors
+  owned_tables:
+  - instructor
+  - qualification
+  - availability
+  responsibility: Approve skills and availability
+  imports:
+  - Identity
+  - Catalog
+- name: Policies
+  owned_tables:
+  - policy_version
+  - academic_rule
+  responsibility: Compile typed rules without database access
+  imports:
+  - Curricula
+- name: Calendar
+  owned_tables:
+  - term
+  - appointment
+  responsibility: Maintain decision windows and term coordination
+  imports:
+  - Institution
+- name: Resources
+  owned_tables:
+  - room
+  - room_feature
+  responsibility: Maintain usable spaces and accessibility features
+  imports:
+  - Institution
+- name: Offerings
+  owned_tables:
+  - offering
+  - section
+  - component
+  - capacity_pool
+  - reservation
+  responsibility: Specify instructional bundles and physical capacity
+  imports:
+  - Catalog
+  - Resources
+  - Calendar
+  - Instructors
+- name: Timetabling
+  owned_tables:
+  - timetable_version
+  - meeting
+  - solve_job
+  - validation_record
+  responsibility: Validate proposals and publish pinned versions
+  imports:
+  - Offerings
+- name: Approvals
+  owned_tables:
+  - exception_grant
+  - review_case
+  responsibility: Grant scoped exceptions with maker/checker control
+  imports:
+  - Policies
+  - Records
+- name: Enrollment
+  owned_tables:
+  - student_term
+  - enrollment
+  - enrollment_component
+  - waitlist
+  - seat_claim
+  - idempotency_record
+  - queue_guard
+  responsibility: Coordinate all mutations and seat use
+  imports:
+  - Timetabling
+  - Approvals
+  - Records
+  - Calendar
+  - Policies
+- name: Audit
+  owned_tables:
+  - audit_entry
+  responsibility: Append attributable academic decisions via transaction port
+  imports: []
+- name: Notifications
+  owned_tables:
+  - consumer_receipt
+  responsibility: Deduplicate delivery and track attempts
+  imports: []
+- name: Events
+  owned_tables:
+  - outbox_event
+  responsibility: Relay committed changes and order per aggregate
+  imports: []
+- name: Reporting
+  owned_tables: []
+  responsibility: Read scoped projections at a disclosed watermark
+  imports:
+  - Events

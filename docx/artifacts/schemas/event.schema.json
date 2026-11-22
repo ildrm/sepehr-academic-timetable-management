@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "event",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "EnrollmentChanged",
+        "WaitlistChanged",
+        "RecordCorrected",
+        "TimetablePublished",
+        "ExceptionDecided",
+        "CapacityChanged",
+        "SolveRequested"
+      ]
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "Approvals",
+        "Enrollment",
+        "Offerings",
+        "Records",
+        "Timetabling"
+      ]
+    },
+    "aggregateKey": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "correlationId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "causationId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "termId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "resourceId",
+        "revision"
+      ]
+    }
+  },
+  "required": [
+    "eventId",
+    "type",
+    "schemaVersion",
+    "occurredAt",
+    "source",
+    "aggregateKey",
+    "sequence",
+    "correlationId",
+    "causationId",
+    "termId",
+    "payload"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "EnrollmentChanged"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "source": {
+            "const": "Enrollment"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "WaitlistChanged"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "source": {
+            "const": "Enrollment"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "RecordCorrected"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "source": {
+            "const": "Records"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "TimetablePublished"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "source": {
+            "const": "Timetabling"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "ExceptionDecided"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "source": {
+            "const": "Approvals"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "CapacityChanged"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "source": {
+            "const": "Offerings"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "SolveRequested"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "source": {
+            "const": "Timetabling"
+          }
+        }
+      }
+    }
+  ]
+}

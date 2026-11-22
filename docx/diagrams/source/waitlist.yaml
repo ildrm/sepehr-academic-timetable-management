@@ -1,0 +1,25 @@
+title: Promotion in queue order
+kind: sequence
+lanes:
+- Worker
+- Service
+- Database
+rows:
+- - 0
+  - 1
+  - Request next eligible offer
+- - 1
+  - 2
+  - Lock queue guard and pools
+- - 2
+  - 1
+  - Ordered head and linked seats
+- - 1
+  - 2
+  - Persist holds + offer event
+- - 2
+  - 1
+  - Commit offer and expiry
+- - 1
+  - 0
+  - Dispatch after commit

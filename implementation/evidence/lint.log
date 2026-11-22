@@ -1,0 +1,4 @@
+
+> teaching-system@0.1.0 lint
+> eslint apps packages infra/local tests
+

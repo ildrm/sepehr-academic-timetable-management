@@ -1,0 +1,98 @@
+{
+  "snapshotId": "SYN-SNAP",
+  "epoch": 4,
+  "zone": "Etc/UTC",
+  "configuration": {
+    "seed": 17,
+    "objective": "minimize placement penalty",
+    "limitParameter": "SOLVE_BUDGET"
+  },
+  "classes": [
+    {
+      "id": "A",
+      "pinned": null,
+      "placements": [
+        {
+          "id": "A1",
+          "room": "R1",
+          "instructor": "IA",
+          "campus": "C1",
+          "intervals": [
+            {
+              "weekDate": "2030-02-04",
+              "startMinute": 540,
+              "endMinute": 600
+            }
+          ],
+          "penalty": 0,
+          "loadUnits": 1,
+          "preferenceCosts": [
+            0
+          ]
+        },
+        {
+          "id": "A2",
+          "room": "R1",
+          "instructor": "IA",
+          "campus": "C1",
+          "intervals": [
+            {
+              "weekDate": "2030-02-04",
+              "startMinute": 600,
+              "endMinute": 660
+            }
+          ],
+          "penalty": 3,
+          "loadUnits": 1,
+          "preferenceCosts": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "pinned": "B1",
+      "placements": [
+        {
+          "id": "B1",
+          "room": "R1",
+          "instructor": "IB",
+          "campus": "C1",
+          "intervals": [
+            {
+              "weekDate": "2030-02-04",
+              "startMinute": 540,
+              "endMinute": 600
+            }
+          ],
+          "penalty": 0,
+          "loadUnits": 1,
+          "preferenceCosts": [
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "sourceFactsRef": "synthetic-resource-edition-A",
+  "constraints": {
+    "forbiddenPairs": [],
+    "workloadCaps": [
+      {
+        "instructor": "IA",
+        "maxUnits": 1
+      },
+      {
+        "instructor": "IB",
+        "maxUnits": 1
+      }
+    ],
+    "objectiveTiers": [
+      {
+        "name": "placement preference",
+        "weight": 1
+      }
+    ]
+  }
+}

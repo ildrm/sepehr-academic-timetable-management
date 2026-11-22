@@ -1,0 +1,16 @@
+title: Inside the academic API
+kind: relationship
+lanes: []
+rows:
+- - Controller
+  - Application service
+  - Actor, scope and command
+- - Application service
+  - Policy evaluator
+  - Final set and pinned facts
+- - Application service
+  - Seat repository
+  - Ordered guards and claims
+- - Application service
+  - Audit / outbox ports
+  - Within the same commit

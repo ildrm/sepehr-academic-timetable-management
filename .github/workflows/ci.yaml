@@ -1,0 +1,48 @@
+name: Academic application
+on: [push, pull_request]
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17.11
+        env:
+          POSTGRES_USER: academic
+          POSTGRES_PASSWORD: ci-isolated-postgres
+          POSTGRES_DB: academic_test
+        ports: ['5432:5432']
+        options: --health-cmd "pg_isready -U academic" --health-interval 4s --health-timeout 4s --health-retries 15
+      redis:
+        image: redis:7.4.9-alpine
+        ports: ['6379:6379']
+        options: --health-cmd "redis-cli ping" --health-interval 4s --health-timeout 4s --health-retries 15
+    env:
+      DATABASE_URL: postgresql://academic:ci-isolated-postgres@127.0.0.1:5432/academic_test
+      QUEUE_REDIS_URL: redis://127.0.0.1:6379
+      SOLVER_PYTHON: python
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: npm ci
+      - run: npm run db:generate
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: python -m pip install -r services/solver/requirements.txt
+      - run: python -m unittest services.solver.test_solve services.solver.test_allocate
+      - run: bash infra/local/integration.sh
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Test the built Persian UI
+        run: |
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -c 'CREATE DATABASE academic_test_browser'
+          DATABASE_URL="${DATABASE_URL%/*}/academic_test_browser" bash infra/local/browser.sh
+      - run: npm audit --omit=dev --audit-level=high

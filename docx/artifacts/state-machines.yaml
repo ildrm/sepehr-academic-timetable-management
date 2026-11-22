@@ -1,0 +1,75 @@
+enrollment:
+- start: absent
+  end: active
+  guard: commit valid bundle
+- start: active
+  end: dropped
+  guard: commit drop or swap
+waitlist:
+- start: absent
+  end: queued
+  guard: join
+- start: queued
+  end: offered
+  guard: hold all pools
+- start: queued
+  end: ineligible
+  guard: definitive eligibility failure
+- start: queued
+  end: declined
+  guard: withdraw
+- start: offered
+  end: enrolled
+  guard: accept and revalidate
+- start: offered
+  end: expired
+  guard: decision time reaches expiry
+- start: offered
+  end: declined
+  guard: decline
+- start: offered
+  end: ineligible
+  guard: revalidation fails definitively
+timetable_version:
+- start: draft
+  end: proposed
+  guard: submit immutable candidate
+- start: proposed
+  end: validated
+  guard: independent checks pass
+- start: validated
+  end: published
+  guard: independent approver and matching epoch
+- start: published
+  end: superseded
+  guard: replacement published in same transaction
+exception_grant:
+- start: requested
+  end: approved
+  guard: independent sign-off
+- start: requested
+  end: rejected
+  guard: deny with reason
+- start: approved
+  end: revoked
+  guard: withdraw and review dependencies
+solve_job:
+- start: queued
+  end: running
+  guard: acquire lease
+- start: running
+  end: finished
+  guard: persist matching generation
+- start: running
+  end: failed
+  guard: record terminal failure
+- start: running
+  end: queued
+  guard: lease expires and retry remains
+policy_version:
+- start: draft
+  end: approved
+  guard: independent sign-off
+- start: approved
+  end: retired
+  guard: close to new assignments

@@ -1,0 +1,23 @@
+{
+  "op": "AND",
+  "children": [
+    {
+      "op": "OR",
+      "children": [
+        {
+          "op": "minimumGrade",
+          "course": "SYN-A",
+          "thresholdParam": "PASS_A"
+        },
+        {
+          "op": "recognizedEquivalent",
+          "course": "SYN-A"
+        }
+      ]
+    },
+    {
+      "op": "concurrent",
+      "course": "SYN-L"
+    }
+  ]
+}

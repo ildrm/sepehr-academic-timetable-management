@@ -1,0 +1,18 @@
+groups:
+  - name: academic-runtime
+    rules:
+      - alert: AcademicWorkerHeartbeatStale
+        expr: absent(academic_worker_heartbeat_age_seconds) or academic_worker_heartbeat_age_seconds > 30
+        for: 2m
+        annotations:
+          summary: Academic worker heartbeat is missing or stale
+      - alert: AcademicNotificationReviewRequired
+        expr: academic_notification_reviews > 0
+        for: 2m
+        annotations:
+          summary: Academic notification deliveries require reconciliation
+      - alert: AcademicRegistrationRetriesExhausted
+        expr: increase(academic_transaction_retries_total{reason="exhausted"}[10m]) > 0
+        for: 1m
+        annotations:
+          summary: An academic transaction exhausted its contention retries

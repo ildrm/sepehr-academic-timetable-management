@@ -1,0 +1,93 @@
+name: academic-production
+x-runtime: &runtime
+  image: ${APP_IMAGE:?Set the approved immutable application image}
+  init: true
+  read_only: true
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  tmpfs: ["/tmp:size=128M,mode=1777"]
+  restart: unless-stopped
+  stop_grace_period: 45s
+x-variables: &variables
+  NODE_ENV: production
+  APP_ENV: production
+  COOKIE_SECURE: "true"
+  ENABLE_DEVELOPMENT_AUTH: "false"
+  ALLOW_SYNTHETIC_SEED: "false"
+  WEB_ORIGIN: ${WEB_ORIGIN:?Set the approved HTTPS public origin}
+  QUEUE_NAME: ${QUEUE_NAME:-academic-jobs}
+services:
+  api:
+    <<: *runtime
+    command: ["node", "dist/apps/api/src/main.js"]
+    environment:
+      <<: *variables
+      API_HOST: 0.0.0.0
+      API_PORT: "4100"
+      DATABASE_URL_FILE: /run/secrets/api_database
+      OIDC_ISSUER: ${OIDC_ISSUER:?Set the approved identity provider HTTPS issuer}
+      OIDC_CLIENT_ID: ${OIDC_CLIENT_ID:?Set the registered OIDC client ID}
+      OIDC_STAFF_ACR: ${OIDC_STAFF_ACR:?Set the accepted staff authentication context}
+      OIDC_CLIENT_SECRET_FILE: /run/secrets/oidc_client_secret
+      CURSOR_SECRET_FILE: /run/secrets/cursor_secret
+      REQUEST_RETENTION_HOURS: ${REQUEST_RETENTION_HOURS:?Set the approved receipt retention hours}
+      SOLVER_LIMIT_SECONDS: ${SOLVER_LIMIT_SECONDS:?Set the approved solver time budget}
+      REPORT_MIN_CELL: ${REPORT_MIN_CELL:?Set the approved export suppression threshold}
+    secrets: [api_database,oidc_client_secret,cursor_secret]
+    healthcheck:
+      test: ["CMD","node","-e","fetch('http://127.0.0.1:4100/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    networks: [backend]
+  web:
+    <<: *runtime
+    working_dir: /app/apps/web
+    command: ["node", "../../node_modules/next/dist/bin/next", "start", "--hostname", "0.0.0.0", "--port", "3000"]
+    environment:
+      <<: *variables
+      INTERNAL_API_URL: http://api:4100
+      NEXT_TELEMETRY_DISABLED: "1"
+    ports: ["127.0.0.1:${WEB_LOOPBACK_PORT:-3000}:3000"]
+    healthcheck:
+      test: ["CMD","node","-e","fetch('http://127.0.0.1:3000/api/session/config').then(async r=>process.exit(r.ok&&(await r.json()).institutionalLogin?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    depends_on:
+      api: {condition: service_healthy}
+    networks: [backend]
+  worker:
+    <<: *runtime
+    command: ["node", "dist/apps/workers/src/main.js"]
+    environment:
+      <<: *variables
+      DATABASE_URL_FILE: /run/secrets/worker_database
+      QUEUE_REDIS_URL_FILE: /run/secrets/queue_redis
+      SOLVER_LIMIT_SECONDS: ${SOLVER_LIMIT_SECONDS:?Set the approved solver time budget}
+    secrets: [worker_database,queue_redis]
+    healthcheck:
+      test: ["CMD","node","dist/apps/workers/src/health.js"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    networks: [backend]
+  migrator:
+    <<: *runtime
+    profiles: [operator]
+    restart: "no"
+    command: ["node","dist/apps/api/src/release.js","migrate"]
+    environment:
+      <<: *variables
+      DATABASE_URL_FILE: /run/secrets/migration_database
+    secrets: [migration_database]
+    networks: [backend]
+secrets:
+  api_database: {file: "${API_DATABASE_SECRET:?Set the API database DSN file path}"}
+  worker_database: {file: "${WORKER_DATABASE_SECRET:?Set the worker database DSN file path}"}
+  migration_database: {file: "${MIGRATION_DATABASE_SECRET:?Set the migration database DSN file path}"}
+  queue_redis: {file: "${QUEUE_REDIS_SECRET:?Set the Redis TLS DSN file path}"}
+  oidc_client_secret: {file: "${OIDC_SECRET_FILE:?Set the identity provider client secret file path}"}
+  cursor_secret: {file: "${CURSOR_SECRET_FILE:?Set the cursor signing secret file path}"}
+networks:
+  backend: {}

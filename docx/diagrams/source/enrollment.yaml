@@ -1,0 +1,25 @@
+title: Commit a complete bundle
+kind: sequence
+lanes:
+- Client
+- API
+- PostgreSQL
+rows:
+- - 0
+  - 1
+  - Submit intent and key
+- - 1
+  - 2
+  - Claim key; acquire guards
+- - 2
+  - 1
+  - Read current facts and seats
+- - 1
+  - 2
+  - Write bundle, audit, outbox
+- - 2
+  - 1
+  - Commit stored outcome
+- - 1
+  - 0
+  - Return authoritative receipt

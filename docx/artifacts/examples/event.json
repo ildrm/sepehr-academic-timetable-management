@@ -1,0 +1,16 @@
+{
+  "eventId": "00000000-0000-4000-8000-000000000001",
+  "type": "EnrollmentChanged",
+  "schemaVersion": 1,
+  "occurredAt": "2030-02-04T08:00:00Z",
+  "source": "Enrollment",
+  "aggregateKey": "term-T/student-S",
+  "sequence": 1,
+  "correlationId": "SYN-REQ",
+  "causationId": "SYN-CMD",
+  "termId": "T",
+  "payload": {
+    "resourceId": "E1",
+    "revision": 1
+  }
+}
