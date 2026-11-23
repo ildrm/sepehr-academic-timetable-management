@@ -6,7 +6,7 @@
 
 **A Persian-first, right-to-left academic portal for university course registration, enrollment, waitlists, degree planning, batch seat allocation, and constraint-based scheduling.**
 
-[![CI](https://github.com/ildrm/teaching-system/actions/workflows/ci.yaml/badge.svg)](https://github.com/ildrm/teaching-system/actions/workflows/ci.yaml)
+[![CI](https://github.com/ildrm/sepehr-academic-timetable-management/actions/workflows/ci.yaml/badge.svg)](https://github.com/ildrm/sepehr-academic-timetable-management/actions/workflows/ci.yaml)
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](LICENSE)
 [![Node.js 24](https://img.shields.io/badge/Node.js-24_LTS-339933?logo=nodedotjs&logoColor=white)](package.json)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)](package.json)
@@ -194,7 +194,7 @@ teaching-system/
 ### 1. Clone the project
 
 ```bash
-git clone https://github.com/ildrm/teaching-system.git
+git clone https://github.com/ildrm/sepehr-academic-timetable-management.git
 cd teaching-system
 ```
 
@@ -588,7 +588,7 @@ Contributions that preserve **academic integrity, access control and transaction
 5. Update API/requirements documentation and the coverage matrix when behavior or scope changes. Do not silently convert **proposed institutional policies** into defaults.
 6. Never commit secrets, real student information, unreviewed production settings or synthetic fixtures presented as real data.
 
-Use [GitHub Issues](https://github.com/ildrm/teaching-system/issues) for reproducible defects and focused feature discussions, and [Pull Requests](https://github.com/ildrm/teaching-system/pulls) for reviewed changes. There is no claim here of an established maintainer response time or governance model.
+Use [GitHub Issues](https://github.com/ildrm/sepehr-academic-timetable-management/issues) for reproducible defects and focused feature discussions, and [Pull Requests](https://github.com/ildrm/sepehr-academic-timetable-management/pulls) for reviewed changes. There is no claim here of an established maintainer response time or governance model.
 
 ## License
 
@@ -600,6 +600,6 @@ The repository includes the **GNU General Public License, Version 2 (GPL v2)**. 
 
 **Sepehr · سپهر — Academic decisions you can trace. Schedules you can validate.**
 
-[Source code](https://github.com/ildrm/teaching-system) · [Documentation](docx/README.md) · [Implementation status](implementation/README.md) · [Release blockers](implementation/BLOCKERS.md)
+[Source code](https://github.com/ildrm/sepehr-academic-timetable-management) · [Documentation](docx/README.md) · [Implementation status](implementation/README.md) · [Release blockers](implementation/BLOCKERS.md)
 
 </div>
